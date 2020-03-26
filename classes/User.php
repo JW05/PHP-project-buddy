@@ -16,7 +16,7 @@
 
 	class User {
 		private $email;
-                private $password;
+		private $password;
                 private $avatar;
                 private $description;
                 private $firstname;
@@ -28,14 +28,13 @@
                 private $voorkeur;
                 private $genre;
                 private $feesten;
-     
 
 		/**
 		 * Get the value of email
 		 */ 
 		public function getEmail()
 		{
-			return $this->email;
+				return $this->email;
 		}
 
 		/**
@@ -45,9 +44,9 @@
 		 */ 
 		public function setEmail($email)
 		{
-			$this->email = $email;
+				$this->email = $email;
 
-			return $this;
+				return $this;
 		}
 
 		/**
@@ -55,7 +54,7 @@
 		 */ 
 		public function getPassword()
 		{
-			return $this->password;
+				return $this->password;
 		}
 
 		/**
@@ -65,9 +64,9 @@
 		 */ 
 		public function setPassword($password)
 		{
-                        $this->password = $password;
+				$this->password = $password;
 
-                        return $this;
+				return $this;
 		}
 	
 		public function canLogin($email, $password)
