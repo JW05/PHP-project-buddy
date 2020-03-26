@@ -1,3 +1,8 @@
+<?php
+    include_once(__DIR__."/classes/User.php");
+    include_once(__DIR__."/upload.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +14,7 @@
 <body>
     <div class="Settings">
         <div class="form form--settings">
-            <form action="" method="post">
+            <form action="" method="post" enctype="multipart/form-data">
 				<h2>Profile settings</h2>
 				<?php if(isset($error)): ?>
 				<div class="form__error">
@@ -20,7 +25,7 @@
 
 				<div class="form__field">
 					<label for="Avatar">Avatar</label>
-					<input type="file" name="avatar" id="Avatar">
+					<input type="file" name="avatarUpload" id="Avatar">
                 </div>
                 <div class="form__field">
 					<label for="Firstname">Firstname</label>

@@ -203,13 +203,18 @@
             $email = $conn->real_escape_string($email);
             $query="select * from users where email = '$email'";
             $result = $conn->query($query);
-            $user = $result->fetch_assoc();
-            if(password_verify($password,$user['password'])){
-                return true;
-       
-            }else
-            {
+            if(mysqli_num_rows($result) != 0){
+                $user = $result->fetch_assoc();
+                if(password_verify($password,$user['password'])){
+                    return true;
+        
+                }else
+                {
+                    return false;
+                }
+            }else{
                 return false;
             }
+            
         }
     }
