@@ -1,10 +1,28 @@
-<h1>Vervoledig hier je profiel</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UpdateProfile</title>
+  <style>
+ 
+      body{ font-family: 'Roboto Condensed'}
+      h1{font-size: 45px;}
+      h2{font-size: 25px; }
+      fieldset{ background-color: #f1f1f1;padding: 15px 5%;}
+      input{border-radius:15px;}
+
+  </style>
+</head>
+<body>
+
+  <h1>Vervoledig hier je profiel</h1>
 
 
 <fieldset>
 <legend><h1>Kenmerken</h1></legend>
-<form action="/PHP-project-buddy/PHP-project-buddy/ProfilePage.php">
-  <label for="locatie">Van waar bent u?</label><br>
+<form action="/PHP-project-buddy/PHP-project-buddy/ProfilePage.php" method="post">
+  <label for="locatie"><h2>Van waar bent u?</h2></label><br>
   <input type="text" id="locatie" name="locatie" value=""><br><br>
   
  
@@ -64,6 +82,10 @@
 </form>
 
 </fieldset>
+</body>
+</html>
+
+
 
 
 
