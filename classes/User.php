@@ -1,5 +1,5 @@
 <?php
-	
+	include_once(__DIR__."/Db.php");
 
 	class Security {
 		
@@ -94,8 +94,219 @@
 		{
 			session_start();
 			session_destroy();
-		}
+                }
+                
+                public static function getCurrentUser($email){
+                        $conn = Db::getConnection();
+                        $statement = $conn->prepare("select * from users where email = '$email'");
+                        $statement->execute();
+                        $user = $statement->fetch(PDO::FETCH_ASSOC);
+                        return $user;
+                }
+
+                public function updateProfile($id){
+                        $conn = Db::getConnection();
+                        $statement = $conn->prepare("update users set firstname = :firstname, lastname = :lastname, email = :email, password = :password, description = :description, avatar = :avatar where id = '$id'");
+                        
+                        $firstname = $this->getFirstname();
+                        $lastname = $this->getLastname();
+                        $email = $this->getEmail();
+                        $password = $this->getPassword();
+                        $avatar = $this->getAvatar();
+                        $description = $this->getDescription();
+
+                        $statement->bindValue(":firstname", $firstname);
+                        $statement->bindValue(":lastname", $lastname);
+                        $statement->bindValue(":email", $email);
+                        $statement->bindValue(":avatar", $avatar);
+                        $statement->bindValue(":description", $description);
+                        $statement->bindValue(":password", $password);
+
+                        $result = $statement->execute();
+
+                        return true;
+                }
 		
+
+                /**
+                 * Get the value of avatar
+                 */ 
+                public function getAvatar()
+                {
+                                return $this->avatar;
+                }
+
+                /**
+                 * Set the value of avatar
+                 *
+                 * @return  self
+                 */ 
+                public function setAvatar($avatar)
+                {
+                                $this->avatar = $avatar;
+
+                                return $this;
+                }
+
+                /**
+                 * Get the value of description
+                 */ 
+                public function getDescription()
+                {
+                                return $this->description;
+                }
+
+                /**
+                 * Set the value of description
+                 *
+                 * @return  self
+                 */ 
+                public function setDescription($description)
+                {
+                                $this->description = $description;
+
+                                return $this;
+                }
+
+                /**
+                 * Get the value of firstname
+                 */ 
+                public function getFirstname()
+                {
+                                return $this->firstname;
+                }
+
+                /**
+                 * Set the value of firstname
+                 *
+                 * @return  self
+                 */ 
+                public function setFirstname($firstname)
+                {
+                                $this->firstname = $firstname;
+
+                                return $this;
+                }
+
+                /**
+                 * Get the value of lastname
+                 */ 
+                public function getLastname()
+                {
+                                return $this->lastname;
+                }
+
+                /**
+                 * Set the value of lastname
+                 *
+                 * @return  self
+                 */ 
+                public function setLastname($lastname)
+                {
+                                $this->lastname = $lastname;
+
+                                return $this;
+                }
+
+                /**
+                 * Get the value of locatie
+                 */ 
+                public function getLocatie()
+                {
+                                return $this->locatie;
+                }
+
+                /**
+                 * Set the value of locatie
+                 *
+                 * @return  self
+                 */ 
+                public function setLocatie($locatie)
+                {
+                                $this->locatie = $locatie;
+
+                                return $this;
+                }
+
+                /**
+                 * Get the value of jaar
+                 */ 
+                public function getJaar()
+                {
+                                return $this->jaar;
+                }
+
+                /**
+                 * Set the value of jaar
+                 *
+                 * @return  self
+                 */ 
+                public function setJaar($jaar)
+                {
+                                $this->jaar = $jaar;
+
+                                return $this;
+                }
+
+                /**
+                 * Get the value of voorkeur
+                 */ 
+                public function getVoorkeur()
+                {
+                                return $this->voorkeur;
+                }
+
+                /**
+                 * Set the value of voorkeur
+                 *
+                 * @return  self
+                 */ 
+                public function setVoorkeur($voorkeur)
+                {
+                                $this->voorkeur = $voorkeur;
+
+                                return $this;
+                }
+
+                /**
+                 * Get the value of genre
+                 */ 
+                public function getGenre()
+                {
+                                return $this->genre;
+                }
+
+                /**
+                 * Set the value of genre
+                 *
+                 * @return  self
+                 */ 
+                public function setGenre($genre)
+                {
+                                $this->genre = $genre;
+
+                                return $this;
+                }
+
+                /**
+                 * Get the value of feesten
+                 */ 
+                public function getFeesten()
+                {
+                                return $this->feesten;
+                }
+
+                /**
+                 * Set the value of feesten
+                 *
+                 * @return  self
+                 */ 
+                public function setFeesten($feesten)
+                {
+                                $this->feesten = $feesten;
+
+                                return $this;
+                }
 	}
 	
 

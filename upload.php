@@ -3,8 +3,6 @@
     
     var_dump($_POST);
     if(!empty($_POST)){
-        echo($_FILES['avatarUpload']['name']);
-        echo($_FILES['avatarUpload']['name']);
         if(!empty($_FILES['avatarUpload']['name'])){
             try{
                 $uploadAvatar = new Upload();
@@ -14,7 +12,14 @@
                 $uploadAvatar->setFileType(strtolower(pathinfo($uploadAvatar->getFileName(),PATHINFO_EXTENSION)));
                 $uploadAvatar->setFileSize($_FILES["avatarUpload"]["size"]);
 
-                $uploadAvatar->saveAvatar($_FILES["avatarUpload"]["tmp_name"]);
+                $codeGen = "Ze2-2ad";
+                if($uploadAvatar->saveAvatar($_FILES["avatarUpload"]["tmp_name"], $user['id'].md5($codeGen))){
+                    $currentUser->setAvatar($user['id'].md5($codeGen).".".$uploadAvatar->getFileType());
+                    if($currentUser->updateProfile($user['id'])){
+                        $success = "Profile ge-update";
+                    }
+                }
+                
             }catch(\Throwable $th){
                 $error = $th->getMessage();
             }

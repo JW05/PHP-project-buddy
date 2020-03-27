@@ -93,7 +93,7 @@
                 return $this;
         }
 
-        public function saveAvatar($currentFile){
+        public function saveAvatar($currentFile, $newFilename){
             // Allow certain file formats
             if($this->fileType != "jpg" && $this->fileType != "png" && $this->fileType != "jpeg"
             && $this->fileType != "gif" ) {
@@ -104,13 +104,13 @@
             if ($this->fileSize > 5000000) {
                 throw new Exception("Sorry, your file is too large.");
             }
-
+            
+            $this->fileName = str_replace(strstr($this->fileName, '.', true),$this->targetDir.$newFilename,$this->fileName);
+            
             if (move_uploaded_file($currentFile, $this->fileName)) {
-                $msg = "The file ". basename( $this->fileName). " has been uploaded.";
+                return true;
             } else {
                 throw new Exception("Sorry we could upload your avatar.");
             }
-
-            return $msg;
         }
     }
