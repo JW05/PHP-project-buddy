@@ -4,6 +4,6 @@
             "user"      => "root",
             "password"  => "",
             "host"      => "localhost",
-            "db"        => "codezilla"
+            "db"        => "phpals"
         ]
     ];

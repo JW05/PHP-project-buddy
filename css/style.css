@@ -1,7 +1,7 @@
 body
 {
-   width: 25%;
-   height: 25%;
+   /*width: 25%;
+   height: 25%;*/
    background-image: url(../img/background.png);
    overflow-x: hidden;
    font-family: Helvetica, sans-serif;
@@ -82,4 +82,75 @@ div input.btn
     -moz-border-radius: 40px 40px;
     -ms-border-radius: 40px 40px;
     -o-border-radius: 40px 40px;
+}
+
+.profileSettings
+{
+  display: grid;
+  grid-template-columns: 1fr [form] minmax(240px, 450px) 1fr;
+  grid-template-rows: [form];
+  justify-content: center;
+  align-items: center;
+}
+
+.profileSettings .form--settings
+{
+  background-color: #F3F3F3;
+  padding: 1em;
+  color: #505050;
+  grid-column: form;
+  grid-row: form;
+}
+
+.form--settings .form__error
+{
+  background-color: #999999;
+  color: white;
+  font-weight: lighter;
+  padding: 0.3em 1em;
+  margin-bottom: 1em;
+  font-size: 0.9em;
+}
+
+.form--settings .form__field
+{
+  padding-bottom: 1em;
+}
+
+.form--settings .form__field label
+{
+  display: block;
+  margin-bottom: 0.2em;
+}
+
+.form--settings .form__field .label__inline
+{
+  display: inline-block;
+}
+
+.form--settings .form__field input
+{
+  width: 100%;
+  padding: 0.3em;
+  font-size: 1.4em;
+}
+
+.form--settings .btn
+{
+  width: 100%;
+  margin: 0.5em auto;
+}
+
+.form--settings .btn--success
+{
+  background-color: green;
+  color: white;
+  text-align: center;
+  border: none;
+  padding: 0.3em 2em;
+  font-size: 1.4em;
+}
+
+.form--settings form{
+    width: 100%;
 }

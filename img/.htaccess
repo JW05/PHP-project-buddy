@@ -1,0 +1,7 @@
+RewriteEngine on
+RewriteCond % !^$
+RewriteCond % !^http://(www.)?localhost/PHPals/PHP-project-buddy/img/.*$ [NC]
+RewriteCond % !^http://(www.)?localhost/PHPals/PHP-project-buddy/img/avatar/.*$ [NC]
+RewriteRule .(gif|jpg|jpeg|png)$ - [L]
+RewriteRule /avatar/.(gif|jpg|jpeg|png)$ - [F]
+Options -Indexes
