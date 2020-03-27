@@ -3,18 +3,74 @@
     session_start();
 
     $user = User::getCurrentUser($_SESSION['user']);
-    var_dump($user);
-    echo $user["avatar"];
+    $userId = $user['id'];
+    
 
     $currentUser = new User();
+    
     $currentUser->setEmail($user["email"]);
     $currentUser->setFirstname($user["firstname"]);
     $currentUser->setLastname($user["lastname"]);
     $currentUser->setAvatar($user["avatar"]);
     $currentUser->setDescription($user["description"]);
     $currentUser->setPassword($user['password']);
+    
+    if(!empty($_POST)){
+        $firstname = $_POST['firstname'];
+        $lastname = $_POST['lastname'];
+        $email = $_POST['email'];
+        $description = $_POST['description'];
+        $oldPassword = $_POST['oldPassword'];
+        $newPassword = $_POST['newPassword'];
+        
+        if(!empty($_FILES['avatarUpload']['name'])){
+            include_once(__DIR__."/upload.php");
+        }
 
-    include_once(__DIR__."/upload.php");
+        if(!empty($oldPassword) || $currentUser->getEmail() != $email){
+            if($currentUser->canLogin($currentUser->getEmail(), $oldPassword)){
+                if($currentUser->checkEmail($email)){
+                    $currentUser->setEmail($email);
+                }else{
+                    $error = "This email was not available.";
+                }
+
+                if(!empty($newPassword) && !empty($oldPassword)){
+                    $currentUser->setPassword($newPassword);
+                }
+            }else{
+                $error = "The current password you entered did not match or records.";
+            }
+        }
+
+
+        if(!empty($firstname)){
+            $currentUser->setFirstname($firstname);
+        }else{
+            $error = "Please fill out all the fields.";
+        }
+
+        if(!empty($lastname)){
+            $currentUser->setLastname($lastname);
+        }else{
+            $error = "Please fill out all the fields.";
+        }
+
+        if(!empty($description)){
+            $currentUser->setDescription($description);
+        }
+
+        if(!isset($error)){
+            if($currentUser->updateProfile($userId)){
+                $success = "Your profile is successfully up to date.";
+            }else{
+                $error = "Something went wrong, please try again.";
+            }
+        }
+
+        unset($_POST);
+    }
+    
     
 ?>
 
@@ -59,7 +115,8 @@
                 </div>
                 <div class="form__field">
 					<label for="Email">Email</label>
-					<input type="email" id="Email" name="email" value="<?php echo $currentUser->getEmail();?>">
+                    <input type="email" id="Email" name="email" value="<?php echo $currentUser->getEmail();?>">
+                    
 				</div>
 				<div class="form__field">
 					<label for="Description">Description</label>
