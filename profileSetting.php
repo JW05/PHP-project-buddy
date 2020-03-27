@@ -29,14 +29,14 @@
 
         if(!empty($oldPassword) || $currentUser->getEmail() != $email){
             if($currentUser->canLogin($currentUser->getEmail(), $oldPassword)){
-                if($currentUser->checkEmail($email)){
-                    $currentUser->setEmail($email);
+                if($currentUser->checkEmail(htmlspecialchars($email))){
+                    $currentUser->setEmail(htmlspecialchars($email));
                 }else{
                     $error = "This email was not available.";
                 }
-
+                
                 if(!empty($newPassword) && !empty($oldPassword)){
-                    $currentUser->setPassword($newPassword);
+                    $currentUser->setPassword(htmlspecialchars($newPassword));
                 }
             }else{
                 $error = "The current password you entered did not match or records.";
@@ -45,19 +45,19 @@
 
 
         if(!empty($firstname)){
-            $currentUser->setFirstname($firstname);
+            $currentUser->setFirstname(htmlspecialchars($firstname));
         }else{
             $error = "Please fill out all the fields.";
         }
 
         if(!empty($lastname)){
-            $currentUser->setLastname($lastname);
+            $currentUser->setLastname(htmlspecialchars($lastname));
         }else{
             $error = "Please fill out all the fields.";
         }
 
         if(!empty($description)){
-            $currentUser->setDescription($description);
+            $currentUser->setDescription(htmlspecialchars($description));
         }
 
         if(!isset($error)){
