@@ -64,14 +64,17 @@
 		 */ 
 		public function setPassword($password)
 		{
-				$this->password = $password;
+                                $options = [
+                                        'cost' => 15
+                                ];
+				$this->password = password_hash($password, PASSWORD_DEFAULT, $options);
 
 				return $this;
 		}
 	
 		public function canLogin($email, $password)
 		{
-			$conn = new mysqli("localhost", "root", "","codezilla");
+			$conn = new mysqli("localhost", "root", "","phpals");
 			$email = $conn->real_escape_string($email);
 			$query="select * from users where email = '$email'";
 			$result = $conn->query($query);
@@ -101,6 +104,7 @@
                         $statement = $conn->prepare("select * from users where email = '$email'");
                         $statement->execute();
                         $user = $statement->fetch(PDO::FETCH_ASSOC);
+
                         return $user;
                 }
 
@@ -125,6 +129,16 @@
                         $result = $statement->execute();
 
                         return true;
+                }
+
+                public function checkEmail($email){
+                        $conn = Db::getConnection();
+                        $result = $conn->query("select * from users where email = '$email'");
+                        if($result->fetchColumn() > 0 && $this->email != $email){
+                                return false;
+                        }else{
+                                return true;
+                        }
                 }
 		
 
