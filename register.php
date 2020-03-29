@@ -9,13 +9,14 @@
     zorg voor een foutmelding indien het aanmaken van een account niet lukt 
 	valideer al wat kan mislopen in dit formulier via PHP en toon gebruiksvriendelijke foutmeldingen */
 	
-	try {
-		//code...
-		$user1 = new NewUser();
-		$user1->setFirstname("Bryan");
-	} catch (\Throwable $th) {
-		//throw $th;
-		$error = $th->getMessage();
+	if(!empty($_POST)){
+		$user = new NewUser();
+		$user->setFirstName($_POST['firstName']);
+		$user->setLastName($_POST['lastName']);
+		$user->setEmail($_POST['email']);
+		$user->setPassword($_POST['password']);
+
+		echo $user->getFirstName();
 	}
 ?>
 <!DOCTYPE html>
@@ -36,13 +37,13 @@
 			<form action="" method="post">
                 <div class="error"></div>
 
-				<input type="text" name="firstName" placeholder="First name" id="firstName" required>
+				<input type="text" name="firstName" placeholder="First name" id="firstName">
 
-                <input type="text" name="lastName" placeholder="Last name" id="lastName" required>
+                <input type="text" name="lastName" placeholder="Last name" id="lastName">
 
-				<input type="password" name="password" placeholder="Password" id="password" required>
+				<input type="email" name="email" placeholder="Email" id="email">
 
-				<input type="email" name="email" placeholder="Email" id="email" required>
+				<input type="password" name="password" placeholder="Password" id="password">
 
 				<input type="submit" value="Register">
 			</form>
