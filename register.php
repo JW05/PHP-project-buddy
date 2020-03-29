@@ -9,6 +9,14 @@
     zorg voor een foutmelding indien het aanmaken van een account niet lukt 
 	valideer al wat kan mislopen in dit formulier via PHP en toon gebruiksvriendelijke foutmeldingen */
 	
+	try {
+		//code...
+		$user1 = new NewUser();
+		$user1->setFirstname("Bryan");
+	} catch (\Throwable $th) {
+		//throw $th;
+		$error = $th->getMessage();
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,6 +27,11 @@
 </head>
 <body>
     <div class="register">
+
+			<?php if(isset($error)):?>
+				<div class="error" style="color: red;"><?php echo $error;?></div>
+			<?php endif;?>
+
 			<h1>Register</h1>
 			<form action="" method="post">
                 <div class="error"></div>
