@@ -1,47 +1,48 @@
 <?php
     include_once(__DIR__."/Db.php");
     class NewUser{
-        private $firstname;
-        private $lastname;
+        private $firstName;
+        private $lastName;
         private $email;
         private $password;
         
+
         /**
-         * Get the value of firstname
+         * Get the value of firstName
          */ 
-        public function getFirstname()
+        public function getFirstName()
         {
-                return $this->firstname;
+                return $this->firstName;
         }
 
         /**
-         * Set the value of firstname
+         * Set the value of firstName
          *
          * @return  self
          */ 
-        public function setFirstname($firstname)
+        public function setFirstName($firstName)
         {
-                $this->firstname = $firstname;
+                $this->firstName = $firstName;
 
                 return $this;
         }
 
         /**
-         * Get the value of lastname
+         * Get the value of lastName
          */ 
-        public function getLastname()
+        public function getLastName()
         {
-                return $this->lastname;
+                return $this->lastName;
         }
 
         /**
-         * Set the value of lastname
+         * Set the value of lastName
          *
          * @return  self
          */ 
-        public function setLastname($lastname)
+        public function setLastName($lastName)
         {
-                $this->lastname = $lastname;
+                $this->lastName = $lastName;
 
                 return $this;
         }
