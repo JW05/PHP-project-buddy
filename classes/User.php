@@ -1,26 +1,13 @@
 <?php
 	include_once(__DIR__."/Db.php");
 
-	class Security {
-		
-		public static function hash($password) {
-			$options = [
-				'cost' => 15
-			];
-			$hash = password_hash($password, PASSWORD_DEFAULT, $options);
-
-			return $hash;
-		}
-    }
-
-
 	class User {
 		private $email;
 		private $password;
                 private $avatar;
                 private $description;
-                private $firstname;
-                private $lastname;
+                private $firstName;
+                private $lastName;
                 
                 //From profilePage
                 private $locatie;
@@ -28,6 +15,52 @@
                 private $voorkeur;
                 private $genre;
                 private $feesten;
+
+                /**
+                 * Get the value of firstname
+                 */ 
+                public function getFirstName()
+                {
+                                return $this->firstName;
+                }
+
+                /**
+                 * Set the value of firstname
+                 *
+                 * @return  self
+                 */ 
+                public function setFirstName($firstName)
+                {
+                        if(empty($firstName)){
+                                throw new Exception("Firstname cannot be empty");
+                        }
+                        $this->firstName = $firstName;
+
+                        return $this;
+                }
+
+                /**
+                 * Get the value of lastname
+                 */ 
+                public function getLastName()
+                {
+                        return $this->lastName;
+                }
+
+                /**
+                 * Set the value of lastname
+                 *
+                 * @return  self
+                 */ 
+                public function setLastName($lastName)
+                {
+                        if(empty($lastName)){
+                                throw new Exception("Last name cannot be empty");
+                        }
+                        $this->lastName = $lastName;
+
+                        return $this;
+                }
 
 		/**
 		 * Get the value of email
@@ -44,9 +77,12 @@
 		 */ 
 		public function setEmail($email)
 		{
-				$this->email = $email;
-
-				return $this;
+                        if(empty($email)){
+                                throw new Exception("Email cannot be empty");
+                        }
+                        $this->email = $email;
+            
+                        return $this;
 		}
 
 		/**
@@ -54,7 +90,7 @@
 		 */ 
 		public function getPassword()
 		{
-				return $this->password;
+			return $this->password;
 		}
 
 		/**
@@ -64,14 +100,52 @@
 		 */ 
 		public function setPassword($password)
 		{
-                                $options = [
-                                        'cost' => 15
-                                ];
-				$this->password = password_hash($password, PASSWORD_DEFAULT, $options);
+                        if(empty($password)){
+                                throw new Exception("Password cannot be empty");
+                        }
+                        $this->password = password_hash($password, PASSWORD_DEFAULT, ["cost" => 14]);
 
-				return $this;
-		}
-	
+                        return $this;
+                }
+                
+                //Written by Bryan
+                public function save()
+                {
+                        //con
+                        //$conn = new PDO('mysql:host=localhost;dbname=phpals', "root", "");
+                        $conn = Db::getConnection();
+                        //insert query
+                        $statement = $conn->prepare("insert into users (firstname, lastname, email, password) values (:firstName, :lastName, :email, :password)"); 
+                        // sql injectie tegengaan
+                        $firstName = $this->getFirstName();
+                        $lastName = $this->getLastName();
+                        $email = $this->getEmail();
+                        /*password (veilig bewaard via bcrypt!)*/
+                        $password = $this->getPassword();
+                        $password = password_hash($password, PASSWORD_DEFAULT, ["cost" => 14]);
+                        $statement->bindValue(":firstName", $firstName);
+                        $statement->bindValue(":lastName", $lastName);
+                        $statement->bindValue(":email", $email);
+                        $statement->bindValue(":password", $password);
+            
+                        $result = $statement->execute();
+
+                        return $result;
+
+                }
+
+                public static function getEmails(){
+                        //$conn = new PDO('mysql:host=localhost;dbname=phpals', "root", "");
+                        $conn = Db::getConnection();
+            
+                        $statement = $conn->prepare("select email from users");
+                        $result = $statement->execute();
+                        $adressen = $statement->fetchAll(PDO::FETCH_ASSOC);
+            
+                        return $adressen;
+                }
+                
+                //Written by Maury
 		public function canLogin($email, $password)
 		{
 			$conn = new mysqli("localhost", "root", "","phpals");
@@ -110,17 +184,17 @@
 
                 public function updateProfile($id){
                         $conn = Db::getConnection();
-                        $statement = $conn->prepare("update users set firstname = :firstname, lastname = :lastname, email = :email, password = :password, description = :description, avatar = :avatar where id = '$id'");
+                        $statement = $conn->prepare("update users set firstname = :firstName, lastname = :lastName, email = :email, password = :password, description = :description, avatar = :avatar where id = '$id'");
                         
-                        $firstname = $this->getFirstname();
-                        $lastname = $this->getLastname();
+                        $firstName = $this->getFirstName();
+                        $lastName = $this->getLastName();
                         $email = $this->getEmail();
                         $password = $this->getPassword();
                         $avatar = $this->getAvatar();
                         $description = $this->getDescription();
 
-                        $statement->bindValue(":firstname", $firstname);
-                        $statement->bindValue(":lastname", $lastname);
+                        $statement->bindValue(":firstName", $firstName);
+                        $statement->bindValue(":lastName", $lastName);
                         $statement->bindValue(":email", $email);
                         $statement->bindValue(":avatar", $avatar);
                         $statement->bindValue(":description", $description);
@@ -182,45 +256,7 @@
                                 return $this;
                 }
 
-                /**
-                 * Get the value of firstname
-                 */ 
-                public function getFirstname()
-                {
-                                return $this->firstname;
-                }
-
-                /**
-                 * Set the value of firstname
-                 *
-                 * @return  self
-                 */ 
-                public function setFirstname($firstname)
-                {
-                                $this->firstname = $firstname;
-
-                                return $this;
-                }
-
-                /**
-                 * Get the value of lastname
-                 */ 
-                public function getLastname()
-                {
-                                return $this->lastname;
-                }
-
-                /**
-                 * Set the value of lastname
-                 *
-                 * @return  self
-                 */ 
-                public function setLastname($lastname)
-                {
-                                $this->lastname = $lastname;
-
-                                return $this;
-                }
+                
 
                 /**
                  * Get the value of locatie
