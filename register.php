@@ -10,13 +10,23 @@
 	valideer al wat kan mislopen in dit formulier via PHP en toon gebruiksvriendelijke foutmeldingen */
 	
 	if(!empty($_POST)){
-		$user = new NewUser();
-		$user->setFirstName($_POST['firstName']);
-		$user->setLastName($_POST['lastName']);
-		$user->setEmail($_POST['email']);
-		$user->setPassword($_POST['password']);
 
-		echo $user->getFirstName();
+		try {
+			//code...
+			$user = new NewUser();
+			$user->setFirstName($_POST['firstName']);
+			$user->setLastName($_POST['lastName']);
+			$user->setEmail($_POST['email']);
+			$user->setPassword($_POST['password']);
+	
+			$user->save();
+			$success = "user saved";
+
+		} catch (\Throwable $th) {
+			//throw $th;
+			$error = $th->getMessage();
+		}
+
 	}
 ?>
 <!DOCTYPE html>
@@ -31,6 +41,9 @@
 
 			<?php if(isset($error)):?>
 				<div class="error" style="color: red;"><?php echo $error;?></div>
+			<?php endif;?>
+			<?php if(isset($success)):?>
+				<div class="error" style="color: green;"><?php echo $success;?></div>
 			<?php endif;?>
 
 			<h1>Register</h1>

@@ -99,5 +99,28 @@
 
                 return $this;
         }
+
+        public function save()
+        {
+            //con
+            $conn = new PDO('mysql:host=localhost;dbname=phpals', "root", "");
+            //insert query
+            $statement = $conn->prepare("insert into users (firstname, lastname, email, password) values (:firstName, :lastName, :email, :password)"); 
+            // sql injectie tegengaan
+            $firstName = $this->getFirstName();
+            $lastName = $this->getLastName();
+            $email = $this->getEmail();
+            $password = $this->getPassword();
+            $statement->bindValue(":firstName", $firstName);
+            $statement->bindValue(":lastName", $lastName);
+            $statement->bindValue(":email", $email);
+            $statement->bindValue(":password", $password);
+            
+            $result = $statement->execute();
+
+            return $result;
+
+        }
+
     }
 ?>
