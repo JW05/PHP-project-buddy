@@ -13,7 +13,7 @@
 	 toon een fout als het email adres reeds in gebruik is */
 
 	$emailsUsed = NewUser::getEmails();
-	var_dump($emailsUsed);
+	//var_dump($emailsUsed);
 	
 	if(!empty($_POST)){
 

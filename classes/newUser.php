@@ -103,7 +103,8 @@
         public function save()
         {
             //con
-            $conn = new PDO('mysql:host=localhost;dbname=phpals', "root", "");
+            //$conn = new PDO('mysql:host=localhost;dbname=phpals', "root", "");
+            $conn = Db::getConnection();
             //insert query
             $statement = $conn->prepare("insert into users (firstname, lastname, email, password) values (:firstName, :lastName, :email, :password)"); 
             // sql injectie tegengaan
@@ -111,6 +112,7 @@
             $lastName = $this->getLastName();
             $email = $this->getEmail();
             $password = $this->getPassword();
+            $password = password_hash($password, PASSWORD_DEFAULT, ["cost" => 14]);
             $statement->bindValue(":firstName", $firstName);
             $statement->bindValue(":lastName", $lastName);
             $statement->bindValue(":email", $email);
@@ -123,7 +125,8 @@
         }
 
         public static function getEmails(){
-            $conn = new PDO('mysql:host=localhost;dbname=phpals', "root", "");
+            //$conn = new PDO('mysql:host=localhost;dbname=phpals', "root", "");
+            $conn = Db::getConnection();
 
             $statement = $conn->prepare("select email from users");
             $result = $statement->execute();
