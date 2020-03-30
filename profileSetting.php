@@ -9,8 +9,8 @@
     $currentUser = new User();
     
     $currentUser->setEmail($user["email"]);
-    $currentUser->setFirstname($user["firstname"]);
-    $currentUser->setLastname($user["lastname"]);
+    $currentUser->setFirstName($user["firstname"]);
+    $currentUser->setLastName($user["lastname"]);
     $currentUser->setAvatar($user["avatar"]);
     $currentUser->setDescription($user["description"]);
     $currentUser->setPassword($user['password']);
@@ -51,7 +51,7 @@
         }
 
         if(!empty($lastname)){
-            $currentUser->setLastname(htmlspecialchars($lastname));
+            $currentUser->setLastName(htmlspecialchars($lastname));
         }else{
             $error = "Please fill out all the fields.";
         }
@@ -107,11 +107,11 @@
                 </div>
                 <div class="form__field">
 					<label for="Firstname">Firstname</label>
-					<input type="text" id="Firstname" name="firstname" value="<?php echo $currentUser->getFirstname();?>">
+					<input type="text" id="Firstname" name="firstname" value="<?php echo $currentUser->getFirstName();?>">
                 </div>
                 <div class="form__field">
 					<label for="Lastname">Lastname</label>
-					<input type="text" id="Lastname" name="lastname" value="<?php echo $currentUser->getLastname();?>">
+					<input type="text" id="Lastname" name="lastname" value="<?php echo $currentUser->getLastName();?>">
                 </div>
                 <div class="form__field">
 					<label for="Email">Email</label>
