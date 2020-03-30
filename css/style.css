@@ -1,0 +1,156 @@
+body
+{
+   /*width: 25%;
+   height: 25%;*/
+   background-image: url(../img/background.png);
+   overflow-x: hidden;
+   font-family: Helvetica, sans-serif;
+   background-repeat: no-repeat;
+}
+div.header
+{
+    width: 100vw;
+}
+.title
+{
+    font-family: 'Righteous', cursive;
+    text-align: center;
+    margin-top: 100px;
+    font-size: 4em;
+}
+
+.background-image
+{
+    width: 25%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    z-index: 99999;
+}
+
+div.form
+{
+    display: block;
+    text-align: center;
+    margin-top: 49%;
+}
+
+form
+{
+    width: 100vw;
+
+}
+div input
+{
+    background-color: gray;
+    margin-top: 10px;
+    border: none;
+    color: white;
+    padding-top:10px ;
+    padding-bottom:10px;
+    padding-left: 7px;
+
+}
+a.btn-logout
+{
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 100px;
+    padding-right: 100px;
+    border: none;
+    border-radius: 20px 10px;
+    -webkit-border-radius: 20px 10px;
+    -moz-border-radius: 20px 10px;
+    -ms-border-radius: 20px 10px;
+    -o-border-radius: 20px 10px;
+}
+div input.btn
+{
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 100px;
+    padding-right: 100px;
+    border: none;
+    border-radius: 40px 40px;
+    -webkit-border-radius: 40px 40px;
+    -moz-border-radius: 40px 40px;
+    -ms-border-radius: 40px 40px;
+    -o-border-radius: 40px 40px;
+}
+
+.profileSettings
+{
+  display: grid;
+  grid-template-columns: 1fr [form] minmax(240px, 450px) 1fr;
+  grid-template-rows: [form];
+  justify-content: center;
+  align-items: center;
+}
+
+.profileSettings .form--settings
+{
+  background-color: #F3F3F3;
+  padding: 1em;
+  color: #505050;
+  grid-column: form;
+  grid-row: form;
+}
+
+.form--settings .form__error
+{
+  background-color: #999999;
+  color: white;
+  font-weight: lighter;
+  padding: 0.3em 1em;
+  margin-bottom: 1em;
+  font-size: 0.9em;
+}
+
+.form--settings .form__field
+{
+  padding-bottom: 1em;
+}
+
+.form--settings .form__field label
+{
+  display: block;
+  margin-bottom: 0.2em;
+}
+
+.form--settings .form__field .label__inline
+{
+  display: inline-block;
+}
+
+.form--settings .form__field input
+{
+  width: 100%;
+  padding: 0.3em;
+  font-size: 1.4em;
+}
+
+.form--settings .btn
+{
+  width: 100%;
+  margin: 0.5em auto;
+}
+
+.form--settings .btn--success
+{
+  background-color: green;
+  color: white;
+  text-align: center;
+  border: none;
+  padding: 0.3em 2em;
+  font-size: 1.4em;
+}
+
+.form--settings form{
+    width: 100%;
+}
