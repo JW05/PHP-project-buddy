@@ -111,6 +111,7 @@
             $firstName = $this->getFirstName();
             $lastName = $this->getLastName();
             $email = $this->getEmail();
+            /*password (veilig bewaard via bcrypt!)*/
             $password = $this->getPassword();
             $password = password_hash($password, PASSWORD_DEFAULT, ["cost" => 14]);
             $statement->bindValue(":firstName", $firstName);

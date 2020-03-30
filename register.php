@@ -4,9 +4,8 @@
     Email
     Dit adres moet eindigen op @student.thomasmore.be*/
 	$emailRequirement = "@student.thomasmore.be";
-	$emailOk = true;
 	$accountExists = true;
-	
+	$emailOk = true;
 
 	
     /*Full name
@@ -36,9 +35,8 @@
 			if(strpos($_POST["email"], $emailRequirement) == false){
 				throw new Exception("Student email required i.e. John@student.thomasmore.be");
 				$emailOk = false;
-			}else{
-				$emailOk = true;
 			}
+
 			// indien een email adres in gebruik is 
 			$email = ($_POST['email']);
 			$query = $conn->prepare( "SELECT `email` FROM `users` WHERE `email` = ?" );
@@ -53,11 +51,13 @@
 			}
 
 			
-
-			$user->save();
-			$success = "user saved";
-
-
+			if($accountExists == false && $emailOk == true){
+				$user->save();
+				$success = "user saved";
+				session_start();
+				 $_SESSION["user"] = $_POST["email"];
+				 header("Location: index.php");
+			}
 
 		} catch (\Throwable $th) {
 			//throw $th;
