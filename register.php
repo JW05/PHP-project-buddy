@@ -3,11 +3,17 @@
 	 /* een account aanmaken kan met
     Email
     Dit adres moet eindigen op @student.thomasmore.be
-    Dit adres mag nog niet bestaan, dubbele accounts aanmaken mag dus niet mogelijk zijn, toon een fout als het email adres reeds in gebruik is
+    
     Full name
     password (veilig bewaard via bcrypt!)
     zorg voor een foutmelding indien het aanmaken van een account niet lukt 
 	valideer al wat kan mislopen in dit formulier via PHP en toon gebruiksvriendelijke foutmeldingen */
+	
+	/* Dit adres mag nog niet bestaan, dubbele accounts aanmaken mag dus niet mogelijk zijn,
+	 toon een fout als het email adres reeds in gebruik is */
+
+	$emailsUsed = NewUser::getEmails();
+	var_dump($emailsUsed);
 	
 	if(!empty($_POST)){
 

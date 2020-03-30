@@ -122,5 +122,15 @@
 
         }
 
+        public static function getEmails(){
+            $conn = new PDO('mysql:host=localhost;dbname=phpals', "root", "");
+
+            $statement = $conn->prepare("select email from users");
+            $result = $statement->execute();
+            $adressen = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            return $adressen;
+        }
+
     }
 ?>
