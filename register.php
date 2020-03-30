@@ -1,5 +1,5 @@
 <?php
-	include_once(__DIR__."/classes/newUser.php");
+	include_once(__DIR__."/classes/User.php");
 	 /* een account aanmaken kan met
     Email
     Dit adres moet eindigen op @student.thomasmore.be*/
@@ -18,10 +18,10 @@
 	if(!empty($_POST)){
 		try {
 			//code...
-			$emailsUsed = NewUser::getEmails();
+			$emailsUsed = User::getEmails();
 			$conn = Db::getConnection();
 
-			$user = new NewUser();
+			$user = new User();
 			$user->setFirstName($_POST['firstName']);
 			$user->setLastName($_POST['lastName']);
 			$user->setEmail($_POST['email']);
