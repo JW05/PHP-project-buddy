@@ -4,15 +4,15 @@
     Email
     Dit adres moet eindigen op @student.thomasmore.be*/
 	$emailRequirement = "@student.thomasmore.be";
+	$emailOk = true;
+	$accountExists = true;
+	
+
 	
     /*Full name
     zorg voor een foutmelding indien het aanmaken van een account niet lukt 
 	valideer al wat kan mislopen in dit formulier via PHP en toon gebruiksvriendelijke foutmeldingen */
-
-	/* Dit adres mag nog niet bestaan, dubbele accounts aanmaken mag dus niet mogelijk zijn,
-	toon een fout als het email adres reeds in gebruik is */
 	
-
 	//$emailsUsed = NewUser::getEmails();
 	//var_dump($emailsUsed);
 	
@@ -20,6 +20,7 @@
 		try {
 			//code...
 			$emailsUsed = NewUser::getEmails();
+			$conn = Db::getConnection();
 
 			$user = new NewUser();
 			$user->setFirstName($_POST['firstName']);
@@ -27,15 +28,36 @@
 			$user->setEmail($_POST['email']);
 			$user->setPassword($_POST['password']);
 	
-			$user->save();
-			$success = "user saved";
+			// $user->save();
+			// $success = "user saved";
 
 			/* een account aanmaken kan met email
 			Dit adres moet eindigen op @student.thomasmore.be*/
 			if(strpos($_POST["email"], $emailRequirement) == false){
 				throw new Exception("Student email required i.e. John@student.thomasmore.be");
-				$requiredVerification = false;
+				$emailOk = false;
+			}else{
+				$emailOk = true;
 			}
+			// indien een email adres in gebruik is 
+			$email = ($_POST['email']);
+			$query = $conn->prepare( "SELECT `email` FROM `users` WHERE `email` = ?" );
+			$query->bindValue( 1, $email );
+			$query->execute();
+
+			if( $query->rowCount() > 0 ) { # If rows are found for query
+				throw new Exception("Email adres is already in use");
+			}
+			else {
+				$accountExists=false;
+			}
+
+			
+
+			$user->save();
+			$success = "user saved";
+
+
 
 		} catch (\Throwable $th) {
 			//throw $th;
