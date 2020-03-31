@@ -1,9 +1,10 @@
 <?php   
         include_once(__DIR__."/classes/User.php");
         session_start();
-        
+        $_SESSION['locatie'] = "profile";
+      
     
-        $Kenmerk = User::getCurrentKenmerk($_SESSION['jaar']);
+        $Kenmerk = User::getCurrentKenmerk($_SESSION['locatie']);
         $KenmerkId = $Kenmerk['id'];
 
         $currentKenmerk = new User();
