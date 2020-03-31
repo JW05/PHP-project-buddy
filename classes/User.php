@@ -278,7 +278,18 @@
             $jaar = $this->getJaar();
             $voorkeur = $this->getVoorkeur();
             $genre = $this->getGenre();
-            $feesten = $this->getFeesten();   
+            $feesten = $this->getFeesten();  
+            
+            
+            $statement->bindValue(":locatie", $locatie);
+            $statement->bindValue(":jaar", $jaar);
+            $statement->bindValue(":voorkeur", $voorkeur);
+            $statement->bindValue(":genre", $genre);
+            $statement->bindValue(":feesten", $feesten);
+
+            $result = $statement->execute();
+
+                return true;
     }
 
                 /**

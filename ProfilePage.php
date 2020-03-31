@@ -1,9 +1,9 @@
 <?php   
         include_once(__DIR__."/classes/User.php");
         session_start();
-
+        
     
-        $Kenmerk = User::getCurrentKenmerk($_SESSION['user']);
+        $Kenmerk = User::getCurrentKenmerk($_SESSION['jaar']);
         $KenmerkId = $Kenmerk['id'];
 
         $currentKenmerk = new User();
@@ -22,9 +22,25 @@
          $feesten = $_POST['feesten'];
 
 if(!empty($locatie)){
-    $currentKenmerk->setlocatie(htmlspecialchars($locatie));
+    $currentKenmerk->setLocatie(htmlspecialchars($locatie));
 }else{
     $error = "Please fill out all the fields.";
+}
+
+if(!empty($jaar)){
+    $currentKenmerk->setJaar(htmlspecialchars($jaar));
+}
+
+if(!empty($voorkeur)){
+    $currentKenmerk->setVoorkeur(htmlspecialchars($voorkeur));
+}
+
+if(!empty($genre)){
+    $currentKenmerk->setGenre(htmlspecialchars($genre));
+}
+
+if(!empty($feesten)){
+    $currentKenmerk->setFeesten(htmlspecialchars($feesten));
 }
 }
 
@@ -48,18 +64,17 @@ if(!empty($locatie)){
 <body>
 <div id="Kenmerken">
 
-    <h1>Kenmerken</h1>
+<fieldset>
 
+    
+    <legend><h1>Kenmerken</h1></legend>
     <h2>Locatie: <?php echo $currentKenmerk->getLocatie();?></h2>
     <h2>Jaar: <?php echo $currentKenmerk->getJaar();?></h2>
-    <h2>Voorkeur:<?php echo $currentKenmerk->getVoorkeur();?></h2>
-    <h2>Muziek genre: <?php echo $currentKenmerk->getGenre();?></h2>
-    <h2>Feestbeest:<?php echo $currentKenmerk->getFeesten();?></h2>
+    <h2>Voorkeur: <?php echo $currentKenmerk->getVoorkeur(); ?></h2>
+    <h2>Muziek genre: <?php echo $currentKenmerk->getGenre(); ?></h2>
+    <h2>Feestbeest: <?php echo $currentKenmerk->getFeesten(); ?></h2>
    
-    
- 
-    
- 
 </div>
+</fieldset>
 </body>
 </html>
