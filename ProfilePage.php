@@ -1,109 +1,72 @@
 
 
 <?php   
+        include_once(__DIR__."/classes/User.php");
+        session_start();
 
-        $locatie ="Sorry er is iets mis geggaan";
-        
-        if(!empty($_POST)){
+
+
+
+      /*  public static function getCurrentKenmerk($email){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("select * from users where email = '$email'");
+            $statement->execute();
+            $kenmerk = $statement->fetch(PDO::FETCH_ASSOC);
+
+            return $kenmerk;
+    }
+
+    public function updateKenmerken($id){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("update users set locatie = :locatie, jaar = :jaar, voorkeur = :voorkeur, genre = :genre, feesten = :feesten where id = '$id'");
             
-        if(!empty ($_POST['locatie'])){
+            $locatie = $this->getLocatie();
+            $jaar = $this->getJaar();
+            $voorkeur = $this->getVoorkeur();
+            $genre = $this->getGenre();
+            $feesten = $this->getFeesten();
+            
 
-		$locatie = $_POST['locatie'];
-      
-		$file = fopen("locatielist.txt","a+");
+    }
 
-		fwrite($file,$locatie."\n");
 
-		fclose($file);
-        
-        $locaties = file("locatielist.txt");
-        $locatie = "$locatie";
-	}
+
+
+
+
+
+
+
+
+
+
+
+
+        $Kenmerk = User::getCurrentKenmerk($_SESSION['user']);
+        $KenmerkId = $Kenmerk['id'];
+
+        $currentKenmerk = new User();
+
+        $currentKenmerk->setLocatie($Kenmerk["locatie"]);
+        $currentKenmerk->setJaar($Kenmerk["jaar"]);
+        $currentKenmerk->setVoorkeur($Kenmerk["voorkeur"]);
+        $currentKenmerk->setGenre($Kenmerk["genre"]);
+        $currentKenmerk->setFeesten($Kenmerk["feesten"]);
+*/
+        if(!empty($_POST)){
+         $locatie = $_POST['locatie'];
+         $jaar = $_POST['jaar'];
+         $voorkeur = $_POST['voorkeur'];
+         $genre = $_POST['genre'];
+         $feesten = $_POST['feesten'];
+
+/*if(!empty($locatie)){
+    $currentKenmerk->setlocatie(htmlspecialchars($locatie));
+}else{
+    $error = "Please fill out all the fields.";
+}*/
 }
 
-
-
-$jaar = "Sorry er is iets mis geggaan";
-        
-if(!empty($_POST)){
-    
-if(!empty ($_POST['jaar'])){
-
-$jaar = $_POST['jaar'];
-
-$file = fopen("jaarlist.txt","a+");
-
-fwrite($file,$jaar."\n");
-
-fclose($file);
-
-$jaaren = file("jaarlist.txt");
-$jaar = "$jaar";
-}
-}
-
-
-
-$voorkeur = "Sorry er is iets mis geggaan";
-        
-if(!empty($_POST)){
-    
-if(!empty ($_POST['voorkeur'])){
-
-$voorkeur = $_POST['voorkeur'];
-
-$file = fopen("voorkeurlist.txt","a+");
-
-fwrite($file,$voorkeur."\n");
-
-fclose($file);
-
-$voorkeuren = file("voorkeurlist.txt");
-$voorkeur = "$voorkeur";
-}
-}
-
-
-
-$genre = "Sorry er is iets mis geggaan";
-        
-if(!empty($_POST)){
-    
-if(!empty ($_POST['genre'])){
-
-$genre = $_POST['genre'];
-
-$file = fopen("genrelist.txt","a+");
-
-fwrite($file,$genre."\n");
-
-fclose($file);
-
-$genres = file("genrelist.txt");
-$genre = "$genre";
-}
-}
-
-
-
-$feesten = "Sorry er is iets mis geggaan";
-        
-if(!empty($_POST)){
-    
-if(!empty ($_POST['feesten'])){
-
-$feesten = $_POST['feesten'];
-
-$file = fopen("feestenlist.txt","a+");
-
-fwrite($file,$feesten."\n");
-
-fclose($file);
-
-$feestenlist = file("feestenlist.txt");
-$feesten = "$feesten";
-}
-}
 
 ?>
 
