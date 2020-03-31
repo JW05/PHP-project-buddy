@@ -6,10 +6,10 @@
   <title>UpdateProfile</title>
   <style>
  
-      body{ font-family: 'Roboto Condensed'}
+      body{ font-family: 'Roboto Condensed';color:#FF6161;}
       h1{font-size: 45px;}
       h2{font-size: 25px; }
-      fieldset{ background-color: #f1f1f1;padding: 15px 5%;}
+      fieldset{ background-color: #FFF699;padding: 15px 5%;}
       input{border-radius:15px;}
 
   </style>

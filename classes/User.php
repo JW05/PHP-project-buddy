@@ -256,7 +256,30 @@
                                 return $this;
                 }
 
-                
+
+
+
+
+
+            public static function getCurrentKenmerk($locatie){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("select * from profile where locatie = '$locatie'");
+            $statement->execute();
+            $kenmerk = $statement->fetch(PDO::FETCH_ASSOC);
+
+            return $kenmerk;
+    }
+
+            public function updateKenmerken($id){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("update profile set locatie = :locatie, jaar = :jaar, voorkeur = :voorkeur, genre = :genre, feesten = :feesten where id = '$id'");
+            
+            $locatie = $this->getLocatie();
+            $jaar = $this->getJaar();
+            $voorkeur = $this->getVoorkeur();
+            $genre = $this->getGenre();
+            $feesten = $this->getFeesten();   
+    }
 
                 /**
                  * Get the value of locatie
