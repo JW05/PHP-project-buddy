@@ -19,43 +19,78 @@
 
         .BuddyBox{
            display:grid;
-           
+           width:499px;
            padding: 50px;
-  
-           
+           margin-right:auto;
+           margin-left:auto;
+          
         }
         .MijnBuddys{
+            color:#FFF699;
             padding:20px;
+            margin-bottom:50px;
+            border: 5px solid #FFF699;
+            width: 100%;
+            border-radius: 15%;
+            text-align:center;
         }
         .BuddysBuddys{
+            color:#a4fcaf;
             padding:20px;
+            border: 5px solid #a4fcaf;
+            width: 100%;
+            border-radius: 15%;
+            text-align:center;
         }
 
-        @media(min-width: 800px) {
-
-            
+        @media(min-width: 1200px) {
+           
         .BuddyBox{
-           display:grid;
-           grid-template-columns: auto auto auto;
-           padding: 50px 50px 0px 400px;
-  
+           display:grid;  
+           width:1100px;       
+           grid-template-columns:auto auto auto;
            
+                    
         }
         .MijnBuddys{
-            padding:20px;
+          position:relative;
+          left:50px;
+          top:150px;            
+             
         }
         .BuddysBuddys{
-            padding:20px;
+          position:relative;
+          left:200px;
+          top:150px;       
+            
         }
 
-
-
-
-
-
-
-
         }
+
+        @media(min-width: 1400px) {
+           
+           .BuddyBox{
+              display:grid;
+              width:1100px;
+              grid-template-columns:auto auto auto;
+              
+              
+                       
+           }
+           .MijnBuddys{
+            position:relative;
+             right:375px;
+             top:150px;          
+                
+           }
+           .BuddysBuddys{
+             position:relative;
+             left:185px;
+             bottom:100px;         
+               
+           }
+   
+           }
 </style>
 </head>
 <body>
