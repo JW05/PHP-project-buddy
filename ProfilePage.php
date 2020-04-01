@@ -5,17 +5,16 @@
        
       
     
-$Kenmerk = User::getCurrentKenmerk($_SESSION['locatie']);
-        $KenmerkId = $Kenmerk['id'];
+
 
         $currentKenmerk = new User();
 
-        $currentKenmerk->setUser_id($Kenmerk["user_id"]);
-        $currentKenmerk->setLocatie($Kenmerk["locatie"]);
-        $currentKenmerk->setJaar($Kenmerk["jaar"]);
-        $currentKenmerk->setVoorkeur($Kenmerk["voorkeur"]);
-        $currentKenmerk->setGenre($Kenmerk["genre"]);
-        $currentKenmerk->setFeesten($Kenmerk["feesten"]);
+        $currentKenmerk->setUser_id($_POST["user_id"]);
+        $currentKenmerk->setLocatie($_POST["locatie"]);
+        $currentKenmerk->setJaar($_POST["jaar"]);
+        $currentKenmerk->setVoorkeur($_POST["voorkeur"]);
+        $currentKenmerk->setGenre($_POST["genre"]);
+        $currentKenmerk->setFeesten($_POST["feesten"]);
         
 
         if(!empty($_POST)){

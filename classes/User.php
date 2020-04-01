@@ -261,17 +261,6 @@
 
 
 
-
-            public static function getCurrentKenmerk(){
-            $conn = Db::getConnection();
-           
-            $statement = $conn->prepare("select * from profile");
-            $statement->execute();
-            $kenmerk = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-            return $kenmerk;
-    }
-
             public function saveKenmerken(){
             $conn = Db::getConnection();
             $statement = $conn->prepare("insert into profile (user_id, locatie, jaar, voorkeur,genre,feesten) values (:user_id, :locatie, :jaar, :voorkeur, :genre, :feesten)");
@@ -297,8 +286,18 @@
             $result = $statement->execute();
 
                 return  $result;
-                $_SESSION['locatie'] = "phpals.profile";
+                
     }
+
+    public static function getCurrentKenmerk(){
+        $conn = Db::getConnection();
+       
+        $statement = $conn->prepare("select * from profile");
+        $statement->execute();
+        $kenmerken = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $kenmerken;
+}
 
    /* public function updateUser_id($id){
         $conn = Db::getConnection();

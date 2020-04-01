@@ -16,11 +16,16 @@ if(!empty($_POST)){
          $kenmerk->saveKenmerken();
          $succes ="user saved";
 
+
+
   } catch (\Throwable $th) {
     $error =$th->getMessage();
   }
          
 }
+
+$Kenmerken = User::getCurrentKenmerk();
+var_dump($kenmerken);
 
 
 ?>
@@ -52,8 +57,8 @@ if(!empty($_POST)){
 
 <fieldset>
 <legend><h1>Kenmerken</h1></legend>
-<form action="" method="post">
-/PHP-project-buddy/PHP-project-buddy/ProfilePage.php
+<form action="/PHP-project-buddy/PHP-project-buddy/ProfilePage.php" method="post">
+
   
   <label for="locatie"><h2>Van waar bent u?</h2></label><br>
   <input type="text" id="locatie" name="locatie" value=""><br><br>
@@ -117,6 +122,10 @@ if(!empty($_POST)){
 
   <input type="submit">
 </form>
+
+<?php foreach($kenmerken as $kenmerk): ?>
+  <h2><?php echo $kenmerk['locatie']; ?></h2>
+<?php endforeach; ?>
 
 </fieldset>
 </body>
