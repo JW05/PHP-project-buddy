@@ -1,17 +1,28 @@
 <?php
-/*
+include_once(__DIR__."/classes/User.php");
+
 if(!empty($_POST)){
-         $kenmerk =setUser_id ($_POST['user_id']);   
-         $kenmerk =setLocatie ($_POST['locatie']);
-         $kenmerk =setJaar ($_POST['jaar']);
-         $kenmerk =setVoorkeur ($_POST['voorkeur']);
-         $kenmerk =setGenre ($_POST['genre']);
-         $kenmerk =setFeesten ($_POST['feesten']);
+
+  try {
+    $kenmerk= new user();
+         $kenmerk->setUser_id ($_POST['user_id']);   
+         $kenmerk->setLocatie ($_POST['locatie']);
+         $kenmerk->setJaar ($_POST['jaar']);
+         $kenmerk->setVoorkeur ($_POST['voorkeur']);
+         $kenmerk->setGenre ($_POST['genre']);
+         $kenmerk->setFeesten ($_POST['feesten']);
 
          echo $kenmerk->getLocatie();
+         $kenmerk->saveKenmerken();
+         $succes ="user saved";
+
+  } catch (\Throwable $th) {
+    $error =$th->getMessage();
+  }
+         
 }
 
-*/
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,14 +41,19 @@ if(!empty($_POST)){
   </style>
 </head>
 <body>
-
+ <?php if(isset($error)):?>
+  <div class="error"><?php echo $error; ?></div>
+  <?php endif; ?>
+  <?php if(isset($succes)):?>
+  <div class="succes"><?php echo $succes; ?></div>
+  <?php endif; ?>
   <h1>Vervoledig hier je profiel</h1>
 
 
 <fieldset>
 <legend><h1>Kenmerken</h1></legend>
-<form action="/PHP-project-buddy/PHP-project-buddy/ProfilePage.php" method="post">
-
+<form action="" method="post">
+/PHP-project-buddy/PHP-project-buddy/ProfilePage.php
   
   <label for="locatie"><h2>Van waar bent u?</h2></label><br>
   <input type="text" id="locatie" name="locatie" value=""><br><br>

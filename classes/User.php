@@ -272,7 +272,7 @@
             return $kenmerk;
     }
 
-            public function saveKenmerken($id){
+            public function saveKenmerken(){
             $conn = Db::getConnection();
             $statement = $conn->prepare("insert into profile (user_id, locatie, jaar, voorkeur,genre,feesten) values (:user_id, :locatie, :jaar, :voorkeur, :genre, :feesten)");
             
@@ -319,7 +319,7 @@
  /**
                  * Get the value of id
                  */ 
-                public function getId()
+           /*     public function getId()
                 {
                                 return $this->id;
                 }
@@ -329,7 +329,7 @@
                  *
                  * @return  self
                  */ 
-                public function setId($id)
+          /*      public function setId($id)
                 {
                                 $this->id = $id;
 
@@ -354,10 +354,6 @@
                 public function setUser_id($user_id)
                 {
 
-                       /* if(empty($user_id)){
-                                throw new Exception("Error Processing Request");
-                                
-                            }*/
                                 $this->user_id = $user_id;
 
                                 return $this;
@@ -380,9 +376,7 @@
                  */ 
                 public function setLocatie($locatie)
                 {
-                       /*  if(!empty($locatie)){
-                                throw new Exception("Error Processing Request");
-                            }*/
+                         
                                 $this->locatie = $locatie;
 
                                 return $this;
