@@ -15,6 +15,7 @@
                 private $voorkeur;
                 private $genre;
                 private $feesten;
+                private $user_id;
 
                 /**
                  * Get the value of firstname
@@ -263,7 +264,8 @@
 
             public static function getCurrentKenmerk($locatie){
             $conn = Db::getConnection();
-            $statement = $conn->prepare("select * from profile where locatie = '$locatie'");
+           
+            $statement = $conn->prepare("select * from profile where locatie = '$locatie'");/*select * from profile left join user on profile.id=user.id locatie */
             $statement->execute();
             $kenmerk = $statement->fetch(PDO::FETCH_ASSOC);
 
@@ -272,8 +274,11 @@
 
             public function updateKenmerken($id){
             $conn = Db::getConnection();
-            $statement = $conn->prepare("update profile set locatie = :locatie, jaar = :jaar, voorkeur = :voorkeur, genre = :genre, feesten = :feesten where id = '$id'");
+           /* $statement = $conn->prepare("insert profile set user_id = :user_id, locatie = :locatie, jaar = :jaar, voorkeur = :voorkeur, genre = :genre, feesten = :feesten where id = '$id'");*/
+            $statement = $conn->prepare("insert into profile (user_id, locatie, jaar, voorkeur,genre,feesten) values (:user_id, :locatie, :jaar, :voorkeur, :genre, :feesten)");
             
+
+            $user_id = $this->getUser_id();
             $locatie = $this->getLocatie();
             $jaar = $this->getJaar();
             $voorkeur = $this->getVoorkeur();
@@ -281,16 +286,79 @@
             $feesten = $this->getFeesten();  
             
             
+            $statement->bindValue(":user_id", $user_id);
             $statement->bindValue(":locatie", $locatie);
             $statement->bindValue(":jaar", $jaar);
             $statement->bindValue(":voorkeur", $voorkeur);
             $statement->bindValue(":genre", $genre);
             $statement->bindValue(":feesten", $feesten);
+            
+            
 
             $result = $statement->execute();
 
                 return true;
+               
     }
+
+    public function updateUser_id($id){
+        $conn = Db::getConnection();
+       /* $statement = $conn->prepare("insert user set id = :id where id = '$id'");*/
+       $statement = $conn->prepare("insert into user (id) values (:id)"); 
+
+        
+        $id = $this->id();
+        
+        $statement->bindValue(":id", $id);
+
+        $result = $statement->execute();
+
+            return true;
+             $_SESSION['locatie'] = "phpals.profile";
+}
+
+ /**
+                 * Get the value of id
+                 */ 
+                public function getId()
+                {
+                                return $this->id;
+                }
+
+                /**
+                 * Set the value of id
+                 *
+                 * @return  self
+                 */ 
+                public function setId($id)
+                {
+                                $this->id = $id;
+
+                                return $this;
+                }
+
+
+
+                  /**
+                 * Get the value of user_id
+                 */ 
+                public function getUser_id()
+                {
+                                return $this->user_id;
+                }
+
+                /**
+                 * Set the value of user_id
+                 *
+                 * @return  self
+                 */ 
+                public function setUser_id($user_id)
+                {
+                                $this->user_id = $user_id;
+
+                                return $this;
+                }
+
 
                 /**
                  * Get the value of locatie

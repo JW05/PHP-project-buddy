@@ -22,6 +22,8 @@
 <fieldset>
 <legend><h1>Kenmerken</h1></legend>
 <form action="/PHP-project-buddy/PHP-project-buddy/ProfilePage.php" method="post">
+
+  
   <label for="locatie"><h2>Van waar bent u?</h2></label><br>
   <input type="text" id="locatie" name="locatie" value=""><br><br>
   
@@ -78,6 +80,10 @@
     <option value="Ja">Ja</option>
     <option value="Nee">Nee</option>
   </select><br><br>
+
+  <label for="user_id"></label><br>
+  <input type="hidden" id="user_id" name="user_id" value="">
+
   <input type="submit">
 </form>
 

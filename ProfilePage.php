@@ -1,7 +1,8 @@
 <?php   
         include_once(__DIR__."/classes/User.php");
         session_start();
-        $_SESSION['locatie'] = "profile";
+        
+        echo $_SESSION["locatie"];
       
     
         $Kenmerk = User::getCurrentKenmerk($_SESSION['locatie']);
@@ -9,19 +10,26 @@
 
         $currentKenmerk = new User();
 
+        $currentKenmerk->setUser_id($Kenmerk["user_id"]);
         $currentKenmerk->setLocatie($Kenmerk["locatie"]);
         $currentKenmerk->setJaar($Kenmerk["jaar"]);
         $currentKenmerk->setVoorkeur($Kenmerk["voorkeur"]);
         $currentKenmerk->setGenre($Kenmerk["genre"]);
         $currentKenmerk->setFeesten($Kenmerk["feesten"]);
+        
 
         if(!empty($_POST)){
+         $user_id = $_POST['user_id'];   
          $locatie = $_POST['locatie'];
          $jaar = $_POST['jaar'];
          $voorkeur = $_POST['voorkeur'];
          $genre = $_POST['genre'];
          $feesten = $_POST['feesten'];
-
+   
+         
+if(!empty($user_id)){
+    $currentKenmerk->setUser_id(htmlspecialchars($user_id));
+}
 if(!empty($locatie)){
     $currentKenmerk->setLocatie(htmlspecialchars($locatie));
 }else{
@@ -43,6 +51,7 @@ if(!empty($genre)){
 if(!empty($feesten)){
     $currentKenmerk->setFeesten(htmlspecialchars($feesten));
 }
+
 }
 
 
@@ -67,6 +76,7 @@ if(!empty($feesten)){
 
 <fieldset>
 
+    
     
     <legend><h1>Kenmerken</h1></legend>
     <h2>Locatie: <?php echo $currentKenmerk->getLocatie();?></h2>
