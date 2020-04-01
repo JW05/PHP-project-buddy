@@ -60,13 +60,13 @@ var_dump($kenmerken);
 <form action="" method="post">
 /PHP-project-buddy/PHP-project-buddy/ProfilePage.php
 
-  
+  <div>
   <label for="locatie"><h2>Van waar bent u?</h2></label><br>
   <input type="text" id="locatie" name="locatie" value=""><br><br>
-  
+  </div>
  
 
-
+<div>
 <h2>In welk jaar zit u</h2>
 
 
@@ -76,9 +76,9 @@ var_dump($kenmerken);
     <option value="2">2</option>
     <option value="3">3</option>
   </select>
-  
+ </div> 
 
-
+<div>
 <h2>Verkiest u development of design?</h2>
 
 
@@ -87,11 +87,11 @@ var_dump($kenmerken);
     <option value="Development">Development</option>
     <option value="Design">Design</option>
   </select>
- 
+ </div>
 
 
 
-
+<div>
 <h2>Wat is je muziek genre?</h2>
 
 
@@ -105,10 +105,10 @@ var_dump($kenmerken);
     <option value="Drum-'n-bass">Drum-'n-bass</option>
     <option value="Klasiek">Klasiek</option>
   </select>
-  
+</div>  
 
 
-
+<div>
 <h2>Bent u een feestbeest?</h2>
 
 
@@ -117,11 +117,16 @@ var_dump($kenmerken);
     <option value="Ja">Ja</option>
     <option value="Nee">Nee</option>
   </select><br><br>
+</div>
 
-    <label for="user_id"><h2>USER ID?</h2></label><br>
+<div>
+  <label for="user_id"><h2>USER ID?</h2></label><br>
   <input type="number" id="user_id" name="user_id"  min="1" max="5"><br><br>
+</div>
 
+<div>
   <input type="submit">
+</div>
 </form>
 
 <?php foreach($kenmerken as $kenmerk): ?>
