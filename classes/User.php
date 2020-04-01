@@ -262,24 +262,25 @@
 
 
             public function saveKenmerken(){
-            $conn = Db::getConnection();
-            $statement = $conn->prepare("insert into profile (user_id, locatie, jaar, voorkeur,genre,feesten) values (:user_id, :locatie, :jaar, :voorkeur, :genre, :feesten)");
+           /* $conn = Db::getConnection();*/
+            $conn = new PDO('mysql:host=localhost;dbname=phpals',"root","");
+            $statement = $conn->prepare("insert into profile (locatie, jaar, voorkeur,genre,feesten,user_id) values (:locatie, :jaar, :voorkeur, :genre, :feesten,:user_id)");
             
-
-            $user_id = $this->getUser_id();
+           
             $locatie = $this->getLocatie();
             $jaar = $this->getJaar();
             $voorkeur = $this->getVoorkeur();
             $genre = $this->getGenre();
-            $feesten = $this->getFeesten();  
+            $feesten = $this->getFeesten(); 
+            $user_id = $this->getUser_id(); 
             
-            
-            $statement->bindValue(":user_id", $user_id);
+             
             $statement->bindValue(":locatie", $locatie);
             $statement->bindValue(":jaar", $jaar);
             $statement->bindValue(":voorkeur", $voorkeur);
             $statement->bindValue(":genre", $genre);
             $statement->bindValue(":feesten", $feesten);
+            $statement->bindValue(":user_id", $user_id);
             
             
 
