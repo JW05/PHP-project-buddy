@@ -262,19 +262,18 @@
 
 
 
-            public static function getCurrentKenmerk($locatie){
+            public static function getCurrentKenmerk(){
             $conn = Db::getConnection();
            
-            $statement = $conn->prepare("select * from profile where locatie = '$locatie'");/*select * from profile left join user on profile.id=user.id locatie */
+            $statement = $conn->prepare("select * from profile");
             $statement->execute();
-            $kenmerk = $statement->fetch(PDO::FETCH_ASSOC);
+            $kenmerk = $statement->fetchAll(PDO::FETCH_ASSOC);
 
             return $kenmerk;
     }
 
             public function saveKenmerken($id){
             $conn = Db::getConnection();
-           /* $statement = $conn->prepare("insert profile set user_id = :user_id, locatie = :locatie, jaar = :jaar, voorkeur = :voorkeur, genre = :genre, feesten = :feesten where id = '$id'");*/
             $statement = $conn->prepare("insert into profile (user_id, locatie, jaar, voorkeur,genre,feesten) values (:user_id, :locatie, :jaar, :voorkeur, :genre, :feesten)");
             
 
@@ -354,6 +353,11 @@
                  */ 
                 public function setUser_id($user_id)
                 {
+
+                       /* if(empty($user_id)){
+                                throw new Exception("Error Processing Request");
+                                
+                            }*/
                                 $this->user_id = $user_id;
 
                                 return $this;
@@ -365,6 +369,7 @@
                  */ 
                 public function getLocatie()
                 {
+                       
                                 return $this->locatie;
                 }
 
@@ -375,6 +380,9 @@
                  */ 
                 public function setLocatie($locatie)
                 {
+                       /*  if(!empty($locatie)){
+                                throw new Exception("Error Processing Request");
+                            }*/
                                 $this->locatie = $locatie;
 
                                 return $this;

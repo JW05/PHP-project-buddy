@@ -1,3 +1,18 @@
+<?php
+/*
+if(!empty($_POST)){
+         $kenmerk =setUser_id ($_POST['user_id']);   
+         $kenmerk =setLocatie ($_POST['locatie']);
+         $kenmerk =setJaar ($_POST['jaar']);
+         $kenmerk =setVoorkeur ($_POST['voorkeur']);
+         $kenmerk =setGenre ($_POST['genre']);
+         $kenmerk =setFeesten ($_POST['feesten']);
+
+         echo $kenmerk->getLocatie();
+}
+
+*/
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

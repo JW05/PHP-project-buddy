@@ -2,10 +2,10 @@
         include_once(__DIR__."/classes/User.php");
         session_start();
         
-        echo $_SESSION["locatie"];
+       
       
     
-        $Kenmerk = User::getCurrentKenmerk($_SESSION['locatie']);
+$Kenmerk = User::getCurrentKenmerk($_SESSION['locatie']);
         $KenmerkId = $Kenmerk['id'];
 
         $currentKenmerk = new User();
