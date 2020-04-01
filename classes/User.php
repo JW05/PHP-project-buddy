@@ -272,7 +272,7 @@
             return $kenmerk;
     }
 
-            public function updateKenmerken($id){
+            public function saveKenmerken($id){
             $conn = Db::getConnection();
            /* $statement = $conn->prepare("insert profile set user_id = :user_id, locatie = :locatie, jaar = :jaar, voorkeur = :voorkeur, genre = :genre, feesten = :feesten where id = '$id'");*/
             $statement = $conn->prepare("insert into profile (user_id, locatie, jaar, voorkeur,genre,feesten) values (:user_id, :locatie, :jaar, :voorkeur, :genre, :feesten)");
@@ -297,17 +297,17 @@
 
             $result = $statement->execute();
 
-                return true;
-               
+                return  $result;
+                $_SESSION['locatie'] = "phpals.profile";
     }
 
-    public function updateUser_id($id){
+   /* public function updateUser_id($id){
         $conn = Db::getConnection();
-       /* $statement = $conn->prepare("insert user set id = :id where id = '$id'");*/
+       
        $statement = $conn->prepare("insert into user (id) values (:id)"); 
 
         
-        $id = $this->id();
+        $id = $this->getId();
         
         $statement->bindValue(":id", $id);
 
@@ -315,7 +315,7 @@
 
             return true;
              $_SESSION['locatie'] = "phpals.profile";
-}
+}*/
 
  /**
                  * Get the value of id
