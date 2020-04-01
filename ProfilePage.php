@@ -83,6 +83,7 @@ if(!empty($feesten)){
     <h2>Voorkeur: <?php echo $currentKenmerk->getVoorkeur(); ?></h2>
     <h2>Muziek genre: <?php echo $currentKenmerk->getGenre(); ?></h2>
     <h2>Feestbeest: <?php echo $currentKenmerk->getFeesten(); ?></h2>
+    <h2>user_id: <?php echo $currentKenmerk->getUser_id(); ?></h2>
    
 </div>
 </fieldset>

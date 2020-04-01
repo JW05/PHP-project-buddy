@@ -4,15 +4,15 @@ include_once(__DIR__."/classes/User.php");
 if(!empty($_POST)){
 
   try {
-    $kenmerk= new user();
-         $kenmerk->setUser_id ($_POST['user_id']);   
+         $kenmerk = new User();
          $kenmerk->setLocatie ($_POST['locatie']);
          $kenmerk->setJaar ($_POST['jaar']);
          $kenmerk->setVoorkeur ($_POST['voorkeur']);
          $kenmerk->setGenre ($_POST['genre']);
          $kenmerk->setFeesten ($_POST['feesten']);
+         $kenmerk->setUser_id ($_POST['user_id']); 
 
-         echo $kenmerk->getLocatie();
+         /*echo $kenmerk->getLocatie();*/
          $kenmerk->saveKenmerken();
          $succes ="user saved";
 
@@ -24,7 +24,7 @@ if(!empty($_POST)){
          
 }
 
-$Kenmerken = User::getCurrentKenmerk();
+$kenmerken = User::getCurrentKenmerk();
 var_dump($kenmerken);
 
 
@@ -57,7 +57,8 @@ var_dump($kenmerken);
 
 <fieldset>
 <legend><h1>Kenmerken</h1></legend>
-<form action="/PHP-project-buddy/PHP-project-buddy/ProfilePage.php" method="post">
+<form action="" method="post">
+/PHP-project-buddy/PHP-project-buddy/ProfilePage.php
 
   
   <label for="locatie"><h2>Van waar bent u?</h2></label><br>
@@ -117,8 +118,8 @@ var_dump($kenmerken);
     <option value="Nee">Nee</option>
   </select><br><br>
 
-  <label for="user_id"></label><br>
-  <input type="hidden" id="user_id" name="user_id" value="">
+    <label for="user_id"><h2>USER ID?</h2></label><br>
+  <input type="number" id="user_id" name="user_id"  min="1" max="5"><br><br>
 
   <input type="submit">
 </form>

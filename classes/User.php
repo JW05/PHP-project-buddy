@@ -260,11 +260,12 @@
 
 
 
-
+        /* Jens W*/
             public function saveKenmerken(){
-           /* $conn = Db::getConnection();*/
+
+            /*$conn = Db::getConnection();*/
             $conn = new PDO('mysql:host=localhost;dbname=phpals',"root","");
-            $statement = $conn->prepare("insert into profile (locatie, jaar, voorkeur,genre,feesten,user_id) values (:locatie, :jaar, :voorkeur, :genre, :feesten,:user_id)");
+            $statement = $conn->prepare("insert into profile (locatie, jaar, voorkeur, genre, feesten, user_id) values (:locatie, :jaar, :voorkeur, :genre, :feesten, :user_id)");
             
            
             $locatie = $this->getLocatie();
@@ -281,9 +282,10 @@
             $statement->bindValue(":genre", $genre);
             $statement->bindValue(":feesten", $feesten);
             $statement->bindValue(":user_id", $user_id);
-            
-            
-
+            /* check value before save */
+            echo $locatie;
+            echo $feesten;
+                /*----------------------*/
             $result = $statement->execute();
 
                 return  $result;
@@ -292,6 +294,7 @@
 
     public static function getCurrentKenmerk(){
         $conn = Db::getConnection();
+       /* $conn = new PDO('mysql:host=localhost;dbname=phpals',"root","");*/
        
         $statement = $conn->prepare("select * from profile");
         $statement->execute();
