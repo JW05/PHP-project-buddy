@@ -263,8 +263,8 @@
         /* Jens W*/
             public function saveKenmerken(){
 
-            /*$conn = Db::getConnection();*/
-            $conn = new PDO('mysql:host=localhost;dbname=phpals',"root","");
+            $conn = Db::getConnection();
+            /*$conn = new PDO('mysql:host=localhost;dbname=phpals',"root","");*/
             $statement = $conn->prepare("insert into profile (locatie, jaar, voorkeur, genre, feesten, user_id) values (:locatie, :jaar, :voorkeur, :genre, :feesten, :user_id)");
             
            
@@ -274,6 +274,8 @@
             $genre = $this->getGenre();
             $feesten = $this->getFeesten(); 
             $user_id = $this->getUser_id(); 
+            
+            /*echo $locatie;*/
             
              
             $statement->bindValue(":locatie", $locatie);
@@ -286,9 +288,11 @@
            /* echo $locatie;
             echo $feesten;
                 /*----------------------*/
-            $result = $statement->execute();
-
-                return  $result;
+            $result = $statement->execute() ; 
+                
+                       var_dump($result);
+                       /* var_dump($locatie);*/
+                return  $result ;
                 
     }
 

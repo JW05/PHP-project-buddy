@@ -12,7 +12,12 @@ if(!empty($_POST)){
          $kenmerk->setFeesten ($_POST['feesten']);
          $kenmerk->setUser_id ($_POST['user_id']); 
 
-         echo $kenmerk->getLocatie();
+         /*echo $kenmerk->getLocatie();
+         echo $kenmerk->getJaar();
+         echo $kenmerk->getVoorkeur();
+         echo $kenmerk->getGenre();
+         echo $kenmerk->getFeesten();
+         echo $kenmerk->getUser_id();*/
 
          $kenmerk->saveKenmerken();
          $succes ="user saved";
