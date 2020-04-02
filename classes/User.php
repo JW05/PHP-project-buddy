@@ -275,7 +275,7 @@
             $feesten = $this->getFeesten(); 
             $user_id = $this->getUser_id(); 
             
-            /*echo $locatie;*/
+           
             
              
             $statement->bindValue(":locatie", $locatie);
@@ -287,11 +287,11 @@
             /* check value before save */
            /* echo $locatie;
             echo $feesten;
-                /*----------------------*/
+           /*----------------------*/
             $result = $statement->execute() ; 
-                
+                /*test result-------------
                        var_dump($result);
-                       /* var_dump($locatie);*/
+                  ------------------------*/     
                 return  $result ;
                 
     }

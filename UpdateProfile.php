@@ -12,16 +12,19 @@ if(!empty($_POST)){
          $kenmerk->setFeesten ($_POST['feesten']);
          $kenmerk->setUser_id ($_POST['user_id']); 
 
-         /*echo $kenmerk->getLocatie();
-         echo $kenmerk->getJaar();
-         echo $kenmerk->getVoorkeur();
-         echo $kenmerk->getGenre();
-         echo $kenmerk->getFeesten();
-         echo $kenmerk->getUser_id();*/
 
+        /** testing getterssetters---------------------------------------*/ 
+                    /*echo $kenmerk->getLocatie();
+                    echo $kenmerk->getJaar();
+                    echo $kenmerk->getVoorkeur();
+                    echo $kenmerk->getGenre();
+                    echo $kenmerk->getFeesten();
+                    echo $kenmerk->getUser_id();*/
+        /*---------------------------------------------------------*/
          $kenmerk->saveKenmerken();
+         /*test Save----------------
          $succes ="user saved";
-
+        -----------------------------*/
 
 
   } catch (\Throwable $th) {
@@ -31,8 +34,10 @@ if(!empty($_POST)){
 }
 
 $kenmerken = User::getCurrentKenmerk();
-var_dump($kenmerken);
 
+/*test $kenmerken -------------------------
+var_dump($kenmerken);
+---------------------------------------------*/
 
 ?>
 <!DOCTYPE html>
@@ -63,8 +68,8 @@ var_dump($kenmerken);
 
 <fieldset>
 <legend><h1>Kenmerken</h1></legend>
-<form action="" method="post">
-/PHP-project-buddy/PHP-project-buddy/ProfilePage.php
+<form action="/PHP-project-buddy/PHP-project-buddy/ProfilePage.php" method="post">
+
 
   <div>
   <label for="locatie"><h2>Van waar bent u?</h2></label><br>
@@ -135,9 +140,7 @@ var_dump($kenmerken);
 </div>
 </form>
 
-<?php foreach($kenmerken as $kenmerk): ?>
-  <h2><?php echo $kenmerk['locatie']; ?></h2>
-<?php endforeach; ?>
+
 
 </fieldset>
 </body>
