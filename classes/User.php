@@ -283,7 +283,7 @@
             $statement->bindValue(":feesten", $feesten);
             $statement->bindValue(":user_id", $user_id);
             /* check value before save */
-            echo $locatie;
+           /* echo $locatie;
             echo $feesten;
                 /*----------------------*/
             $result = $statement->execute();
