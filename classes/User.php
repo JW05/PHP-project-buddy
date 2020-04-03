@@ -307,19 +307,52 @@
 
 /* check if id exists in profile table to execute Updateprofile */
 
-     public function CheckUserIdProfile($id)
+     public function UserIdExists($id)
 		{
-                        $query = "select exists (select * from profile where userId ='$id')";
+                        /*$conn = Db::getConnection();*/
+                       /* $query = "select exists (select * from profile where userId ='$id')";
+                        $result = $conn->query($query);
+                        $row = $result->fetch(PDO::FETCH_ASSOC);
+                        echo " ------ dit is row ----";
+                        var_dump($row);
+                        $num_rows = count($row);
+                        echo "aantal rijen";
+                        echo $num_rows;/*
+                        /* if (count($row) != 0)*/
+                        /*if($result->num_rows != 0)*/
+                        $conn = new mysqli("localhost", "root", "","phpals");
+			
+                        $query="select * from profile where userId ='$id'";
+			$result = $conn->query($query);
+			if(mysqli_num_rows($result)!=0)
+                        /*if ($num_row=1)*/
+                         {      
+                                echo "true user id exists !!! ";
+                                return true;}
+                           else	{
+                                echo "false user id doesnt exist zzzzzzzzzz";
+                                return false;
+			        }
+		}
+                /*
                         if (@mysql_num_rows(mysql_query($query))<1) {
                                 return false;}
                           else {
                                 return true;
                         }
-                        /* return false in case no profile exists in profile table for id = userId */
-		}
+                        return false in case no profile exists in profile table for id = userId 
+		} */
 			
 
-
+/*
+$mysqli = new mysqli(SERVER, DBUSER, DBPASS, DATABASE);
+$result = $mysqli->query("SELECT id FROM mytable WHERE city = 'c7'");
+if($result->num_rows == 0) {
+     // row not found, do stuff...
+} else {
+    // do other stuff...
+}
+$mysqli->close(); */
 
 /*---------------------NO USE AT MOMENT--------------------------------------------------*/
    /* public function updateUserId($id){

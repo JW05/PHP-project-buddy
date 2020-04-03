@@ -1,6 +1,10 @@
 <?php
 include_once(__DIR__."/classes/User.php");
+session_start();
 
+    $user = User::getCurrentUser($_SESSION['user']);
+    $userId = $user['id'];
+    
 if(!empty($_POST)){
   
   try {
