@@ -307,6 +307,30 @@
         return $kenmerken;
 }
 /*-------------------------------------------------------------------------------------------------------------------------------------------------*/
+                /*public function getCurrentUserIdKenmerk($userIdUsers)
+		{
+			$conn = Db::getConnection();
+			$userIdUsers = $conn->real_escape_string($userIdUsers);
+			$query="select * from profile where userId = '$userIdUsers'";
+			$result = $conn->query($query);
+			if(mysqli_num_rows($result)!=0)
+			{
+			"/PHP-project-buddy/PHP-project-buddy/ProfilePage.php"
+			
+			}else{
+				
+                        "/PHP-project-buddy/PHP-project-buddy/UpdatePage.php"
+                        }        
+				
+		}
+			
+		
+
+
+
+
+
+
 /*public static function getCurrentUserIdKenmerk(){
         $conn = Db::getConnection();
        /* $conn = new PDO('mysql:host=localhost;dbname=phpals',"root","");*/
@@ -314,15 +338,15 @@
        /*------ $userIdUsers is the var received after login, which is the unique value of the current User logged in ---------*/
        
        /*---------- temporary $userIdUsers filled manually to test with existing and non existing userId*/
- /*      $userIdUsers = 1
+     /*  $userIdUsers = 1
        /*---- end test -------*/
        
-  /*     $statement = $conn->prepare("select * from profile where userId = '$userIdUsers'");
+     /*  $statement = $conn->prepare("select * from profile where userId = '$userIdUsers'");
        $result = $statement->execute();
         
        /*return $result;*/
 
-  /*     if (!$result){
+    /*   if (!$result){
         "/PHP-project-buddy/PHP-project-buddy/UpdatePage.php"
        }
        else{
