@@ -265,7 +265,7 @@
 
             $conn = Db::getConnection();
             /*$conn = new PDO('mysql:host=localhost;dbname=phpals',"root","");*/
-            $statement = $conn->prepare("insert into profile (locatie, jaar, voorkeur, genre, feesten, user_id) values (:locatie, :jaar, :voorkeur, :genre, :feesten, :user_id)");
+            $statement = $conn->prepare("insert into profile (locatie, jaar, voorkeur, genre, feesten, userId) values (:locatie, :jaar, :voorkeur, :genre, :feesten, :userId)");
             
            
             $locatie = $this->getLocatie();
@@ -273,7 +273,7 @@
             $voorkeur = $this->getVoorkeur();
             $genre = $this->getGenre();
             $feesten = $this->getFeesten(); 
-            $user_id = $this->getUser_id(); 
+            $userId = $this->getUserId(); 
             
            
             
@@ -283,15 +283,15 @@
             $statement->bindValue(":voorkeur", $voorkeur);
             $statement->bindValue(":genre", $genre);
             $statement->bindValue(":feesten", $feesten);
-            $statement->bindValue(":user_id", $user_id);
+            $statement->bindValue(":userId", $userId);
             /* check value before save */
            /* echo $locatie;
             echo $feesten;
            /*----------------------*/
-            $result = $statement->execute() ; 
+            $result = $statement->execute() ; echo $locatie;
                 /*test result-------------
                        var_dump($result);
-                  ------------------------*/     
+                 ------------------------*/     
                 return  $result ;
                 
     }
@@ -307,7 +307,7 @@
         return $kenmerken;
 }
 
-   /* public function updateUser_id($id){
+   /* public function updateUserId($id){
         $conn = Db::getConnection();
        
        $statement = $conn->prepare("insert into user (id) values (:id)"); 
@@ -346,22 +346,22 @@
 
 
                   /**
-                 * Get the value of user_id
+                 * Get the value of userId
                  */ 
-                public function getUser_id()
+                public function getUserId()
                 {
-                                return $this->user_id;
+                                return $this->userId;
                 }
 
                 /**
-                 * Set the value of user_id
+                 * Set the value of userId
                  *
                  * @return  self
                  */ 
-                public function setUser_id($user_id)
+                public function setUserId($userId)
                 {
 
-                                $this->user_id = $user_id;
+                                $this->userId = $userId;
 
                                 return $this;
                 }

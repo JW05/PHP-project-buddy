@@ -10,7 +10,7 @@ if(!empty($_POST)){
          $kenmerk->setVoorkeur ($_POST['voorkeur']);
          $kenmerk->setGenre ($_POST['genre']);
          $kenmerk->setFeesten ($_POST['feesten']);
-         $kenmerk->setUser_id ($_POST['user_id']); 
+         $kenmerk->setUserId ($_POST['userId']); 
 
 
         /** testing getterssetters---------------------------------------*/ 
@@ -19,7 +19,7 @@ if(!empty($_POST)){
                     echo $kenmerk->getVoorkeur();
                     echo $kenmerk->getGenre();
                     echo $kenmerk->getFeesten();
-                    echo $kenmerk->getUser_id();*/
+                    echo $kenmerk->getUserId();*/
         /*---------------------------------------------------------*/
          $kenmerk->saveKenmerken();
          /*test Save----------------
@@ -131,8 +131,8 @@ var_dump($kenmerken);
 </div>
 
 <div>
-  <label for="user_id"><h2>USER ID?</h2></label><br>
-  <input type="number" id="user_id" name="user_id"  min="1" max="5"><br><br>
+  <label for="userId"><h2>USER ID?</h2></label><br>
+  <input type="number" id="userId" name="userId"  min="1" max="5"><br><br>
 </div>
 
 <div>

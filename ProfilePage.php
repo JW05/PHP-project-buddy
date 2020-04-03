@@ -9,7 +9,7 @@
 
         $currentKenmerk = new User();
 
-        $currentKenmerk->setUser_id($_POST["user_id"]);
+        $currentKenmerk->setUserId($_POST["userId"]);
         $currentKenmerk->setLocatie($_POST["locatie"]);
         $currentKenmerk->setJaar($_POST["jaar"]);
         $currentKenmerk->setVoorkeur($_POST["voorkeur"]);
@@ -18,7 +18,7 @@
         
 
         if(!empty($_POST)){
-         $user_id = $_POST['user_id'];   
+         $userId = $_POST['userId'];   
          $locatie = $_POST['locatie'];
          $jaar = $_POST['jaar'];
          $voorkeur = $_POST['voorkeur'];
@@ -26,8 +26,8 @@
          $feesten = $_POST['feesten'];
    
          
-if(!empty($user_id)){
-    $currentKenmerk->setUser_id(htmlspecialchars($user_id));
+if(!empty($userId)){
+    $currentKenmerk->setUserId(htmlspecialchars($userId));
 }
 if(!empty($locatie)){
     $currentKenmerk->setLocatie(htmlspecialchars($locatie));
@@ -83,7 +83,7 @@ if(!empty($feesten)){
     <h2>Voorkeur: <?php echo $currentKenmerk->getVoorkeur(); ?></h2>
     <h2>Muziek genre: <?php echo $currentKenmerk->getGenre(); ?></h2>
     <h2>Feestbeest: <?php echo $currentKenmerk->getFeesten(); ?></h2>
-    <h2>user_id: <?php echo $currentKenmerk->getUser_id(); ?></h2>
+    <h2>userId: <?php echo $currentKenmerk->getUserId(); ?></h2>
    
 </div>
 </fieldset>
