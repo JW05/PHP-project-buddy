@@ -260,7 +260,8 @@
 
 
 
-        /* Jens W*/
+
+/* Jens W*/
             public function saveKenmerken(){
 
             $conn = Db::getConnection();
@@ -275,19 +276,14 @@
             $feesten = $this->getFeesten(); 
             $userId = $this->getUserId(); 
             
-           
-            
-             
+                       
             $statement->bindValue(":locatie", $locatie);
             $statement->bindValue(":jaar", $jaar);
             $statement->bindValue(":voorkeur", $voorkeur);
             $statement->bindValue(":genre", $genre);
             $statement->bindValue(":feesten", $feesten);
             $statement->bindValue(":userId", $userId);
-            /* check value before save */
-           /* echo $locatie;
-            echo $feesten;
-           /*----------------------*/
+            
             $result = $statement->execute() ;
                 /*test result-------------
                        var_dump($result);
@@ -295,6 +291,7 @@
                 return  $result ;
                 
     }
+/* ophalen alle kenmerken - no use */
 
     public static function getCurrentAllKenmerk(){
         $conn = Db::getConnection();
@@ -306,55 +303,25 @@
 
         return $kenmerken;
 }
-/*-------------------------------------------------------------------------------------------------------------------------------------------------*/
-                /*public function getCurrentUserIdKenmerk($userIdUsers)
+/* ------------------------------------*/
+
+/* check if id exists in profile table to execute Updateprofile */
+
+     public function CheckUserIdProfile($id)
 		{
-			$conn = Db::getConnection();
-			$userIdUsers = $conn->real_escape_string($userIdUsers);
-			$query="select * from profile where userId = '$userIdUsers'";
-			$result = $conn->query($query);
-			if(mysqli_num_rows($result)!=0)
-			{
-			"/PHP-project-buddy/PHP-project-buddy/ProfilePage.php"
-			
-			}else{
-				
-                        "/PHP-project-buddy/PHP-project-buddy/UpdatePage.php"
-                        }        
-				
+                        $query = "select exists (select * from profile where userId ='$id')";
+                        if (@mysql_num_rows(mysql_query($query))<1) {
+                                return false;}
+                          else {
+                                return true;
+                        }
+                        /* return false in case no profile exists in profile table for id = userId */
 		}
 			
-		
 
 
 
-
-
-
-/*public static function getCurrentUserIdKenmerk(){
-        $conn = Db::getConnection();
-       /* $conn = new PDO('mysql:host=localhost;dbname=phpals',"root","");*/
-
-       /*------ $userIdUsers is the var received after login, which is the unique value of the current User logged in ---------*/
-       
-       /*---------- temporary $userIdUsers filled manually to test with existing and non existing userId*/
-     /*  $userIdUsers = 1
-       /*---- end test -------*/
-       
-     /*  $statement = $conn->prepare("select * from profile where userId = '$userIdUsers'");
-       $result = $statement->execute();
-        
-       /*return $result;*/
-
-    /*   if (!$result){
-        "/PHP-project-buddy/PHP-project-buddy/UpdatePage.php"
-       }
-       else{
-
-        "/PHP-project-buddy/PHP-project-buddy/ProfilePage.php"
-       }
-}
-/*-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*---------------------NO USE AT MOMENT--------------------------------------------------*/
    /* public function updateUserId($id){
         $conn = Db::getConnection();
        
@@ -391,16 +358,18 @@
                                 return $this;
                 }
 
-
+/* END NO USE ------------------------------------------------------------------------*/
 
                   /**
                  * Get the value of userId
                  */ 
+
                 public function getUserId()
                 {
                                 return $this->userId;
                 }
 
+/* setUserId  will not be used as it is a value linked from users table - id and taken over from there - left in program */
                 /**
                  * Set the value of userId
                  *

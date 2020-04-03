@@ -2,7 +2,7 @@
 include_once(__DIR__."/classes/User.php");
 
 if(!empty($_POST)){
-
+  
   try {
          $kenmerk = new User();
          $kenmerk->setLocatie ($_POST['locatie']);
@@ -70,7 +70,7 @@ var_dump($kenmerken);
 <legend><h1>Kenmerken</h1></legend>
 <form action="" method="post">
 <!--  /PHP-project-buddy/PHP-project-buddy/ProfilePage.php  -->
-<form action="" method="post">
+
   <div>
   <label for="locatie"><h2>Van waar bent u?</h2></label><br>
   <input type="text" id="locatie" name="locatie" value=""><br><br>
