@@ -296,7 +296,7 @@
                 
     }
 
-    public static function getCurrentKenmerk(){
+    public static function getCurrentAllKenmerk(){
         $conn = Db::getConnection();
        /* $conn = new PDO('mysql:host=localhost;dbname=phpals',"root","");*/
        
@@ -306,7 +306,31 @@
 
         return $kenmerken;
 }
+/*-------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*public static function getCurrentUserIdKenmerk(){
+        $conn = Db::getConnection();
+       /* $conn = new PDO('mysql:host=localhost;dbname=phpals',"root","");*/
 
+       /*------ $userIdUsers is the var received after login, which is the unique value of the current User logged in ---------*/
+       
+       /*---------- temporary $userIdUsers filled manually to test with existing and non existing userId*/
+ /*      $userIdUsers = 1
+       /*---- end test -------*/
+       
+  /*     $statement = $conn->prepare("select * from profile where userId = '$userIdUsers'");
+       $result = $statement->execute();
+        
+       /*return $result;*/
+
+  /*     if (!$result){
+        "/PHP-project-buddy/PHP-project-buddy/UpdatePage.php"
+       }
+       else{
+
+        "/PHP-project-buddy/PHP-project-buddy/ProfilePage.php"
+       }
+}
+/*-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
    /* public function updateUserId($id){
         $conn = Db::getConnection();
        

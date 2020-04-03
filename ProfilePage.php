@@ -1,10 +1,10 @@
 <?php   
         include_once(__DIR__."/classes/User.php");
-        session_start();
+      
         
        
       
-      /*  $kenmerken = User::getCurrentKenmerk();*/
+      /*  $kenmerken = User::getCurrentAllKenmerk();*/
         /*var_dump($kenmerken);*/
 
         $currentKenmerk = new User();
@@ -15,7 +15,7 @@
         $currentKenmerk->setVoorkeur($_POST["voorkeur"]);
         $currentKenmerk->setGenre($_POST["genre"]);
         $currentKenmerk->setFeesten($_POST["feesten"]);
-        
+       
 
         if(!empty($_POST)){
          $userId = $_POST['userId'];   
@@ -83,7 +83,7 @@ if(!empty($feesten)){
     <h2>Voorkeur: <?php echo $currentKenmerk->getVoorkeur(); ?></h2>
     <h2>Muziek genre: <?php echo $currentKenmerk->getGenre(); ?></h2>
     <h2>Feestbeest: <?php echo $currentKenmerk->getFeesten(); ?></h2>
-    <h2>userId: <?php echo $currentKenmerk->getUserId(); ?></h2>
+  <!--  <h2>userId: </*?php echo $currentKenmerk->getUserId(); ?></h2> -->
 
 
     

@@ -33,7 +33,7 @@ if(!empty($_POST)){
          
 }
 
-$kenmerken = User::getCurrentKenmerk();
+$kenmerken = User::getCurrentAllKenmerk();
 
 /*test $kenmerken -------------------------
 var_dump($kenmerken);
@@ -68,9 +68,9 @@ var_dump($kenmerken);
 
 <fieldset>
 <legend><h1>Kenmerken</h1></legend>
-<form action="/PHP-project-buddy/PHP-project-buddy/ProfilePage.php" method="post">
-
-
+<form action="" method="post">
+<!--  /PHP-project-buddy/PHP-project-buddy/ProfilePage.php  -->
+<form action="" method="post">
   <div>
   <label for="locatie"><h2>Van waar bent u?</h2></label><br>
   <input type="text" id="locatie" name="locatie" value=""><br><br>
@@ -131,8 +131,13 @@ var_dump($kenmerken);
 </div>
 
 <div>
-  <label for="userId"><h2>USER ID?</h2></label><br>
-  <input type="number" id="userId" name="userId"  min="1" max="5"><br><br>
+
+<!-- userId hided and set temporary to empty, as this needs to come from main user file 
+the variable need to be transferred once this profile additional info is requested
+                      userId = id from users -->
+
+  <label for="userId"></label><br>
+  <input type="hidden" id="userId" name="userId"  >
 </div>
 
 <div>
@@ -144,6 +149,8 @@ var_dump($kenmerken);
     
 
 </fieldset>
+
+
 </body>
 </html>
 
