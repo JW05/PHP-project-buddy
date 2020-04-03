@@ -288,7 +288,7 @@
            /* echo $locatie;
             echo $feesten;
            /*----------------------*/
-            $result = $statement->execute() ; echo $locatie;
+            $result = $statement->execute() ;
                 /*test result-------------
                        var_dump($result);
                  ------------------------*/     

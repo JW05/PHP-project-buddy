@@ -4,8 +4,8 @@
         
        
       
-    
-
+      /*  $kenmerken = User::getCurrentKenmerk();*/
+        /*var_dump($kenmerken);*/
 
         $currentKenmerk = new User();
 
@@ -84,6 +84,9 @@ if(!empty($feesten)){
     <h2>Muziek genre: <?php echo $currentKenmerk->getGenre(); ?></h2>
     <h2>Feestbeest: <?php echo $currentKenmerk->getFeesten(); ?></h2>
     <h2>userId: <?php echo $currentKenmerk->getUserId(); ?></h2>
+
+
+    
    
 </div>
 </fieldset>
