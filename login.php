@@ -43,38 +43,30 @@ if( !empty($_POST) ){
 
 </head>
 <body>
-	<div class="header"><h1 class="title">PHPals</h1></div>
-
-	<div class="phpalsLogin">
-		<div class="form form--login">
-			<form action="" method="post">
-				<h2 form__title>Log In</h2>
-
+	<div class="container" id="container">
+		<div class="form-container sign-in-container">
+			<form action="" id ="loginForm" method="post">
+				<h1>Sign in</h1>
+				<span>or use your account</span>
 				<?php if (isset($error)): ?>
-				<div class="form__error">
-					<p>
-						<?php echo $error;?>
-					</p>
-				</div>
+					<div class="form__error">
+						<p> <?php echo $error;?></p>
+					</div>
 				<?php endif; ?>
-
-				<div class="form__field">
-					
-					<input type="text" name="email" value="email">
-				</div>
-				<div class="form__field">
-					
-					<input type="password" name="password">
-				</div>
-
-				<div class="form__field">
-					<input type="submit" value="Sign in" class="btn">
-				</div>
-
-				<div>
-					<p>Not registered yet?<a href="register.php">Sign up here</a></p>
-				</div>
+				<input type="email" placeholder="Email" name="email" />
+				<input type="password" placeholder="Password" name="password" />
+				<a href="#">Forgot your password?</a>
+				<button>Sign In</button>
 			</form>
+		</div>
+		<div class="signup-container">
+			<div class="panel">
+				<div class="panel-right">
+					<h1>Hello, Traveler!</h1>
+					<p>Enter your personal info and get started on your IMD journey with a buddy</p>
+					<button class="ghost "id="signUp" href="./register.php">Sign Up</button>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>
