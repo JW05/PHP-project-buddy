@@ -261,7 +261,9 @@
 
 
 
-/* Jens W*/
+/* Jens W ------------------- Jens W ---------------------------------------------------------------------------------------------------*/
+
+
             public function saveKenmerken(){
 
             $conn = Db::getConnection();
@@ -285,10 +287,7 @@
             $statement->bindValue(":userId", $userId);
             
             $result = $statement->execute() ;
-                /*test result-------------
-                       var_dump($result);
-                 ------------------------*/     
-                return  $result ;
+            return  $result ;
                 
     }
 /* ophalen alle kenmerken - no use */
@@ -306,27 +305,15 @@
 
 /* ------------------------------------*/
 
-/* check if id exists in profile table to execute Updateprofile */
+/* check if id exists in profile table to execute insert Updateprofile data */
 
      public function UserIdExists($id)
 		{
-                        /*$conn = Db::getConnection();*/
-                       /* $query = "select exists (select * from profile where userId ='$id')";
-                        $result = $conn->query($query);
-                        $row = $result->fetch(PDO::FETCH_ASSOC);
-                        echo " ------ dit is row ----";
-                        var_dump($row);
-                        $num_rows = count($row);
-                        echo "aantal rijen";
-                        echo $num_rows;/*
-                        /* if (count($row) != 0)*/
-                        /*if($result->num_rows != 0)*/
                         $conn = new mysqli("localhost", "root", "","phpals");
-			
-                        $query="select * from profile where userId ='$id'";
+			$query="select * from profile where userId ='$id'";
 			$result = $conn->query($query);
 			if(mysqli_num_rows($result)!=0)
-                        /*if ($num_row=1)*/
+                       
                          {      
                                 echo "true user id exists !!! ";
                                 return true;}
@@ -336,25 +323,7 @@
 			        }
                 }
                 
-                /*
-                        if (@mysql_num_rows(mysql_query($query))<1) {
-                                return false;}
-                          else {
-                                return true;
-                        }
-                        return false in case no profile exists in profile table for id = userId 
-		} */
-			
-
-/*
-$mysqli = new mysqli(SERVER, DBUSER, DBPASS, DATABASE);
-$result = $mysqli->query("SELECT id FROM mytable WHERE city = 'c7'");
-if($result->num_rows == 0) {
-     // row not found, do stuff...
-} else {
-    // do other stuff...
-}
-$mysqli->close(); */
+                
 
 /*---------------------NO USE AT MOMENT--------------------------------------------------*/
    /* public function updateUserId($id){
@@ -394,6 +363,8 @@ $mysqli->close(); */
                 }
 
 /* END NO USE ------------------------------------------------------------------------*/
+
+
 
                   /**
                  * Get the value of userId
@@ -525,47 +496,32 @@ $mysqli->close(); */
      
         
 	
-/*--------------------------------BuddyPage------------------------------------------------------*/
+/*--JW------------------------------BuddyPage------------------------------------------------------*/
 
-
+/* lookup function for the user id of the entered email or return not found */ 
                 public function getUserId2($email)
                 {
                         $conn = new mysqli("localhost", "root", "","phpals");
                         $email = $conn->real_escape_string($email);
-                        $query="select * from users where email = '$email'";
+                        $query="select id from users where email = '$email'";
                         $result = $conn->query($query);
+                        
                         if(mysqli_num_rows($result)!=0)
                         {
-                                $user = $result->fetch_assoc();
-                                var_dump($user);
-                                        return true;
+                                        $user = $result->fetch_assoc();
+                                        return $user;
                         
-                                }else
+                               }else
                                 {
                                         return false;
                                 }
                         }
-                        
                 
-
-
-
-
-
-
-
-                public function  AllBuddys($id){
-                        $conn = Db::getConnection();
-                        $query="select * from buddys where id ='$id'";
-
-                }
-
                
-                public static function getBuddys(){
+                public static function getBuddys($userid){
                         $conn = Db::getConnection();
-                       
-                       
-                        $statement = $conn->prepare("select * from users");
+                                              
+                        $statement = $conn->prepare("select buddyId from buddys where userId = $usersid ");
                         $statement->execute(); 
                         $buddys = $statement->fetchAll(PDO::FETCH_ASSOC);
                 
@@ -573,7 +529,13 @@ $mysqli->close(); */
                 
                 }
 
+/* No use at the moment just test */
+                public function  AllBuddys($id){
+                        $conn = Db::getConnection();
+                        $query="select * from buddys where id ='$id'";
 
+                }
+/* end no use ---------------------*/
 
 
 
