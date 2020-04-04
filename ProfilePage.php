@@ -1,57 +1,20 @@
 <?php   
         include_once(__DIR__."/classes/User.php");
-      
+        session_start();
         
        
       
       /*  $kenmerken = User::getCurrentAllKenmerk();*/
         /*var_dump($kenmerken);*/
 
-        $currentKenmerk = new User();
+        try{
+            $currentUser = User::getCurrentUser($_SESSION['user']);
+            $currentPreference = User::getCurrentPreference($currentUser['id']);
+        }catch(\Throwable $th){
+            //throw $th;
+			$error = $th->getMessage();
+        }
 
-        $currentKenmerk->setUserId($_POST["userId"]);
-        $currentKenmerk->setLocatie($_POST["location"]);
-        $currentKenmerk->setJaar($_POST["year"]);
-        $currentKenmerk->setVoorkeur($_POST["preference"]);
-        $currentKenmerk->setGenre($_POST["genre"]);
-        $currentKenmerk->setFeesten($_POST["likestoparty"]);
-        
-
-        if(!empty($_POST)){
-         $userId = $_POST['userId'];   
-         $locatie = $_POST['location'];
-         $jaar = $_POST['year'];
-         $voorkeur = $_POST['prefernce'];
-         $genre = $_POST['genre'];
-         $feesten = $_POST['likestoparty'];
-   
-         
-if(!empty($userId)){
-    $currentKenmerk->setUserId(htmlspecialchars($userId));
-}
-if(!empty($locatie)){
-    $currentKenmerk->setLocation(htmlspecialchars($location));
-}else{
-    $error = "Please fill out all the fields.";
-}
-
-if(!empty($year)){
-    $currentKenmerk->setYear(htmlspecialchars($year));
-}
-
-if(!empty($preference)){
-    $currentKenmerk->setPreference(htmlspecialchars($preference));
-}
-
-if(!empty($genre)){
-    $currentKenmerk->setGenre(htmlspecialchars($genre));
-}
-
-if(!empty($likestoparty)){
-    $currentKenmerk->setParty(htmlspecialchars($likestoparty));
-}
-
-}
 
 
 ?>
@@ -78,21 +41,11 @@ if(!empty($likestoparty)){
     
     
     <legend><h1>Kenmerken</h1></legend>
-<<<<<<< HEAD
-    <h2>Location: <?php echo $currentKenmerk->getLocatie();?></h2>
-    <h2>Year: <?php echo $currentKenmerk->getJaar();?></h2>
-    <h2>Preference: <?php echo $currentKenmerk->getVoorkeur(); ?></h2>
-    <h2>Music genre: <?php echo $currentKenmerk->getGenre(); ?></h2>
-    <h2>Party animal: <?php echo $currentKenmerk->getFeesten(); ?></h2>
-    <h2>userId: <?php echo $currentKenmerk->getUserId(); ?></h2>
-=======
-    <h2>Locatie: <?php echo $currentKenmerk->getLocatie();?></h2>
-    <h2>Jaar: <?php echo $currentKenmerk->getJaar();?></h2>
-    <h2>Voorkeur: <?php echo $currentKenmerk->getVoorkeur(); ?></h2>
-    <h2>Muziek genre: <?php echo $currentKenmerk->getGenre(); ?></h2>
-    <h2>Feestbeest: <?php echo $currentKenmerk->getFeesten(); ?></h2>
-  <!--  <h2>userId: </*?php echo $currentKenmerk->getUserId(); ?></h2> -->
->>>>>>> 3ffa2bdbf5f864fcc868ea2f53c9c6d9d86afae2
+    <h2>Location: <?php echo $currentPreference->location;?></h2>
+    <h2>Year: <?php echo $currentPreference->year;?></h2>
+    <h2>Preference: <?php echo $currentPreference->preference; ?></h2>
+    <h2>Music genre: <?php echo $currentPreference->genre; ?></h2>
+    <h2>Party animal: <?php echo ($currentPreference->likesToParty)? "Yes": "No"; ?></h2>
 
 
     Buddy:

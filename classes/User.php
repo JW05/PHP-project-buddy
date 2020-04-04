@@ -276,7 +276,7 @@
             $year = $this->getYear();
             $preference = $this->getPreference();
             $genre = $this->getGenre();
-            $party = $this->getParty(); 
+            $party = $this->getLikesToParty(); 
             $userId = $this->getUserId(); 
             
            
@@ -293,17 +293,20 @@
             return  $result ;
                 
     }
-/* ophalen alle kenmerken - no use */
 
-    public static function getCurrentAllKenmerk(){
+
+    public static function getCurrentPreference($userId){
         $conn = Db::getConnection();
        /* $conn = new PDO('mysql:host=localhost;dbname=phpals',"root","");*/
        
-        $statement = $conn->prepare("select * from profile");
+        $statement = $conn->prepare("select * from profile where userId = '$userId'");
         $statement->execute();
-        $kenmerken = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $preference = $statement->fetch(PDO::FETCH_OBJ);
+        if(empty($preference)){
+                throw new Exception("Sorry records were not found.");
+        }
 
-        return $kenmerken;
+        return $preference;
 }
 
 
@@ -468,9 +471,9 @@ public function saveBuddy()
                 /**
                  * Get the value of feesten
                  */ 
-                public function getParty()
+                public function getLikesToParty()
                 {
-                                return $this->party;
+                                return $this->likesToParty;
                 }
 
                 /**
@@ -478,9 +481,9 @@ public function saveBuddy()
                  *
                  * @return  self
                  */ 
-                public function setParty($party)
+                public function setLikesToParty($likesToParty)
                 {
-                                $this->party = $party;
+                                $this->likesToParty = $likesToParty;
 
                                 return $this;
                 }
@@ -513,7 +516,7 @@ public function saveBuddy()
                 public static function getBuddys($userid){
                         $conn = Db::getConnection();
                                               
-                        $statement = $conn->prepare("select buddyId from buddys where userId = $usersid ");
+                        $statement = $conn->prepare("select buddyId from buddys where userId = $userid ");
                         $statement->execute(); 
                         $buddys = $statement->fetchAll(PDO::FETCH_ASSOC);
                 

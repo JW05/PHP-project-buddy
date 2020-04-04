@@ -9,12 +9,12 @@ if(!empty($_POST)){
   
   try {
          $kenmerk = new User();
-         $kenmerk->setLocatie ($_POST['locatie']);
-         $kenmerk->setJaar ($_POST['jaar']);
-         $kenmerk->setVoorkeur ($_POST['voorkeur']);
+         $kenmerk->setLocation ($_POST['location']);
+         $kenmerk->setYear ($_POST['year']);
+         $kenmerk->setPreference ($_POST['preference']);
          $kenmerk->setGenre ($_POST['genre']);
-         $kenmerk->setFeesten ($_POST['feesten']);
-         $kenmerk->setUserId ($_POST['userId']); 
+         $kenmerk->setLikesToParty ($_POST['likesToParty']);
+         $kenmerk->setUserId ($userId); 
 
 
         /** testing getterssetters---------------------------------------*/ 
@@ -37,11 +37,6 @@ if(!empty($_POST)){
          
 }
 
-$kenmerken = User::getCurrentAllKenmerk();
-
-/*test $kenmerken -------------------------
-var_dump($kenmerken);
----------------------------------------------*/
 
 ?>
 <!DOCTYPE html>
@@ -77,8 +72,8 @@ var_dump($kenmerken);
 <!--  /PHP-project-buddy/PHP-project-buddy/ProfilePage.php  -->
 
   <div>
-  <label for="locatie"><h2>Van waar bent u?</h2></label><br>
-  <input type="text" id="locatie" name="locatie" value=""><br><br>
+  <label for="location"><h2>Van waar bent u?</h2></label><br>
+  <input type="text" id="location" name="location" value=""><br><br>
   </div>
  
 
@@ -86,8 +81,8 @@ var_dump($kenmerken);
 <h2>In welk jaar zit u</h2>
 
 
-  <label for="jaar"></label>
-  <select id="jaar" name="jaar">
+  <label for="year"></label>
+  <select id="year" name="year">
     <option value="1">1</option>
     <option value="2">2</option>
     <option value="3">3</option>
@@ -98,8 +93,8 @@ var_dump($kenmerken);
 <h2>Verkiest u development of design?</h2>
 
 
-  <label for="voorkeur"></label>
-  <select id="voorkeur" name="voorkeur">
+  <label for="preference"></label>
+  <select id="preference" name="preference">
     <option value="Development">Development</option>
     <option value="Design">Design</option>
   </select>
@@ -128,21 +123,11 @@ var_dump($kenmerken);
 <h2>Bent u een feestbeest?</h2>
 
 
-  <label for="feesten"></label>
-  <select id="feesten" name="feesten">
+  <label for="likesToParty"></label>
+  <select id="likesToParty" name="likesToParty">
     <option value="Ja">Ja</option>
     <option value="Nee">Nee</option>
   </select><br><br>
-</div>
-
-<div>
-
-<!-- userId hided and set temporary to empty, as this needs to come from main user file 
-the variable need to be transferred once this profile additional info is requested
-                      userId = id from users -->
-
-  <label for="userId"></label><br>
-  <input type="hidden" id="userId" name="userId"  >
 </div>
 
 <div>
