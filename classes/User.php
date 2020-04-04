@@ -262,7 +262,9 @@
 
 
 
-/* Jens W*/
+/* Jens W ------------------- Jens W ---------------------------------------------------------------------------------------------------*/
+
+
             public function saveKenmerken(){
 
             $conn = Db::getConnection();
@@ -288,10 +290,7 @@
             $statement->bindValue(":userId", $userId);
             
             $result = $statement->execute() ;
-                /*test result-------------
-                       var_dump($result);
-                 ------------------------*/     
-                return  $result ;
+            return  $result ;
                 
     }
 /* ophalen alle kenmerken - no use */
@@ -356,6 +355,8 @@ public function saveBuddy()
                 }
 
 /* END NO USE ------------------------------------------------------------------------*/
+
+
 
                   /**
                  * Get the value of userId
@@ -487,47 +488,32 @@ public function saveBuddy()
      
         
 	
-/*--------------------------------BuddyPage------------------------------------------------------*/
+/*--JW------------------------------BuddyPage------------------------------------------------------*/
 
-
+/* lookup function for the user id of the entered email or return not found */ 
                 public function getUserId2($email)
                 {
                         $conn = new mysqli("localhost", "root", "","phpals");
                         $email = $conn->real_escape_string($email);
-                        $query="select * from users where email = '$email'";
+                        $query="select id from users where email = '$email'";
                         $result = $conn->query($query);
+                        
                         if(mysqli_num_rows($result)!=0)
                         {
-                                $user = $result->fetch_assoc();
-                                var_dump($user);
-                                        return true;
+                                        $user = $result->fetch_assoc();
+                                        return $user;
                         
-                                }else
+                               }else
                                 {
                                         return false;
                                 }
                         }
-                        
                 
-
-
-
-
-
-
-
-                public function  AllBuddys($id){
-                        $conn = Db::getConnection();
-                        $query="select * from buddys where id ='$id'";
-
-                }
-
                
-                public static function getBuddys(){
+                public static function getBuddys($userid){
                         $conn = Db::getConnection();
-                       
-                       
-                        $statement = $conn->prepare("select * from users");
+                                              
+                        $statement = $conn->prepare("select buddyId from buddys where userId = $usersid ");
                         $statement->execute(); 
                         $buddys = $statement->fetchAll(PDO::FETCH_ASSOC);
                 
@@ -535,7 +521,13 @@ public function saveBuddy()
                 
                 }
 
+/* No use at the moment just test */
+                public function  AllBuddys($id){
+                        $conn = Db::getConnection();
+                        $query="select * from buddys where id ='$id'";
 
+                }
+/* end no use ---------------------*/
 
 
 
