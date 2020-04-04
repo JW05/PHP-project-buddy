@@ -10,12 +10,13 @@
                 private $lastName;
                 
                 //From profilePage
-                private $locatie;
-                private $jaar;
-                private $voorkeur;
+                private $location;
+                private $year;
+                private $preference;
                 private $genre;
-                private $feesten;
-                private $user_id;
+                private $likesToParty;
+                private $userId;
+                private $buddy;
 
                 /**
                  * Get the value of firstname
@@ -265,24 +266,24 @@
 
             $conn = Db::getConnection();
             /*$conn = new PDO('mysql:host=localhost;dbname=phpals',"root","");*/
-            $statement = $conn->prepare("insert into profile (locatie, jaar, voorkeur, genre, feesten, userId) values (:locatie, :jaar, :voorkeur, :genre, :feesten, :userId)");
+            $statement = $conn->prepare("insert into profile (location, year, preference, genre, likesToParty, userId) values (:location, :year, :preference, :genre, :likestoparty, :userId)");
             
            
-            $locatie = $this->getLocatie();
-            $jaar = $this->getJaar();
-            $voorkeur = $this->getVoorkeur();
+            $location = $this->getLocation();
+            $year = $this->getYear();
+            $preference = $this->getPreference();
             $genre = $this->getGenre();
-            $feesten = $this->getFeesten(); 
+            $party = $this->getParty(); 
             $userId = $this->getUserId(); 
             
            
             
              
-            $statement->bindValue(":locatie", $locatie);
-            $statement->bindValue(":jaar", $jaar);
-            $statement->bindValue(":voorkeur", $voorkeur);
+            $statement->bindValue(":location", $location);
+            $statement->bindValue(":year", $year);
+            $statement->bindValue(":preference", $preference);
             $statement->bindValue(":genre", $genre);
-            $statement->bindValue(":feesten", $feesten);
+            $statement->bindValue(":likestoparty", $party);
             $statement->bindValue(":userId", $userId);
             /* check value before save */
            /* echo $locatie;
@@ -306,6 +307,18 @@
 
         return $kenmerken;
 }
+
+
+
+public function saveBuddy()
+{
+        $conn = Db::getConnection();
+
+        $statement = $conn->prepare("insert into profile (LookingForBuddy) values (:buddy)");
+        $statement->execute();
+}
+
+
 
    /* public function updateUserId($id){
         $conn = Db::getConnection();
@@ -370,10 +383,10 @@
                 /**
                  * Get the value of locatie
                  */ 
-                public function getLocatie()
+                public function getLocation()
                 {
                        
-                                return $this->locatie;
+                                return $this->location;
                 }
 
                 /**
@@ -381,10 +394,10 @@
                  *
                  * @return  self
                  */ 
-                public function setLocatie($locatie)
+                public function setLocation($location)
                 {
                          
-                                $this->locatie = $locatie;
+                                $this->location = $location;
 
                                 return $this;
                 }
@@ -392,9 +405,9 @@
                 /**
                  * Get the value of jaar
                  */ 
-                public function getJaar()
+                public function getYear()
                 {
-                                return $this->jaar;
+                                return $this->year;
                 }
 
                 /**
@@ -402,9 +415,9 @@
                  *
                  * @return  self
                  */ 
-                public function setJaar($jaar)
+                public function setYear($year)
                 {
-                                $this->jaar = $jaar;
+                                $this->year = $year;
 
                                 return $this;
                 }
@@ -412,9 +425,9 @@
                 /**
                  * Get the value of voorkeur
                  */ 
-                public function getVoorkeur()
+                public function getPreference()
                 {
-                                return $this->voorkeur;
+                                return $this->preference;
                 }
 
                 /**
@@ -422,9 +435,9 @@
                  *
                  * @return  self
                  */ 
-                public function setVoorkeur($voorkeur)
+                public function setPreference($preference)
                 {
-                                $this->voorkeur = $voorkeur;
+                                $this->preference = $preference;
 
                                 return $this;
                 }
@@ -452,9 +465,9 @@
                 /**
                  * Get the value of feesten
                  */ 
-                public function getFeesten()
+                public function getParty()
                 {
-                                return $this->feesten;
+                                return $this->party;
                 }
 
                 /**
@@ -462,9 +475,9 @@
                  *
                  * @return  self
                  */ 
-                public function setFeesten($feesten)
+                public function setParty($party)
                 {
-                                $this->feesten = $feesten;
+                                $this->party = $party;
 
                                 return $this;
                 }
