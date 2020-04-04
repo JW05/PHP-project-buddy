@@ -303,6 +303,7 @@
 
         return $kenmerken;
 }
+
 /* ------------------------------------*/
 
 /* check if id exists in profile table to execute Updateprofile */
@@ -333,7 +334,8 @@
                                 echo "false user id doesnt exist zzzzzzzzzz";
                                 return false;
 			        }
-		}
+                }
+                
                 /*
                         if (@mysql_num_rows(mysql_query($query))<1) {
                                 return false;}
@@ -447,6 +449,7 @@ $mysqli->close(); */
                                 return $this->jaar;
                 }
 
+                
                 /**
                  * Set the value of jaar
                  *
@@ -518,7 +521,40 @@ $mysqli->close(); */
 
                                 return $this;
                 }
-	}
+                
+     
+        
 	
+/*--------------------------------BuddyPage------------------------------------------------------*/
 
+
+
+                public function  AllBuddys($id){
+                        $conn = Db::getConnection();
+                        $query="select * from buddys where id ='$id'";
+
+                }
+
+               
+                public static function getBuddys(){
+                        $conn = Db::getConnection();
+                       
+                       
+                        $statement = $conn->prepare("select * from users");
+                        $statement->execute(); 
+                        $buddys = $statement->fetchAll(PDO::FETCH_ASSOC);
+                
+                        return $buddys;
+                
+                }
+
+
+
+
+
+
+
+
+
+   }
 ?>

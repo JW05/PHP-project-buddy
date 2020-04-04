@@ -1,3 +1,33 @@
+
+
+
+
+
+<?php 
+include_once(__DIR__."/classes/User.php");
+if(!empty($_POST)){
+  
+  
+         $buddy = new User();
+         $buddy->setEmail ($_POST['email']);        
+      }
+
+$buddys = User::getBuddys();
+
+
+
+
+
+
+
+
+
+
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -130,5 +160,9 @@ function myFunction() {
         <p>buddy5</p> 
     </div>
 </div> 
+
+<?php foreach($buddys as $buddy): ?>
+<h2><?php echo $buddy['email']; ?></h2>
+<?php endforeach; ?>
 </body>
 </html>
