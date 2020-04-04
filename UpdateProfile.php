@@ -1,8 +1,12 @@
 <?php
 include_once(__DIR__."/classes/User.php");
+session_start();
 
+    $user = User::getCurrentUser($_SESSION['user']);
+    $userId = $user['id'];
+    
 if(!empty($_POST)){
-
+  
   try {
          $kenmerk = new User();
          $kenmerk->setLocatie ($_POST['locatie']);
@@ -33,7 +37,7 @@ if(!empty($_POST)){
          
 }
 
-$kenmerken = User::getCurrentKenmerk();
+$kenmerken = User::getCurrentAllKenmerk();
 
 /*test $kenmerken -------------------------
 var_dump($kenmerken);
@@ -46,6 +50,7 @@ var_dump($kenmerken);
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UpdateProfile</title>
+  <!--<link rel="stylesheet" href="css/style.css">-->
   <style>
  
       body{ font-family: 'Roboto Condensed';color:#FF6161;}
@@ -68,8 +73,8 @@ var_dump($kenmerken);
 
 <fieldset>
 <legend><h1>Kenmerken</h1></legend>
-<form action="/PHP-project-buddy/PHP-project-buddy/ProfilePage.php" method="post">
-
+<form action="" method="post">
+<!--  /PHP-project-buddy/PHP-project-buddy/ProfilePage.php  -->
 
   <div>
   <label for="locatie"><h2>Van waar bent u?</h2></label><br>
@@ -131,8 +136,13 @@ var_dump($kenmerken);
 </div>
 
 <div>
-  <label for="userId"><h2>USER ID?</h2></label><br>
-  <input type="number" id="userId" name="userId"  min="1" max="5"><br><br>
+
+<!-- userId hided and set temporary to empty, as this needs to come from main user file 
+the variable need to be transferred once this profile additional info is requested
+                      userId = id from users -->
+
+  <label for="userId"></label><br>
+  <input type="hidden" id="userId" name="userId"  >
 </div>
 
 <div>
@@ -144,6 +154,8 @@ var_dump($kenmerken);
     
 
 </fieldset>
+
+
 </body>
 </html>
 

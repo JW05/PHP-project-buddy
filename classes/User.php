@@ -261,7 +261,8 @@
 
 
 
-        /* Jens W*/
+
+/* Jens W*/
             public function saveKenmerken(){
 
             $conn = Db::getConnection();
@@ -285,10 +286,7 @@
             $statement->bindValue(":genre", $genre);
             $statement->bindValue(":likestoparty", $party);
             $statement->bindValue(":userId", $userId);
-            /* check value before save */
-           /* echo $locatie;
-            echo $feesten;
-           /*----------------------*/
+            
             $result = $statement->execute() ;
                 /*test result-------------
                        var_dump($result);
@@ -296,8 +294,9 @@
                 return  $result ;
                 
     }
+/* ophalen alle kenmerken - no use */
 
-    public static function getCurrentKenmerk(){
+    public static function getCurrentAllKenmerk(){
         $conn = Db::getConnection();
        /* $conn = new PDO('mysql:host=localhost;dbname=phpals',"root","");*/
        
@@ -356,16 +355,18 @@ public function saveBuddy()
                                 return $this;
                 }
 
-
+/* END NO USE ------------------------------------------------------------------------*/
 
                   /**
                  * Get the value of userId
                  */ 
+
                 public function getUserId()
                 {
                                 return $this->userId;
                 }
 
+/* setUserId  will not be used as it is a value linked from users table - id and taken over from there - left in program */
                 /**
                  * Set the value of userId
                  *
@@ -410,6 +411,7 @@ public function saveBuddy()
                                 return $this->year;
                 }
 
+                
                 /**
                  * Set the value of jaar
                  *
@@ -481,7 +483,65 @@ public function saveBuddy()
 
                                 return $this;
                 }
-	}
+                
+     
+        
 	
+/*--------------------------------BuddyPage------------------------------------------------------*/
 
+
+                public function getUserId2($email)
+                {
+                        $conn = new mysqli("localhost", "root", "","phpals");
+                        $email = $conn->real_escape_string($email);
+                        $query="select * from users where email = '$email'";
+                        $result = $conn->query($query);
+                        if(mysqli_num_rows($result)!=0)
+                        {
+                                $user = $result->fetch_assoc();
+                                var_dump($user);
+                                        return true;
+                        
+                                }else
+                                {
+                                        return false;
+                                }
+                        }
+                        
+                
+
+
+
+
+
+
+
+                public function  AllBuddys($id){
+                        $conn = Db::getConnection();
+                        $query="select * from buddys where id ='$id'";
+
+                }
+
+               
+                public static function getBuddys(){
+                        $conn = Db::getConnection();
+                       
+                       
+                        $statement = $conn->prepare("select * from users");
+                        $statement->execute(); 
+                        $buddys = $statement->fetchAll(PDO::FETCH_ASSOC);
+                
+                        return $buddys;
+                
+                }
+
+
+
+
+
+
+
+
+
+   }
 ?>

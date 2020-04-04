@@ -1,10 +1,10 @@
 <?php   
         include_once(__DIR__."/classes/User.php");
-        session_start();
+      
         
        
       
-      /*  $kenmerken = User::getCurrentKenmerk();*/
+      /*  $kenmerken = User::getCurrentAllKenmerk();*/
         /*var_dump($kenmerken);*/
 
         $currentKenmerk = new User();
@@ -78,12 +78,21 @@ if(!empty($likestoparty)){
     
     
     <legend><h1>Kenmerken</h1></legend>
+<<<<<<< HEAD
     <h2>Location: <?php echo $currentKenmerk->getLocatie();?></h2>
     <h2>Year: <?php echo $currentKenmerk->getJaar();?></h2>
     <h2>Preference: <?php echo $currentKenmerk->getVoorkeur(); ?></h2>
     <h2>Music genre: <?php echo $currentKenmerk->getGenre(); ?></h2>
     <h2>Party animal: <?php echo $currentKenmerk->getFeesten(); ?></h2>
     <h2>userId: <?php echo $currentKenmerk->getUserId(); ?></h2>
+=======
+    <h2>Locatie: <?php echo $currentKenmerk->getLocatie();?></h2>
+    <h2>Jaar: <?php echo $currentKenmerk->getJaar();?></h2>
+    <h2>Voorkeur: <?php echo $currentKenmerk->getVoorkeur(); ?></h2>
+    <h2>Muziek genre: <?php echo $currentKenmerk->getGenre(); ?></h2>
+    <h2>Feestbeest: <?php echo $currentKenmerk->getFeesten(); ?></h2>
+  <!--  <h2>userId: </*?php echo $currentKenmerk->getUserId(); ?></h2> -->
+>>>>>>> 3ffa2bdbf5f864fcc868ea2f53c9c6d9d86afae2
 
 
     Buddy:
