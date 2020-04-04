@@ -528,6 +528,31 @@ $mysqli->close(); */
 /*--------------------------------BuddyPage------------------------------------------------------*/
 
 
+                public function getUserId2($email)
+                {
+                        $conn = new mysqli("localhost", "root", "","phpals");
+                        $email = $conn->real_escape_string($email);
+                        $query="select * from users where email = '$email'";
+                        $result = $conn->query($query);
+                        if(mysqli_num_rows($result)!=0)
+                        {
+                                $user = $result->fetch_assoc();
+                                var_dump($user);
+                                        return true;
+                        
+                                }else
+                                {
+                                        return false;
+                                }
+                        }
+                        
+                
+
+
+
+
+
+
 
                 public function  AllBuddys($id){
                         $conn = Db::getConnection();

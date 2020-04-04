@@ -5,6 +5,45 @@
 
 <?php 
 include_once(__DIR__."/classes/User.php");
+
+
+if( !empty($_POST) ){
+	$user = new User();
+	$email = $_POST['email'];
+	
+   
+	if( !empty($email)){
+
+		
+		// indien ok: login checken
+		if($user->getUserId2($email)){
+			session_start();
+			$_SESSION['user'] = $email ;
+		
+			
+		} else {
+			$error = "Sorry, we couldn't find your buddy.";
+		}
+	} else {
+		// indien leeg: error generen
+		$error = "Email is required.";
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 if(!empty($_POST)){
   
   
@@ -34,8 +73,8 @@ $buddys = User::getBuddys();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BuddyPage</title>
-    <link rel="stylesheet" href="css/style.css">
-    <style>
+ <!--   <link rel="stylesheet" href="css/style.css"> -->
+    <!--<style>
         * {
         box-sizing: border-box;
         }
@@ -117,10 +156,11 @@ $buddys = User::getBuddys();
            }
    
            }
-</style>
+</style>-->
 </head>
 <body>
-<input type="text" id="BuddyInput" onkeyup="myFunction()" placeholder="Zoek buddy's" title="Typ een buddy">
+<!--<input type="text" id="BuddyInput" onkeyup="myFunction()" placeholder="Zoek buddy's" title="Typ een buddy">
+
 <script>
 function myFunction() {
   var input, filter, table, tr, td, i, txtValue;
@@ -140,8 +180,9 @@ function myFunction() {
     }       
   }
 }
-</script>
-<div class="BuddyBox">
+</script>-->
+
+<!--<div class="BuddyBox">
     <div class="MijnBuddys">
         <h1>Jouw Buddy's</h1>
         <p>buddy1</p>
@@ -159,10 +200,33 @@ function myFunction() {
         <p>buddy4</p>
         <p>buddy5</p> 
     </div>
-</div> 
+</div> -->
+<div class="container" id="container">
+		<div class="form-container sign-in-container">
+			<form action="" id ="loginForm" method="post">
+				<h1>Search your Buddy</h1>
+				
+				<?php if (isset($error)): ?>
+					<div class="form__error">
+						<p> <?php echo $error;?></p>
+					</div>
+				<?php endif; ?>
+				<input type="email" placeholder="Email" name="email" />				
+				<button>Search</button>
+			</form>
+		</div>
+		<div class="signup-container">
+			<div class="panel">
+				<div class="panel-right">
+					<h1>Your Buddys Buddys</h1>
+					<?php foreach($buddys as $buddy): ?>
+          <h2><?php echo $buddy['email']; ?></h2>
+          <?php endforeach; ?>
+				</div>
+			</div>
+		</div>
+	</div>
 
-<?php foreach($buddys as $buddy): ?>
-<h2><?php echo $buddy['email']; ?></h2>
-<?php endforeach; ?>
+
 </body>
 </html>
