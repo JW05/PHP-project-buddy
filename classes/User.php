@@ -17,6 +17,7 @@
                 private $likesToParty;
                 private $userId;
                 private $buddy;
+                private $lookingForBuddy;
 
                 /**
                  * Get the value of firstname
@@ -267,8 +268,8 @@
             public function saveInfo(){
 
             $conn = Db::getConnection();
-            $statement = $conn->prepare("insert into profile (location, year, preference, genre, likesToParty, userId) values (:location, :year, :preference, :genre, :likestoparty, :userId)");
-            
+            //$statement = $conn->prepare("insert into profile (location, year, preference, genre, likesToParty, userId) values (:location, :year, :preference, :genre, :likestoparty, :userId)");
+            $statement = $conn->prepare("insert into profile (location, year, preference, genre, likesToParty, userId,lookingForBuddy) values (:location, :year, :preference, :genre, :likestoparty, :userId,:lookingForBuddy)");
            
             $location = $this->getLocation();
             $year = $this->getYear();
@@ -276,7 +277,7 @@
             $genre = $this->getGenre();
             $party = $this->getLikesToParty(); 
             $userId = $this->getUserId(); 
-            
+            $lookingForBuddy = $this->getLookingForBuddy(); 
                         
             $statement->bindValue(":location", $location);
             $statement->bindValue(":year", $year);
@@ -284,6 +285,7 @@
             $statement->bindValue(":genre", $genre);
             $statement->bindValue(":likestoparty", $party);
             $statement->bindValue(":userId", $userId);
+            $statement->bindValue(":lookingForBuddy", $lookingForBuddy);
             
             $result = $statement->execute() ;
             return  $result ;
@@ -308,14 +310,8 @@
 }
 // No use by Jens End
 
+//Maury 
 
-public function saveBuddy()
-{
-        $conn = Db::getConnection();
-
-        $statement = $conn->prepare("insert into profile (LookingForBuddy) values (:buddy)");
-        $statement->execute();
-}
 
 // JENS
 /* check if id exists in profile table to execute insert Updateprofile data */
@@ -511,6 +507,46 @@ public function getBuddys($userId) {
 // END JENS
 
 
+
+                /**
+                 * Get the value of buddy
+                 */ 
+                public function getBuddy()
+                {
+                                return $this->buddy;
+                }
+
+                /**
+                 * Set the value of buddy
+                 *
+                 * @return  self
+                 */ 
+                public function setBuddy($buddy)
+                {
+                                $this->buddy = $buddy;
+
+                                return $this;
+                }
+
+                /**
+                 * Get the value of lookingForBuddy
+                 */ 
+                public function getLookingForBuddy()
+                {
+                                return $this->lookingForBuddy;
+                }
+
+                /**
+                 * Set the value of lookingForBuddy
+                 *
+                 * @return  self
+                 */ 
+                public function setLookingForBuddy($lookingForBuddy)
+                {
+                                $this->lookingForBuddy = $lookingForBuddy;
+
+                                return $this;
+                }
    }
 
 ?>

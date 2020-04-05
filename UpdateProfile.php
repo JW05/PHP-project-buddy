@@ -15,7 +15,7 @@ if(!empty($_POST)){
          $info->setPreference ($_POST['preference']);
          $info->setGenre ($_POST['genre']);
          $info->setLikesToParty ($_POST['likesToParty']);
-
+         $info->setLookingForBuddy ($_POST['lookingForBuddy']);
          $info->setUserId ($userId); 
 
          $result = $info->saveInfo();
@@ -26,8 +26,7 @@ if(!empty($_POST)){
 
   } catch (\Throwable $th) {
     $error =$th->getMessage();
-  }
-         
+  }       
 }
 
 
@@ -95,7 +94,7 @@ if(!empty($_POST)){
  </div>
 
 <div>
-<h2>Wat is je muziek genre?</h2>
+<h2>What is your music genre?</h2>
 
   <label for="genre"></label>
   <select id="genre" name="genre">
@@ -103,14 +102,14 @@ if(!empty($_POST)){
     <option value="Rock">Rock</option>
     <option value="R&B">R&B</option>
     <option value="Latin">Latin</option>
-    <option value="Electronische muziek">Electronische muziek</option>
+    <option value="Electronische Music">Electronic Muzic</option>
     <option value="Drum-'n-bass">Drum-'n-bass</option>
-    <option value="Klasiek">Klasiek</option>
+    <option value="Classic">Classic</option>
   </select>
 </div>  
 
 <div>
-<h2>Bent u een feestbeest?</h2>
+<h2>Party animal?</h2>
 
   <label for="likesToParty"></label>
   <select id="likesToParty" name="likesToParty">
@@ -118,6 +117,23 @@ if(!empty($_POST)){
     <option value="0">Nee</option>
   </select><br><br>
 </div>
+
+
+
+
+<h2>Need a buddy?</h2>
+
+  <label for="lookingForBuddy"></label>
+  <select id="lookingForBuddy" name="lookingForBuddy">
+    <option value="0">I am looking for a buddy</option>
+    <option value="1">I would like to take care of someone</option>
+  </select><br><br>
+</div>
+
+   
+
+
+
 
 <div>
   <input class = "button" type="submit">
