@@ -1,4 +1,5 @@
 <?php
+// JENS
 include_once(__DIR__."/classes/User.php");
 session_start();
 
@@ -8,16 +9,16 @@ session_start();
 if(!empty($_POST)){
   
   try {
-         $kenmerk = new User();
-         $kenmerk->setLocation ($_POST['location']);
-         $kenmerk->setYear ($_POST['year']);
-         $kenmerk->setPreference ($_POST['preference']);
-         $kenmerk->setGenre ($_POST['genre']);
-         $kenmerk->setLikesToParty ($_POST['likesToParty']);
+         $info = new User();
+         $info->setLocation ($_POST['location']);
+         $info->setYear ($_POST['year']);
+         $info->setPreference ($_POST['preference']);
+         $info->setGenre ($_POST['genre']);
+         $info->setLikesToParty ($_POST['likesToParty']);
 
-         $kenmerk->setUserId ($userId); 
+         $info->setUserId ($userId); 
 
-         $result = $kenmerk->saveKenmerken();
+         $result = $info->saveInfo();
          // If the result from the save is success, redirect to the index.
          if($result) {
           header('Location: index.php');
@@ -39,10 +40,7 @@ if(!empty($_POST)){
   <title>UpdateProfile</title>
   <link rel="stylesheet" href="css/style.css">
   <style>
- 
-     
-      
-     
+   
       body{
         background: #0396FF;
         background: -webkit-linear-gradient(to right, #ABDCFF, #0396FF);
@@ -65,24 +63,18 @@ if(!empty($_POST)){
   <?php endif; ?>
 
 
-
-
-
 <h1>Vervoledig hier je profiel</h1>
 <br><br>
 <legend><h1>Kenmerken</h1></legend>
 <form action="" method="post">
-<!--  /PHP-project-buddy/PHP-project-buddy/ProfilePage.php  -->
 
   <div>
   <label for="location"><h2>Van waar bent u?</h2></label><br>
   <input type="text" id="location" name="location" value=""><br><br>
   </div>
  
-
 <div>
 <h2>In welk jaar zit u</h2>
-
 
   <label for="year"></label>
   <select id="year" name="year">
@@ -95,7 +87,6 @@ if(!empty($_POST)){
 <div>
 <h2>Verkiest u development of design?</h2>
 
-
   <label for="preference"></label>
   <select id="preference" name="preference">
     <option value="Development">Development</option>
@@ -103,11 +94,8 @@ if(!empty($_POST)){
   </select>
  </div>
 
-
-
 <div>
 <h2>Wat is je muziek genre?</h2>
-
 
   <label for="genre"></label>
   <select id="genre" name="genre">
@@ -121,10 +109,8 @@ if(!empty($_POST)){
   </select>
 </div>  
 
-
 <div>
 <h2>Bent u een feestbeest?</h2>
-
 
   <label for="likesToParty"></label>
   <select id="likesToParty" name="likesToParty">
@@ -137,9 +123,6 @@ if(!empty($_POST)){
   <input class = "button" type="submit">
 </div>
 </form>
-
-
-
 
 </body>
 </html>

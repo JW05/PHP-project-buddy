@@ -262,13 +262,11 @@
 
 
 
-/* Jens W ------------------- Jens W ---------------------------------------------------------------------------------------------------*/
+// JENS
 
-
-            public function saveKenmerken(){
+            public function saveInfo(){
 
             $conn = Db::getConnection();
-            /*$conn = new PDO('mysql:host=localhost;dbname=phpals',"root","");*/
             $statement = $conn->prepare("insert into profile (location, year, preference, genre, likesToParty, userId) values (:location, :year, :preference, :genre, :likestoparty, :userId)");
             
            
@@ -279,9 +277,7 @@
             $party = $this->getLikesToParty(); 
             $userId = $this->getUserId(); 
             
-           
-            
-             
+                        
             $statement->bindValue(":location", $location);
             $statement->bindValue(":year", $year);
             $statement->bindValue(":preference", $preference);
@@ -294,11 +290,13 @@
                 
     }
 
+// END JENS
 
+// No use  by JENS
     public static function getCurrentPreference($userId){
-        $conn = Db::getConnection();
-       /* $conn = new PDO('mysql:host=localhost;dbname=phpals',"root","");*/
        
+        $conn = Db::getConnection();
+            
         $statement = $conn->prepare("select * from profile where userId = '$userId'");
         $statement->execute();
         $preference = $statement->fetch(PDO::FETCH_OBJ);
@@ -308,7 +306,7 @@
 
         return $preference;
 }
-
+// No use by Jens End
 
 
 public function saveBuddy()
@@ -319,14 +317,7 @@ public function saveBuddy()
         $statement->execute();
 }
 
-
-
-  
-
-
-
-/* -----------------------------------------------------------------------------*/
-
+// JENS
 /* check if id exists in profile table to execute insert Updateprofile data */
 
 public function UserIdExists($id)
@@ -344,7 +335,9 @@ public function UserIdExists($id)
                 return false;
                 }
 }
+// END JENS
 
+// JENS
 public function getUserId2($email)
 {
         $conn = new mysqli("localhost", "root", "","phpals");
@@ -361,9 +354,11 @@ public function getUserId2($email)
                 {
                         return false;
                 }
-        }   
+        } 
+
+// END JENS
         
- //--------------------------end check if id exists in profile table to execute insert Updateprofile data-----//        
+// JENS Getters & setters     
                
                   /**
                  * Get the value of userId
@@ -374,7 +369,7 @@ public function getUserId2($email)
                                 return $this->userId;
                 }
 
-/* setUserId  will not be used as it is a value linked from users table - id and taken over from there - left in program */
+
                 /**
                  * Set the value of userId
                  *
@@ -433,7 +428,7 @@ public function getUserId2($email)
                 }
 
                 /**
-                 * Get the value of voorkeur
+                 * Get the value of preference
                  */ 
                 public function getPreference()
                 {
@@ -441,7 +436,7 @@ public function getUserId2($email)
                 }
 
                 /**
-                 * Set the value of voorkeur
+                 * Set the value of preference
                  *
                  * @return  self
                  */ 
@@ -473,7 +468,7 @@ public function getUserId2($email)
                 }
 
                 /**
-                 * Get the value of feesten
+                 * Get the value of LikesToParty
                  */ 
                 public function getLikesToParty()
                 {
@@ -481,7 +476,7 @@ public function getUserId2($email)
                 }
 
                 /**
-                 * Set the value of feesten
+                 * Set the value of LikesToParty
                  *
                  * @return  self
                  */ 
@@ -492,10 +487,10 @@ public function getUserId2($email)
                                 return $this;
                 }
                 
-     
+// JENS end getters and setters  
         
 	
-/*--JW------------------------------BuddyPage------------------------------------------------------*/
+// JENS
 
 public function getBuddys($userId) {					
         $conn = new mysqli("localhost", "root", "","phpals");
@@ -513,6 +508,9 @@ public function getBuddys($userId) {
                 }
 } 
  
+// END JENS
+
 
    }
+
 ?>

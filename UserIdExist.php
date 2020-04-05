@@ -1,5 +1,5 @@
 <?php
-//JENS
+//JENS 
 
 session_start();
 
@@ -16,7 +16,7 @@ $user = $user->getUserId2($email);
 $id = $user['id'];
 $user = new User();
     if ($user->UserIdExists($id)){
-      echo "User profile is available. goto main page";
+     
       //ID is existing in profile so goto index page 
       header("Location: index.php");
     } else {
