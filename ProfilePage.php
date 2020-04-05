@@ -34,13 +34,18 @@
 </head>
  
 <body>
+
+<a href="index.php" class="btn"> Go Back </a>
+<a href="UpdateProfile.php" class="btn"> Update your profile </a>
+
+
 <div id="Kenmerken">
 
 <fieldset>
 
     
     
-    <legend><h1>Kenmerken</h1></legend>
+    <legend><h1>Characteristiques</h1></legend>
     <h2>Location: <?php echo $currentPreference->location;?></h2>
     <h2>Year: <?php echo $currentPreference->year;?></h2>
     <h2>Preference: <?php echo $currentPreference->preference; ?></h2>
