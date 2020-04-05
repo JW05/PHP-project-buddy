@@ -26,6 +26,31 @@ include_once(__DIR__."/classes/User.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BuddyPage</title>
   <link rel="stylesheet" href="css/style.css">
+  <style>
+
+@media only screen and (max-width: 600px) {
+ 	.panel{
+	/*display:flex;*/
+	display:none;
+	
+	
+  }
+  .panel-right{
+	display:flex;
+	
+	
+	
+	
+  }
+  .buddy-left-container{
+	
+  }
+  .buddy-right-container{
+	
+  }
+  
+  }
+  </style>
     
 </head>
 <body>
@@ -47,9 +72,10 @@ include_once(__DIR__."/classes/User.php");
 					<h1>Your Buddys are </h1>
           
 		  <?php foreach($buddys as $buddy): ?>
+		  <h2><?php echo $buddy['avatar']; ?></h2>
           <h2><?php echo $buddy["firstname"]; ?></h2>
           <h2><?php echo $buddy['lastname']; ?></h2>
-          <h2><?php echo $buddy['avatar']; ?></h2>
+          <h2><?php echo $buddy['email']; ?></h2>
           <?php endforeach; ?>
 				</div>
 			</div>
