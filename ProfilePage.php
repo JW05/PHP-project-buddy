@@ -36,7 +36,7 @@
 <body>
 
 <a href="index.php" class="btn"> Go Back </a>
-<a href="UpdateProfile.php" class="btn"> Update your profile </a>
+<a href="updateProfile.php" class="btn"> Update your profile </a>
 
 
 <div id="Kenmerken">

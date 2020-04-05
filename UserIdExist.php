@@ -21,6 +21,6 @@ $user = new User();
       header("Location: index.php");
     } else {
       //ID doesn't exist in profile so fill in the needed data
-        header('Location: http://localhost/PHP-project-buddy/PHP-project-buddy/UpdateProfile.php?R%26B=R%26B');
+        header('Location: insertProfile.php?R%26B=R%26B');
         
     }

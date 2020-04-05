@@ -263,7 +263,7 @@
 
 
 
-// JENS
+// JENS - (feature 5 toegevoegd MAURY)
 
             public function saveInfo(){
 
@@ -283,14 +283,45 @@
             $statement->bindValue(":year", $year);
             $statement->bindValue(":preference", $preference);
             $statement->bindValue(":genre", $genre);
-            $statement->bindValue(":likestoparty", $party);
+            $statement->bindValue(":likesToParty", $party);
             $statement->bindValue(":userId", $userId);
             $statement->bindValue(":lookingForBuddy", $lookingForBuddy);
             
             $result = $statement->execute() ;
-            return  $result ;
+            return  $result;
                 
     }
+
+// END JENS
+
+// JENS 
+
+public function updateInfo($userId){
+
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("update profile set location = :location, year = :year, preference = :preference, genre = :genre, likesToParty = : likesToParty, lookingForBuddy = :lookingForbuddy where userId = '$userId')");
+        
+       
+        $location = $this->getLocation();
+        $year = $this->getYear();
+        $preference = $this->getPreference();
+        $genre = $this->getGenre();
+        $party = $this->getLikesToParty(); 
+       // $userId = $this->getUserId(); unique info no update selection made on
+        
+                    
+        $statement->bindValue(":location", $location);
+        $statement->bindValue(":year", $year);
+        $statement->bindValue(":preference", $preference);
+        $statement->bindValue(":genre", $genre);
+        $statement->bindValue(":likesToParty", $party);
+        //$statement->bindValue(":userId", $userId); unique info no update 
+        $statement->bindValue(":lookingForBuddy", $lookingForBuddy);
+        
+        $result = $statement->execute() ;
+        return  $result;
+            
+}
 
 // END JENS
 

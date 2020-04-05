@@ -8,10 +8,9 @@ include_once(__DIR__."/classes/User.php");
     $user = User::getCurrentUser($_SESSION['user']);
     $userId = $user['id'];
 
-    /* search buddys from the ID of the session */
+    // search buddys from the ID of the session
     $buddys = User::getBuddys($userId);
-
-    /* end buddy search */
+    // end buddy search list 
 
     ?>
 

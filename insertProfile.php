@@ -1,5 +1,5 @@
 <?php
-// JENS UPDATE 
+// JENS
 include_once(__DIR__."/classes/User.php");
 session_start();
 
@@ -18,7 +18,7 @@ if(!empty($_POST)){
          $info->setLookingForBuddy ($_POST['lookingForBuddy']);
          $info->setUserId ($userId); 
 
-         $result = $info->updateInfo();
+         $result = $info->saveInfo();
          // If the result from the save is success, redirect to the index.
          if($result) {
           header('Location: index.php');
@@ -26,7 +26,8 @@ if(!empty($_POST)){
 
   } catch (\Throwable $th) {
     $error =$th->getMessage();
-  }       
+  }
+         
 }
 
 
@@ -95,7 +96,7 @@ if(!empty($_POST)){
  </div>
 
 <div>
-<h2>What is your music genre?</h2>
+<h2>Wat is je muziek genre?</h2>
 
   <label for="genre"></label>
   <select id="genre" name="genre">
@@ -103,14 +104,14 @@ if(!empty($_POST)){
     <option value="Rock">Rock</option>
     <option value="R&B">R&B</option>
     <option value="Latin">Latin</option>
-    <option value="Electronische Music">Electronic Muzic</option>
+    <option value="Electronische muziek">Electronische muziek</option>
     <option value="Drum-'n-bass">Drum-'n-bass</option>
-    <option value="Classic">Classic</option>
+    <option value="Klasiek">Klasiek</option>
   </select>
 </div>  
 
 <div>
-<h2>Party animal?</h2>
+<h2>Bent u een feestbeest?</h2>
 
   <label for="likesToParty"></label>
   <select id="likesToParty" name="likesToParty">
@@ -118,7 +119,6 @@ if(!empty($_POST)){
     <option value="0">Nee</option>
   </select><br><br>
 </div>
-
 
 
 
@@ -131,7 +131,6 @@ if(!empty($_POST)){
   </select><br><br>
 </div>
 
-   
 
 
 
