@@ -277,30 +277,30 @@
 
             public function saveInfo(){
 
-            $conn = Db::getConnection();
-            //$statement = $conn->prepare("insert into profile (location, year, preference, genre, likesToParty, userId) values (:location, :year, :preference, :genre, :likestoparty, :userId)");
-            $statement = $conn->prepare("insert into profile (location, year, preference, genre, likesToParty, userId,lookingForBuddy) values (:location, :year, :preference, :genre, :likestoparty, :userId,:lookingForBuddy)");
-           
-            $location = $this->getLocation();
-            $year = $this->getYear();
-            $preference = $this->getPreference();
-            $genre = $this->getGenre();
-            $party = $this->getLikesToParty(); 
-            $userId = $this->getUserId(); 
-            $lookingForBuddy = $this->getLookingForBuddy(); 
-                        
-            $statement->bindValue(":location", $location);
-            $statement->bindValue(":year", $year);
-            $statement->bindValue(":preference", $preference);
-            $statement->bindValue(":genre", $genre);
-            $statement->bindValue(":likesToParty", $party);
-            $statement->bindValue(":userId", $userId);
-            $statement->bindValue(":lookingForBuddy", $lookingForBuddy);
-            
-            $result = $statement->execute() ;
-            return  $result;
+                $conn = Db::getConnection();
+                //$statement = $conn->prepare("insert into profile (location, year, preference, genre, likesToParty, userId) values (:location, :year, :preference, :genre, :likestoparty, :userId)");
+                $statement = $conn->prepare("insert into profile (location, year, preference, genre, likesToParty, userId, lookingForBuddy) values (:location, :year, :preference, :genre, :likesToParty, :userId, :lookingForBuddy)");
                 
-    }
+                $location = $this->getLocation();
+                $year = $this->getYear();
+                $preference = $this->getPreference();
+                $genre = $this->getGenre();
+                $party = $this->getLikesToParty(); 
+                $userId = $this->getUserId(); 
+                $lookingForBuddy = $this->getLookingForBuddy();
+                                
+                $statement->bindValue(":location", $location);
+                $statement->bindValue(":year", $year);
+                $statement->bindValue(":preference", $preference);
+                $statement->bindValue(":genre", $genre);
+                $statement->bindValue(":likesToParty", $party);
+                $statement->bindValue(":userId", $userId);
+                $statement->bindValue(":lookingForBuddy", $lookingForBuddy);
+                
+                $result = $statement->execute();
+                return  $result;
+                
+        }
 
 // END JENS
 
@@ -309,7 +309,7 @@
 public function updateInfo($userId){
 
         $conn = Db::getConnection();
-        $statement = $conn->prepare("update profile set location = :location, year = :year, preference = :preference, genre = :genre, likesToParty = : likesToParty, lookingForBuddy = :lookingForbuddy where userId = '$userId')");
+        $statement = $conn->prepare("update profile set location = :location, year = :year, preference = :preference, genre = :genre, likesToParty = :likesToParty, lookingForBuddy = :lookingForBuddy where userId = '$userId'");
         
        
         $location = $this->getLocation();
@@ -317,25 +317,24 @@ public function updateInfo($userId){
         $preference = $this->getPreference();
         $genre = $this->getGenre();
         $party = $this->getLikesToParty(); 
-       // $userId = $this->getUserId(); unique info no update selection made on
-        
+        $lookingForBuddy = $this->getLookingForBuddy();
                     
         $statement->bindValue(":location", $location);
         $statement->bindValue(":year", $year);
         $statement->bindValue(":preference", $preference);
         $statement->bindValue(":genre", $genre);
         $statement->bindValue(":likesToParty", $party);
-        //$statement->bindValue(":userId", $userId); unique info no update 
         $statement->bindValue(":lookingForBuddy", $lookingForBuddy);
         
         $result = $statement->execute() ;
-        return  $result;
+        
+        return $result;
             
 }
 
 // END JENS
 
-// No use  by JENS
+// Written by Jens, fixed by others -- get profile preferences linked with own account
     public static function getCurrentPreference($userId){
        
         $conn = Db::getConnection();
@@ -349,7 +348,7 @@ public function updateInfo($userId){
 
         return $preference;
 }
-// No use by Jens End
+//end Jens
 
 //Maury 
 

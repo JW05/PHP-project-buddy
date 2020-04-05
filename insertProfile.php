@@ -10,13 +10,13 @@ if(!empty($_POST)){
   
   try {
          $info = new User();
-         $info->setLocation ($_POST['location']);
-         $info->setYear ($_POST['year']);
-         $info->setPreference ($_POST['preference']);
-         $info->setGenre ($_POST['genre']);
-         $info->setLikesToParty ($_POST['likesToParty']);
-         $info->setLookingForBuddy ($_POST['lookingForBuddy']);
-         $info->setUserId ($userId); 
+         $info->setLocation($_POST['location']);
+         $info->setYear($_POST['year']);
+         $info->setPreference($_POST['preference']);
+         $info->setGenre($_POST['genre']);
+         $info->setLikesToParty($_POST['likesToParty']);
+         $info->setLookingForBuddy($_POST['lookingForBuddy']);
+         $info->setUserId($userId); 
 
          $result = $info->saveInfo();
          // If the result from the save is success, redirect to the index.
@@ -126,8 +126,8 @@ if(!empty($_POST)){
 
   <label for="lookingForBuddy"></label>
   <select id="lookingForBuddy" name="lookingForBuddy">
-    <option value="0">I am looking for a buddy</option>
-    <option value="1">I would like to take care of someone</option>
+    <option value="1">I am looking for a buddy</option>
+    <option value="0">I would like to take care of someone</option>
   </select><br><br>
 </div>
 
