@@ -189,24 +189,9 @@ a.btn-logout
     -o-border-radius: 20px 10px;
 }
 
-
-
-.profileSettings
-{
-  display: grid;
-  grid-template-columns: 1fr [form] minmax(240px, 450px) 1fr;
-  grid-template-rows: [form];
-  justify-content: center;
-  align-items: center;
-}
-
-.profileSettings .form--settings
-{
-  background-color: #F3F3F3;
-  padding: 1em;
-  color: #505050;
-  grid-column: form;
-  grid-row: form;
+.form--settings{
+	width: 800px;
+	margin-top: 20em;
 }
 
 .form--settings .form__error
@@ -219,45 +204,22 @@ a.btn-logout
   font-size: 0.9em;
 }
 
-.form--settings .form__field
+.form--settings .form__success
 {
-  padding-bottom: 1em;
+  background-color: #b7daae;
+  color: rgb(65, 107, 52);
+  font-weight: lighter;
+  padding: 0.3em 1em;
+  margin-bottom: 1em;
+  font-size: 0.9em;
 }
 
-.form--settings .form__field label
-{
-  display: block;
-  margin-bottom: 0.2em;
-}
-
-.form--settings .form__field .label__inline
-{
-  display: inline-block;
-}
-
-.form--settings .form__field input
-{
-  width: 100%;
-  padding: 0.3em;
-  font-size: 1.4em;
-}
-
-.form--settings .btn
-{
-  width: 100%;
-  margin: 0.5em auto;
-}
-
-.form--settings .btn--success
-{
-  background-color: green;
-  color: white;
-  text-align: center;
-  border: none;
-  padding: 0.3em 2em;
-  font-size: 1.4em;
+.form--settings input{
+	max-width: 100%;
 }
 
 .form--settings form{
-    width: 100%;
+	display: block;
+	text-align: left;
+
 }

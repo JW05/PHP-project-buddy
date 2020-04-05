@@ -105,7 +105,7 @@
                         if(empty($password)){
                                 throw new Exception("Password cannot be empty");
                         }
-                        $this->password = password_hash($password, PASSWORD_DEFAULT, ["cost" => 14]);
+                        $this->password = $password;
 
                         return $this;
                 }
@@ -124,7 +124,7 @@
                         $email = $this->getEmail();
                         /*password (veilig bewaard via bcrypt!)*/
                         $password = $this->getPassword();
-                        $password = password_hash($password, PASSWORD_DEFAULT, ["cost" => 14]);
+                        $password = password_hash($password, PASSWORD_DEFAULT, ["cost" => 14]); 
                         $statement->bindValue(":firstName", $firstName);
                         $statement->bindValue(":lastName", $lastName);
                         $statement->bindValue(":email", $email);
@@ -175,18 +175,20 @@
 			session_destroy();
                 }
                 
+                //Get current active user
                 public static function getCurrentUser($email){
                         $conn = Db::getConnection();
                         $statement = $conn->prepare("select * from users where email = '$email'");
                         $statement->execute();
                         $user = $statement->fetch(PDO::FETCH_ASSOC);
-
+                        if(empty($user)){
+                                throw new Exception("Sorry records with this user were not found.");
+                        }
                         return $user;
                 }
 
                 public function updateProfile($id){
                         $conn = Db::getConnection();
-                        $statement = $conn->prepare("update users set firstname = :firstName, lastname = :lastName, email = :email, password = :password, description = :description, avatar = :avatar where id = '$id'");
                         
                         $firstName = $this->getFirstName();
                         $lastName = $this->getLastName();
@@ -194,13 +196,21 @@
                         $password = $this->getPassword();
                         $avatar = $this->getAvatar();
                         $description = $this->getDescription();
+                        
+                        //if user as for new password execute first statement where password will be updated, else execute the second one
+                        if(!empty($password)){
+                                $statement = $conn->prepare("update users set firstname = :firstName, lastname = :lastName, email = :email, password = :password, description = :description, avatar = :avatar where id = '$id'");
+                                $password = password_hash($password, PASSWORD_DEFAULT, ["cost" => 14]);
+                                $statement->bindValue(":password", $password);
+                        }else{
+                                $statement = $conn->prepare("update users set firstname = :firstName, lastname = :lastName, email = :email, description = :description, avatar = :avatar where id = '$id'");
+                        }
 
                         $statement->bindValue(":firstName", $firstName);
                         $statement->bindValue(":lastName", $lastName);
                         $statement->bindValue(":email", $email);
                         $statement->bindValue(":avatar", $avatar);
                         $statement->bindValue(":description", $description);
-                        $statement->bindValue(":password", $password);
 
                         $result = $statement->execute();
 
