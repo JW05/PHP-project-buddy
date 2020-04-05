@@ -110,14 +110,14 @@ input {
   box-shadow: 10px 5px 5px black;
 }
 
-.sign-in-container {
+.sign-in-container , .buddy-left-container {
 	left: 0;
   width: 50%;
   box-shadow: 10px 5px 5px black;
 }
 
 
-.signup-container {
+.signup-container ,.buddy-right-container {
 	position: absolute;
 	top: 0;
 	left: 50%;

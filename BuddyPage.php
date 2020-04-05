@@ -26,8 +26,8 @@ include_once(__DIR__."/classes/User.php");
 </head>
 <body>
 <div class="container" id="container">
-		<div class="form-container sign-in-container">
-			<form action="" id ="loginForm" method="post">
+		<div class="form-container buddy-left-container">
+			<form action="" id ="buddyForm" method="post">
 				<h1>All your buddys</h1>
 				
         <?php if (isset($error)): ?>
@@ -37,12 +37,12 @@ include_once(__DIR__."/classes/User.php");
 				<?php endif; ?>
 				</form>
 		</div>
-		<div class="signup-container">
+		<div class="buddy-right-container">
 			<div class="panel">
 				<div class="panel-right">
 					<h1>Your Buddys are </h1>
           
-					<?php foreach($buddys as $buddy): ?>
+		  <?php foreach($buddys as $buddy): ?>
           <h2><?php echo $buddy["firstname"]; ?></h2>
           <h2><?php echo $buddy['lastname']; ?></h2>
           <h2><?php echo $buddy['avatar']; ?></h2>

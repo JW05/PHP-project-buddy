@@ -337,10 +337,10 @@ public function UserIdExists($id)
         if(mysqli_num_rows($result)!=0)
        
          {      
-                echo "true user id exists !!! ";
+                echo "true user id exists";
                 return true;}
            else	{
-                echo "false user id doesnt exist zzzzzzzzzz";
+                echo "false user id doesnt exist";
                 return false;
                 }
 }
@@ -364,14 +364,7 @@ public function getUserId2($email)
         }   
         
  //--------------------------end check if id exists in profile table to execute insert Updateprofile data-----//        
-                /**
-                 * Get the value of userId
-                 */ 
-
-                public function getUserId()
-                {
-                                return $this->userId;
-                }
+               
                   /**
                  * Get the value of userId
                  */ 

@@ -17,8 +17,11 @@ if(!empty($_POST)){
 
          $kenmerk->setUserId ($userId); 
 
-         $kenmerk->saveKenmerken();
-
+         $result = $kenmerk->saveKenmerken();
+         // If the result from the save is success, redirect to the index.
+         if($result) {
+          header('Location: index.php');
+         }
 
   } catch (\Throwable $th) {
     $error =$th->getMessage();
