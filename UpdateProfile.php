@@ -14,21 +14,10 @@ if(!empty($_POST)){
          $kenmerk->setPreference ($_POST['preference']);
          $kenmerk->setGenre ($_POST['genre']);
          $kenmerk->setLikesToParty ($_POST['likesToParty']);
+
          $kenmerk->setUserId ($userId); 
 
-
-        /** testing getterssetters---------------------------------------*/ 
-                    /*echo $kenmerk->getLocatie();
-                    echo $kenmerk->getJaar();
-                    echo $kenmerk->getVoorkeur();
-                    echo $kenmerk->getGenre();
-                    echo $kenmerk->getFeesten();
-                    echo $kenmerk->getUserId();*/
-        /*---------------------------------------------------------*/
          $kenmerk->saveKenmerken();
-         /*test Save----------------
-         $succes ="user saved";
-        -----------------------------*/
 
 
   } catch (\Throwable $th) {
@@ -125,8 +114,8 @@ if(!empty($_POST)){
 
   <label for="likesToParty"></label>
   <select id="likesToParty" name="likesToParty">
-    <option value="Ja">Ja</option>
-    <option value="Nee">Nee</option>
+    <option value="1">Ja</option>
+    <option value="0">Nee</option>
   </select><br><br>
 </div>
 
