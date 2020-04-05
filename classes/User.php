@@ -17,6 +17,7 @@
                 private $likesToParty;
                 private $userId;
                 private $buddy;
+                private $lookingForBuddy;
 
                 /**
                  * Get the value of firstname
@@ -272,15 +273,13 @@
 
 
 
-/* Jens W ------------------- Jens W ---------------------------------------------------------------------------------------------------*/
+// JENS - (feature 5 toegevoegd MAURY)
 
-
-            public function saveKenmerken(){
+            public function saveInfo(){
 
             $conn = Db::getConnection();
-            /*$conn = new PDO('mysql:host=localhost;dbname=phpals',"root","");*/
-            $statement = $conn->prepare("insert into profile (location, year, preference, genre, likesToParty, userId) values (:location, :year, :preference, :genre, :likestoparty, :userId)");
-            
+            //$statement = $conn->prepare("insert into profile (location, year, preference, genre, likesToParty, userId) values (:location, :year, :preference, :genre, :likestoparty, :userId)");
+            $statement = $conn->prepare("insert into profile (location, year, preference, genre, likesToParty, userId,lookingForBuddy) values (:location, :year, :preference, :genre, :likestoparty, :userId,:lookingForBuddy)");
            
             $location = $this->getLocation();
             $year = $this->getYear();
@@ -288,27 +287,59 @@
             $genre = $this->getGenre();
             $party = $this->getLikesToParty(); 
             $userId = $this->getUserId(); 
-            
-           
-            
-             
+            $lookingForBuddy = $this->getLookingForBuddy(); 
+                        
             $statement->bindValue(":location", $location);
             $statement->bindValue(":year", $year);
             $statement->bindValue(":preference", $preference);
             $statement->bindValue(":genre", $genre);
-            $statement->bindValue(":likestoparty", $party);
+            $statement->bindValue(":likesToParty", $party);
             $statement->bindValue(":userId", $userId);
+            $statement->bindValue(":lookingForBuddy", $lookingForBuddy);
             
             $result = $statement->execute() ;
-            return  $result ;
+            return  $result;
                 
     }
 
+// END JENS
 
-    public static function getCurrentPreference($userId){
+// JENS 
+
+public function updateInfo($userId){
+
         $conn = Db::getConnection();
-       /* $conn = new PDO('mysql:host=localhost;dbname=phpals',"root","");*/
+        $statement = $conn->prepare("update profile set location = :location, year = :year, preference = :preference, genre = :genre, likesToParty = : likesToParty, lookingForBuddy = :lookingForbuddy where userId = '$userId')");
+        
        
+        $location = $this->getLocation();
+        $year = $this->getYear();
+        $preference = $this->getPreference();
+        $genre = $this->getGenre();
+        $party = $this->getLikesToParty(); 
+       // $userId = $this->getUserId(); unique info no update selection made on
+        
+                    
+        $statement->bindValue(":location", $location);
+        $statement->bindValue(":year", $year);
+        $statement->bindValue(":preference", $preference);
+        $statement->bindValue(":genre", $genre);
+        $statement->bindValue(":likesToParty", $party);
+        //$statement->bindValue(":userId", $userId); unique info no update 
+        $statement->bindValue(":lookingForBuddy", $lookingForBuddy);
+        
+        $result = $statement->execute() ;
+        return  $result;
+            
+}
+
+// END JENS
+
+// No use  by JENS
+    public static function getCurrentPreference($userId){
+       
+        $conn = Db::getConnection();
+            
         $statement = $conn->prepare("select * from profile where userId = '$userId'");
         $statement->execute();
         $preference = $statement->fetch(PDO::FETCH_OBJ);
@@ -318,59 +349,54 @@
 
         return $preference;
 }
+// No use by Jens End
+
+//Maury 
 
 
+// JENS
+/* check if id exists in profile table to execute insert Updateprofile data */
 
-public function saveBuddy()
+public function UserIdExists($id)
 {
-        $conn = Db::getConnection();
-
-        $statement = $conn->prepare("insert into profile (LookingForBuddy) values (:buddy)");
-        $statement->execute();
-}
-
-
-
-   /* public function updateUserId($id){
-        $conn = Db::getConnection();
+        $conn = new mysqli("localhost", "root", "","phpals");
+        $query="select * from profile where userId ='$id'";
+        $result = $conn->query($query);
+        if(mysqli_num_rows($result)!=0)
        
-       $statement = $conn->prepare("insert into user (id) values (:id)"); 
-
-        
-        $id = $this->getId();
-        
-        $statement->bindValue(":id", $id);
-
-        $result = $statement->execute();
-
-            return true;
-             $_SESSION['locatie'] = "phpals.profile";
-}*/
-
- /**
-                 * Get the value of id
-                 */ 
-           /*     public function getId()
-                {
-                                return $this->id;
+         {      
+                echo "true user id exists";
+                return true;}
+           else	{
+                echo "false user id doesnt exist";
+                return false;
                 }
+}
+// END JENS
 
-                /**
-                 * Set the value of id
-                 *
-                 * @return  self
-                 */ 
-          /*      public function setId($id)
+// JENS
+public function getUserId2($email)
+{
+        $conn = new mysqli("localhost", "root", "","phpals");
+        $email = $conn->real_escape_string($email);
+        $query="select id from users where email = '$email'";
+        $result = $conn->query($query);
+        
+        if(mysqli_num_rows($result)!=0)
+        {
+                        $user = $result->fetch_assoc();
+                        return $user;
+        
+               }else
                 {
-                                $this->id = $id;
-
-                                return $this;
+                        return false;
                 }
+        } 
 
-/* END NO USE ------------------------------------------------------------------------*/
-
-
-
+// END JENS
+        
+// JENS Getters & setters     
+               
                   /**
                  * Get the value of userId
                  */ 
@@ -380,7 +406,7 @@ public function saveBuddy()
                                 return $this->userId;
                 }
 
-/* setUserId  will not be used as it is a value linked from users table - id and taken over from there - left in program */
+
                 /**
                  * Set the value of userId
                  *
@@ -439,7 +465,7 @@ public function saveBuddy()
                 }
 
                 /**
-                 * Get the value of voorkeur
+                 * Get the value of preference
                  */ 
                 public function getPreference()
                 {
@@ -447,7 +473,7 @@ public function saveBuddy()
                 }
 
                 /**
-                 * Set the value of voorkeur
+                 * Set the value of preference
                  *
                  * @return  self
                  */ 
@@ -479,7 +505,7 @@ public function saveBuddy()
                 }
 
                 /**
-                 * Get the value of feesten
+                 * Get the value of LikesToParty
                  */ 
                 public function getLikesToParty()
                 {
@@ -487,7 +513,7 @@ public function saveBuddy()
                 }
 
                 /**
-                 * Set the value of feesten
+                 * Set the value of LikesToParty
                  *
                  * @return  self
                  */ 
@@ -498,55 +524,70 @@ public function saveBuddy()
                                 return $this;
                 }
                 
-     
+// JENS end getters and setters  
         
 	
-/*--JW------------------------------BuddyPage------------------------------------------------------*/
+// JENS
 
-/* lookup function for the user id of the entered email or return not found */ 
-                public function getUserId2($email)
-                {
-                        $conn = new mysqli("localhost", "root", "","phpals");
-                        $email = $conn->real_escape_string($email);
-                        $query="select id from users where email = '$email'";
-                        $result = $conn->query($query);
-                        
-                        if(mysqli_num_rows($result)!=0)
-                        {
-                                        $user = $result->fetch_assoc();
-                                        return $user;
-                        
-                               }else
-                                {
-                                        return false;
-                                }
+public function getBuddys($userId) {					
+        $conn = new mysqli("localhost", "root", "","phpals");
+        $userId = $conn->real_escape_string($userId);
+        $query="select u.firstname, u.lastname, u.avatar, u.email from users u left join buddys b on u.id = b.buddyid where b.userid = '$userId'";
+        $result = $conn->query($query);
+        if(mysqli_num_rows($result)!=0) {
+                        //place all data in the array row to be able to use 
+                        while($row = $result->fetch_assoc()) {
+                                $rows[] = $row;
                         }
-                
-               
-                public static function getBuddys($userid){
-                        $conn = Db::getConnection();
-                                              
-                        $statement = $conn->prepare("select buddyId from buddys where userId = $userid ");
-                        $statement->execute(); 
-                        $buddys = $statement->fetchAll(PDO::FETCH_ASSOC);
-                
-                        return $buddys;
-                
+                        return $rows;   
+                }else {
+                        return false;
+                }
+} 
+ 
+// END JENS
+
+
+
+                /**
+                 * Get the value of buddy
+                 */ 
+                public function getBuddy()
+                {
+                                return $this->buddy;
                 }
 
-/* No use at the moment just test */
-                public function  AllBuddys($id){
-                        $conn = Db::getConnection();
-                        $query="select * from buddys where id ='$id'";
+                /**
+                 * Set the value of buddy
+                 *
+                 * @return  self
+                 */ 
+                public function setBuddy($buddy)
+                {
+                                $this->buddy = $buddy;
 
+                                return $this;
                 }
-/* end no use ---------------------*/
 
+                /**
+                 * Get the value of lookingForBuddy
+                 */ 
+                public function getLookingForBuddy()
+                {
+                                return $this->lookingForBuddy;
+                }
 
+                /**
+                 * Set the value of lookingForBuddy
+                 *
+                 * @return  self
+                 */ 
+                public function setLookingForBuddy($lookingForBuddy)
+                {
+                                $this->lookingForBuddy = $lookingForBuddy;
 
-
-
-
-
+                                return $this;
+                }
    }
+
 ?>

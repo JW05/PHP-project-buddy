@@ -8,6 +8,7 @@
 </head>
 <body>
     
+    <a href="ProfilePage.php"> Profile </a>
 
     <a href="logout.php" class="btn-logout">logout</a>
 

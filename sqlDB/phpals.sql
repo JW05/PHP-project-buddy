@@ -53,7 +53,17 @@ CREATE TABLE `users` (
   `description` varchar(300) DEFAULT NULL,
   `avatar` varchar(300) DEFAULT 'default.jpg'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `buddys`
+--
+
+CREATE TABLE `buddys` (
+  `id` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `buddyId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 --
 -- Dumping data for table `users`
 --
@@ -78,6 +88,11 @@ ALTER TABLE `profile`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
+--  
+-- Indexes for table `buddys`
+--
+ALTER TABLE `buddys`
+  ADD PRIMARY KEY (`id`);
 --
 -- AUTO_INCREMENT for dumped tables
 --
@@ -94,6 +109,11 @@ ALTER TABLE `profile`
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
+
+-- AUTO_INCREMENT for table `buddys`
+--
+ALTER TABLE `buddys`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
