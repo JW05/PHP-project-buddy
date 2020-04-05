@@ -267,7 +267,7 @@
             public function saveInfo(){
 
             $conn = Db::getConnection();
-            $statement = $conn->prepare("insert into profile (location, year, preference, genre, likesToParty, userId) values (:location, :year, :preference, :genre, :likestoparty, :userId)");
+            $statement = $conn->prepare("insert into profile (location, year, preference, genre, likesToParty, userId) values (:location, :year, :preference, :genre, :likesToParty, :userId)");
             
            
             $location = $this->getLocation();
@@ -282,7 +282,7 @@
             $statement->bindValue(":year", $year);
             $statement->bindValue(":preference", $preference);
             $statement->bindValue(":genre", $genre);
-            $statement->bindValue(":likestoparty", $party);
+            $statement->bindValue(":likesToParty", $party);
             $statement->bindValue(":userId", $userId);
             
             $result = $statement->execute() ;
