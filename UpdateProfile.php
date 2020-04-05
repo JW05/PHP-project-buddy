@@ -37,14 +37,22 @@ if(!empty($_POST)){
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UpdateProfile</title>
-  <!--<link rel="stylesheet" href="css/style.css">-->
+  <link rel="stylesheet" href="css/style.css">
   <style>
  
-      body{ font-family: 'Roboto Condensed';color:#FF6161;}
-      h1{font-size: 45px;}
-      h2{font-size: 25px; }
-      fieldset{ background-color: #FFF699;padding: 15px 5%;}
-      input{border-radius:15px;}
+     
+      
+     
+      body{
+        background: #0396FF;
+        background: -webkit-linear-gradient(to right, #ABDCFF, #0396FF);
+        background: linear-gradient(to right, #ABDCFF, #0396FF);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: 0 0;
+        color: black;
+        height: 135vh;
+      }
 
   </style>
 </head>
@@ -55,10 +63,13 @@ if(!empty($_POST)){
   <?php if(isset($succes)):?>
   <div class="succes"><?php echo $succes; ?></div>
   <?php endif; ?>
-  <h1>Vervoledig hier je profiel</h1>
 
 
-<fieldset>
+
+
+
+<h1>Vervoledig hier je profiel</h1>
+<br><br>
 <legend><h1>Kenmerken</h1></legend>
 <form action="" method="post">
 <!--  /PHP-project-buddy/PHP-project-buddy/ProfilePage.php  -->
@@ -123,14 +134,11 @@ if(!empty($_POST)){
 </div>
 
 <div>
-  <input type="submit">
+  <input class = "button" type="submit">
 </div>
 </form>
 
 
-    
-
-</fieldset>
 
 
 </body>
