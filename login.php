@@ -15,7 +15,7 @@ if( !empty($_POST) ){
 			session_start();
 			$_SESSION['user'] = $email ;
 		
-			header("Location: index.php");
+			header("Location: UserIdExist.php"); //JENS //Instead of going to index, first we will perform a check if our profile is filled in
 		} else {
 			$error = "Sorry, we couldn't log you in.";
 		}
