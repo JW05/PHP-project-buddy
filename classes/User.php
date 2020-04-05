@@ -495,7 +495,7 @@ public function getUserId2($email)
 public function getBuddys($userId) {					
         $conn = new mysqli("localhost", "root", "","phpals");
         $userId = $conn->real_escape_string($userId);
-        $query="select u.firstname, u.lastname, u.avatar from users u left join buddys b on u.id = b.buddyid where b.userid = '$userId'";
+        $query="select u.firstname, u.lastname, u.avatar, u.email from users u left join buddys b on u.id = b.buddyid where b.userid = '$userId'";
         $result = $conn->query($query);
         if(mysqli_num_rows($result)!=0) {
                         //place all data in the array row to be able to use 
