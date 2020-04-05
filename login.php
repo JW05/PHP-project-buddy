@@ -14,8 +14,8 @@ if( !empty($_POST) ){
 		if($user->canLogin($email, $password)){
 			session_start();
 			$_SESSION['user'] = $email ;
-			//header("Location: BuddyPage.php"); //JENS //For testing the buddypage 
-			header("Location: UserIdExist.php"); //JENS //Instead of going to index, first we will perform a check if our profile is filled in
+			//header("Location: buddyPage.php"); //JENS //For testing the buddypage 
+			header("Location: userIdExist.php"); //JENS //Instead of going to index, first we will perform a check if our profile is filled in
 		} else {
 			$error = "Sorry, we couldn't log you in.";
 		}

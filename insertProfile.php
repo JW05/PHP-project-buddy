@@ -1,5 +1,5 @@
 <?php
-// JENS UPDATE 
+// JENS
 include_once(__DIR__."/classes/User.php");
 session_start();
 
@@ -18,7 +18,7 @@ if(!empty($_POST)){
 
          $info->setUserId ($userId); 
 
-         $result = $info->updateInfo();
+         $result = $info->saveInfo();
          // If the result from the save is success, redirect to the index.
          if($result) {
           header('Location: index.php');

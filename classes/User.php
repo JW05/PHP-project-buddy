@@ -292,6 +292,36 @@
 
 // END JENS
 
+// JENS
+
+public function updateInfo($userId){
+
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("update profile set location = :location, year = :year, preference = :preference, genre = :genre, likesToParty = : likesToParty where userId = '$userId')");
+        
+       
+        $location = $this->getLocation();
+        $year = $this->getYear();
+        $preference = $this->getPreference();
+        $genre = $this->getGenre();
+        $party = $this->getLikesToParty(); 
+       // $userId = $this->getUserId(); unique info no update selection made on
+        
+                    
+        $statement->bindValue(":location", $location);
+        $statement->bindValue(":year", $year);
+        $statement->bindValue(":preference", $preference);
+        $statement->bindValue(":genre", $genre);
+        $statement->bindValue(":likesToParty", $party);
+        //$statement->bindValue(":userId", $userId); unique info no update 
+        
+        $result = $statement->execute() ;
+        return  $result ;
+            
+}
+
+// END JENS
+
 // No use  by JENS
     public static function getCurrentPreference($userId){
        
