@@ -38,7 +38,7 @@
 
             //Check if email is changed
             if($currentUser->getEmail() != $email || $oldPassword){
-                echo $currentUser->getEmail();
+                
                 if($currentUser->canLogin($currentUser->getEmail(), $oldPassword)){
                     
                     //If email is changed don't meets the condition, give error
@@ -101,9 +101,13 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <?php
+<nav class="settingsNav">
+<?php
         include_once(__DIR__."/nav.inc.php");
     ?>
+
+</nav>
+
     <div>
         <div class="form--settings">
             <form action="" method="post" enctype="multipart/form-data">

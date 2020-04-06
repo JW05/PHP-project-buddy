@@ -13,7 +13,6 @@ body {
 	align-items: center;
 	flex-direction: column;
 	font-family: 'Montserrat', sans-serif;
-  	height: 100vh;
   	margin: 0;
 }
 
@@ -191,10 +190,14 @@ a.btn-logout
     -ms-border-radius: 20px 10px;
     -o-border-radius: 20px 10px;
 }
+.settingsNav
+{
+margin-bottom: -15em;
+}
 
 .form--settings{
 	width: 800px;
-	margin-top: 20em;
+	margin-top: 15em;
 }
 
 .form--settings .form__error
