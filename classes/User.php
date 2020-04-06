@@ -1,7 +1,7 @@
 <?php
-	include_once(__DIR__."/Db.php");
+        include_once(__DIR__."/Db.php");
 
-	class User {
+        class User {
 		private $email;
 		private $password;
                 private $avatar;
@@ -234,7 +234,7 @@
                  */ 
                 public function getAvatar()
                 {
-                                return $this->avatar;
+                        return $this->avatar;
                 }
 
                 /**
@@ -244,9 +244,9 @@
                  */ 
                 public function setAvatar($avatar)
                 {
-                                $this->avatar = $avatar;
+                        $this->avatar = $avatar;
 
-                                return $this;
+                        return $this;
                 }
 
                 /**
@@ -254,7 +254,7 @@
                  */ 
                 public function getDescription()
                 {
-                                return $this->description;
+                        return $this->description;
                 }
 
                 /**
@@ -264,137 +264,167 @@
                  */ 
                 public function setDescription($description)
                 {
-                                $this->description = $description;
+                        $this->description = $description;
 
-                                return $this;
+                        return $this;
                 }
 
 
 
 
 
-// JENS - (feature 5 toegevoegd MAURY)
+                // JENS - (feature 5 toegevoegd MAURY)
 
-            public function saveInfo(){
+                public function saveInfo(){
 
-                $conn = Db::getConnection();
-                //$statement = $conn->prepare("insert into profile (location, year, preference, genre, likesToParty, userId) values (:location, :year, :preference, :genre, :likestoparty, :userId)");
-                $statement = $conn->prepare("insert into profile (location, year, preference, genre, likesToParty, userId, lookingForBuddy) values (:location, :year, :preference, :genre, :likesToParty, :userId, :lookingForBuddy)");
+                        $conn = Db::getConnection();
+                        //$statement = $conn->prepare("insert into profile (location, year, preference, genre, likesToParty, userId) values (:location, :year, :preference, :genre, :likestoparty, :userId)");
+                        $statement = $conn->prepare("insert into profile (location, year, preference, genre, likesToParty, userId, lookingForBuddy) values (:location, :year, :preference, :genre, :likesToParty, :userId, :lookingForBuddy)");
                 
-                $location = $this->getLocation();
-                $year = $this->getYear();
-                $preference = $this->getPreference();
-                $genre = $this->getGenre();
-                $party = $this->getLikesToParty(); 
-                $userId = $this->getUserId(); 
-                $lookingForBuddy = $this->getLookingForBuddy();
+                        $location = $this->getLocation();
+                        $year = $this->getYear();
+                        $preference = $this->getPreference();
+                        $genre = $this->getGenre();
+                        $party = $this->getLikesToParty(); 
+                        $userId = $this->getUserId(); 
+                        $lookingForBuddy = $this->getLookingForBuddy();
                                 
-                $statement->bindValue(":location", $location);
-                $statement->bindValue(":year", $year);
-                $statement->bindValue(":preference", $preference);
-                $statement->bindValue(":genre", $genre);
-                $statement->bindValue(":likesToParty", $party);
-                $statement->bindValue(":userId", $userId);
-                $statement->bindValue(":lookingForBuddy", $lookingForBuddy);
+                        $statement->bindValue(":location", $location);
+                        $statement->bindValue(":year", $year);
+                        $statement->bindValue(":preference", $preference);
+                        $statement->bindValue(":genre", $genre);
+                        $statement->bindValue(":likesToParty", $party);
+                        $statement->bindValue(":userId", $userId);
+                        $statement->bindValue(":lookingForBuddy", $lookingForBuddy);
                 
-                $result = $statement->execute();
-                return  $result;
+                        $result = $statement->execute();
+                        return  $result;
                 
-        }
+                }
 
-// END JENS
+                // END JENS
 
-// JENS 
+                // JENS 
 
-public function updateInfo($userId){
+                public function updateInfo($userId){
 
-        $conn = Db::getConnection();
-        $statement = $conn->prepare("update profile set location = :location, year = :year, preference = :preference, genre = :genre, likesToParty = :likesToParty, lookingForBuddy = :lookingForBuddy where userId = '$userId'");
+                        $conn = Db::getConnection();
+                        $statement = $conn->prepare("update profile set location = :location, year = :year, preference = :preference, genre = :genre, likesToParty = :likesToParty, lookingForBuddy = :lookingForBuddy where userId = '$userId'");
         
        
-        $location = $this->getLocation();
-        $year = $this->getYear();
-        $preference = $this->getPreference();
-        $genre = $this->getGenre();
-        $party = $this->getLikesToParty(); 
-        $lookingForBuddy = $this->getLookingForBuddy();
+                        $location = $this->getLocation();
+                        $year = $this->getYear();
+                        $preference = $this->getPreference();
+                        $genre = $this->getGenre();
+                        $party = $this->getLikesToParty(); 
+                        $lookingForBuddy = $this->getLookingForBuddy();
                     
-        $statement->bindValue(":location", $location);
-        $statement->bindValue(":year", $year);
-        $statement->bindValue(":preference", $preference);
-        $statement->bindValue(":genre", $genre);
-        $statement->bindValue(":likesToParty", $party);
-        $statement->bindValue(":lookingForBuddy", $lookingForBuddy);
+                        $statement->bindValue(":location", $location);
+                        $statement->bindValue(":year", $year);
+                        $statement->bindValue(":preference", $preference);
+                        $statement->bindValue(":genre", $genre);
+                        $statement->bindValue(":likesToParty", $party);
+                        $statement->bindValue(":lookingForBuddy", $lookingForBuddy);
         
-        $result = $statement->execute() ;
+                        $result = $statement->execute() ;
         
-        return $result;
+                        return $result;
             
-}
-
-// END JENS
-
-// Written by Jens, fixed by others -- get profile preferences linked with own account
-    public static function getCurrentPreference($userId){
-       
-        $conn = Db::getConnection();
-            
-        $statement = $conn->prepare("select * from profile where userId = '$userId'");
-        $statement->execute();
-        $preference = $statement->fetch(PDO::FETCH_OBJ);
-        if(empty($preference)){
-                throw new Exception("Sorry records were not found.");
-        }
-
-        return $preference;
-}
-//end Jens
-
-//Maury 
-
-
-// JENS
-/* check if id exists in profile table to execute insert Updateprofile data */
-
-public function UserIdExists($id)
-{
-        $conn = new mysqli("localhost", "root", "","phpals");
-        $query="select * from profile where userId ='$id'";
-        $result = $conn->query($query);
-        if(mysqli_num_rows($result)!=0)
-       
-         {      
-                echo "true user id exists";
-                return true;}
-           else	{
-                echo "false user id doesnt exist";
-                return false;
                 }
-}
-// END JENS
 
-// JENS
-public function getUserId2($email)
-{
-        $conn = new mysqli("localhost", "root", "","phpals");
-        $email = $conn->real_escape_string($email);
-        $query="select id from users where email = '$email'";
-        $result = $conn->query($query);
-        
-        if(mysqli_num_rows($result)!=0)
-        {
-                        $user = $result->fetch_assoc();
+                // END JENS
+
+                // Written by Jens, fixed by others -- get profile preferences linked with own account
+                public static function getCurrentPreference($userId){
+       
+                        $conn = Db::getConnection();
+            
+                        $statement = $conn->prepare("select * from profile where userId = '$userId'");
+                        $statement->execute();
+                        $preference = $statement->fetch(PDO::FETCH_OBJ);
+                        if(empty($preference)){
+                                throw new Exception("Sorry records were not found.");
+                        }
+
+                        return $preference;
+                }
+                //end Jens
+
+                //Maury 
+
+
+                //Madina feature7
+                public function getMatchingProfiles($currentUserProfile){
+                        $conn = Db::getConnection();
+                        $statement = $conn->prepare("select * from profile where not exists (select 1 from buddys where buddys.userId = profile.userId or buddys.buddyId = profile.userId) and userId != :userId and lookingForBuddy = :lookingForBuddy and (location = :location or preference = :preference or genre = :genre or likesToParty = :likesToParty)");
+                        $statement->bindValue(":userId", $currentUserProfile->userId);
+                        $statement->bindValue(":lookingForBuddy", !$currentUserProfile->lookingForBuddy);
+                        $statement->bindValue(":location", $currentUserProfile->location);
+                        $statement->bindValue(":preference", $currentUserProfile->preference);
+                        $statement->bindValue(":genre", $currentUserProfile->genre);
+                        $statement->bindValue(":likesToParty", $currentUserProfile->likesToParty);
+
+                        $statement->execute();
+                        
+                        $match = $statement->fetchAll(PDO::FETCH_ASSOC);
+                        
+                        return $match;
+                }
+
+                public function getUserInfo($userId){
+                        $conn = Db::getConnection();
+                        $statement = $conn->prepare(
+                                "select users.firstName, users.lastName, users.avatar, users.description, profile.* from users left join profile p on p.userId = users.id where p.userId = '$userId'"
+                        );
+
+                        $statement->execute();
+
+                        $user = $statement->fetch(PDO::FETCH_OBJ);
                         return $user;
-        
-               }else
-                {
-                        return false;
                 }
-        } 
 
-// END JENS
+                // JENS
+                /* check if id exists in profile table to execute insert Updateprofile data */
+
+                public function UserIdExists($id)
+                {
+                        $conn = new mysqli("localhost", "root", "","phpals");
+                        $query="select * from profile where userId ='$id'";
+                        $result = $conn->query($query);
+                        if(mysqli_num_rows($result)!=0)
+                
+                        {      
+                                echo "true user id exists";
+                                return true;}
+                        else	{
+                                echo "false user id doesnt exist";
+                                return false;
+                                }
+                }
+                // END JENS
+
+                // JENS
+                public function getUserId2($email)
+                {
+                        $conn = new mysqli("localhost", "root", "","phpals");
+                        $email = $conn->real_escape_string($email);
+                        $query="select id from users where email = '$email'";
+                        $result = $conn->query($query);
+                        
+                        if(mysqli_num_rows($result)!=0)
+                        {
+                                $user = $result->fetch_assoc();
+                                return $user;
+                        
+                        }else
+                        {
+                                return false;
+                        }
+                } 
+
+                // END JENS
         
-// JENS Getters & setters     
+                // JENS Getters & setters     
                
                   /**
                  * Get the value of userId
@@ -523,28 +553,28 @@ public function getUserId2($email)
                                 return $this;
                 }
                 
-// JENS end getters and setters  
+                // JENS end getters and setters  
         
 	
-// JENS
+                // JENS
 
-public function getBuddys($userId) {					
-        $conn = new mysqli("localhost", "root", "","phpals");
-        $userId = $conn->real_escape_string($userId);
-        $query="select u.firstname, u.lastname, u.avatar, u.email from users u left join buddys b on u.id = b.buddyid where b.userid = '$userId'";
-        $result = $conn->query($query);
-        if(mysqli_num_rows($result)!=0) {
-                        //place all data in the array row to be able to use 
-                        while($row = $result->fetch_assoc()) {
-                                $rows[] = $row;
+                public function getBuddys($userId) {					
+                        $conn = new mysqli("localhost", "root", "","phpals");
+                        $userId = $conn->real_escape_string($userId);
+                        $query="select u.firstname, u.lastname, u.avatar, u.email from users u left join buddys b on u.id = b.buddyid where b.userid = '$userId'";
+                        $result = $conn->query($query);
+                        if(mysqli_num_rows($result)!=0) {
+                                //place all data in the array row to be able to use 
+                                while($row = $result->fetch_assoc()) {
+                                        $rows[] = $row;
+                                }
+                                return $rows;   
+                        }else {
+                                return false;
                         }
-                        return $rows;   
-                }else {
-                        return false;
-                }
-} 
+                } 
  
-// END JENS
+                // END JENS
 
 
 
@@ -587,6 +617,6 @@ public function getBuddys($userId) {
 
                                 return $this;
                 }
-   }
+        }
 
 ?>

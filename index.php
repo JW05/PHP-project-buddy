@@ -12,5 +12,15 @@
 
     <a href="logout.php" class="btn-logout">logout</a>
 
+    <div class="side-bar">
+    <div class="same-intrest">
+        <h2>These people have the same intrest</h2>
+        <h3>Maybe get in touch</h3>
+
+        <!--   code gedeeldte feature 7 -->
+    
+    </div>
+    </div>
+
 </body>
 </html>
