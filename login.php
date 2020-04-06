@@ -14,8 +14,8 @@ if( !empty($_POST) ){
 		if($user->canLogin($email, $password)){
 			session_start();
 			$_SESSION['user'] = $email ;
-		
-			header("Location: index.php");
+			//header("Location: buddyPage.php"); //JENS //For testing the buddypage 
+			header("Location: userIdExist.php"); //JENS //Instead of going to index, first we will perform a check if our profile is filled in
 		} else {
 			$error = "Sorry, we couldn't log you in.";
 		}
@@ -64,7 +64,7 @@ if( !empty($_POST) ){
 				<div class="panel-right">
 					<h1>Hello, Traveler!</h1>
 					<p>Enter your personal info and get started on your IMD journey with a buddy</p>
-					<button class="ghost "id="signUp" href="./register.php">Sign Up</button>
+					<button class="ghost "id="signUp" ><a href="register.php"> Sign Up</a></button>
 				</div>
 			</div>
 		</div>

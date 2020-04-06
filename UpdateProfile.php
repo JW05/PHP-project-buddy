@@ -1,47 +1,38 @@
 <?php
-include_once(__DIR__."/classes/User.php");
-session_start();
+  // JENS UPDATE 
+  include_once(__DIR__."/classes/User.php");
+  session_start();
 
+  try{
     $user = User::getCurrentUser($_SESSION['user']);
     $userId = $user['id'];
+    $currentPreference = User::getCurrentPreference($userId);
+  }catch(\Throwable $th){
+    $error = $th->getMessage();
+  }
     
-if(!empty($_POST)){
+  if(!empty($_POST)){
   
-  try {
-         $kenmerk = new User();
-         $kenmerk->setLocatie ($_POST['locatie']);
-         $kenmerk->setJaar ($_POST['jaar']);
-         $kenmerk->setVoorkeur ($_POST['voorkeur']);
-         $kenmerk->setGenre ($_POST['genre']);
-         $kenmerk->setFeesten ($_POST['feesten']);
-         $kenmerk->setUserId ($_POST['userId']); 
+    try {
+      $info = new User();
+      $info->setLocation ($_POST['location']);
+      $info->setYear ($_POST['year']);
+      $info->setPreference ($_POST['preference']);
+      $info->setGenre ($_POST['genre']);
+      $info->setLikesToParty ($_POST['likesToParty']);
+      $info->setLookingForBuddy ($_POST['lookingForBuddy']);
 
-
-        /** testing getterssetters---------------------------------------*/ 
-                    /*echo $kenmerk->getLocatie();
-                    echo $kenmerk->getJaar();
-                    echo $kenmerk->getVoorkeur();
-                    echo $kenmerk->getGenre();
-                    echo $kenmerk->getFeesten();
-                    echo $kenmerk->getUserId();*/
-        /*---------------------------------------------------------*/
-         $kenmerk->saveKenmerken();
-         /*test Save----------------
-         $succes ="user saved";
-        -----------------------------*/
-
+      $result = $info->updateInfo($userId);
+      // If the result from the save is success, redirect to the index.
+      if(!empty($result)) {
+        $success = "Preferences are up to date";
+      }
 
   } catch (\Throwable $th) {
     $error =$th->getMessage();
-  }
-         
+  }       
 }
 
-$kenmerken = User::getCurrentAllKenmerk();
-
-/*test $kenmerken -------------------------
-var_dump($kenmerken);
----------------------------------------------*/
 
 ?>
 <!DOCTYPE html>
@@ -50,117 +41,91 @@ var_dump($kenmerken);
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UpdateProfile</title>
-  <!--<link rel="stylesheet" href="css/style.css">-->
+ <link rel="stylesheet" href="css/style.css">
   <style>
- 
-      body{ font-family: 'Roboto Condensed';color:#FF6161;}
-      h1{font-size: 45px;}
-      h2{font-size: 25px; }
-      fieldset{ background-color: #FFF699;padding: 15px 5%;}
-      input{border-radius:15px;}
+   
+      body{
+        background: #0396FF;
+        background: -webkit-linear-gradient(to right, #ABDCFF, #0396FF);
+        background: linear-gradient(to right, #ABDCFF, #0396FF);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: 0 0;
+        color: black;
+        height: 135vh;
+      }
 
-  </style>
+</style>
 </head>
 <body>
- <?php if(isset($error)):?>
-  <div class="error"><?php echo $error; ?></div>
-  <?php endif; ?>
-  <?php if(isset($succes)):?>
-  <div class="succes"><?php echo $succes; ?></div>
-  <?php endif; ?>
+
+
   <h1>Vervoledig hier je profiel</h1>
+  <br><br>
+  <legend><h1>Kenmerken</h1></legend>
+  <form action="" method="post">
+    <?php if(isset($error)):?>
+      <div class="error"><?php echo $error; ?></div>
+    <?php endif; ?>
+    <?php if(isset($success)):?>
+      <div class="succes"><?php echo $success; ?></div>
+    <?php endif; ?>
 
-
-<fieldset>
-<legend><h1>Kenmerken</h1></legend>
-<form action="" method="post">
-<!--  /PHP-project-buddy/PHP-project-buddy/ProfilePage.php  -->
-
-  <div>
-  <label for="locatie"><h2>Van waar bent u?</h2></label><br>
-  <input type="text" id="locatie" name="locatie" value=""><br><br>
-  </div>
+    <div>
+      <label for="location"><h2>Van waar bent u?</h2></label><br>
+      <input type="text" id="location" name="location" value="<?php echo htmlspecialchars($currentPreference->location);?>"><br><br>
+    </div>
  
+    <div>
+      <label for="year"><h2>In welk jaar zit u</h2></label>
+      <select id="year" name="year">
+        <option value="1" <?php echo ($currentPreference->year == 1)? "selected": ""; ?>>1</option>
+        <option value="2" <?php echo ($currentPreference->year == 2)? "selected": ""; ?>>2</option>
+        <option value="3" <?php echo ($currentPreference->year == 3)? "selected": ""; ?>>3</option>
+      </select>
+    </div> 
 
-<div>
-<h2>In welk jaar zit u</h2>
+    <div>
+      <label for="preference"><h2>Verkiest u development of design?</h2></label>
+      <select id="preference" name="preference">
+        <option value="Development" <?php echo ($currentPreference->preference == "Development")? "selected": ""; ?>>Development</option>
+        <option value="Design" <?php echo ($currentPreference->preference == "Design")? "selected": ""; ?>>Design</option>
+      </select>
+    </div>
 
+    <div>
+      <label for="genre"><h2>What is your music genre?</h2></label>
+      <select id="genre" name="genre">
+        <option value="Pop" <?php echo ($currentPreference->genre == "Pop")? "selected": ""; ?>>Pop</option>
+        <option value="Rock" <?php echo ($currentPreference->genre == "Rock")? "selected": ""; ?>>Rock</option>
+        <option value="R&B" <?php echo ($currentPreference->genre == "R&B")? "selected": ""; ?>>R&B</option>
+        <option value="Latin" <?php echo ($currentPreference->genre == "Latin")? "selected": ""; ?>>Latin</option>
+        <option value="Electronische Music" <?php echo ($currentPreference->genre == "Electronische Music")? "selected": ""; ?>>Electronic Muzic</option>
+        <option value="Drum-'n-bass" <?php echo ($currentPreference->genre == "Drum-'n-bass")? "selected": ""; ?>>Drum-'n-bass</option>
+        <option value="Classic" <?php echo ($currentPreference->genre == "Classic")? "selected": ""; ?>>Classic</option>
+      </select>
+    </div>  
 
-  <label for="jaar"></label>
-  <select id="jaar" name="jaar">
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-  </select>
- </div> 
+    <div>
+      <label for="likesToParty"><h2>Party animal?</h2></label>
+      <select id="likesToParty" name="likesToParty">
+        <option value="1" <?php echo ($currentPreference->likesToParty == 1)? "selected": ""; ?>>Ja</option>
+        <option value="0" <?php echo ($currentPreference->likesToParty == 0)? "selected": ""; ?>>Nee</option>
+      </select><br><br>
+    </div>
 
-<div>
-<h2>Verkiest u development of design?</h2>
+    <div>
+      <label for="lookingForBuddy"><h2>Need a buddy?</h2></label>
+      <select id="lookingForBuddy" name="lookingForBuddy">
+        <option value="1" <?php echo ($currentPreference->lookingForBuddy == 1)? "selected": ""; ?>>I am looking for a buddy</option>
+        <option value="0" <?php echo ($currentPreference->lookingForBuddy == 0)? "selected": ""; ?>>I would like to take care of someone</option>
+      </select><br><br>
+    </div>
 
-
-  <label for="voorkeur"></label>
-  <select id="voorkeur" name="voorkeur">
-    <option value="Development">Development</option>
-    <option value="Design">Design</option>
-  </select>
- </div>
-
-
-
-<div>
-<h2>Wat is je muziek genre?</h2>
-
-
-  <label for="genre"></label>
-  <select id="genre" name="genre">
-    <option value="Pop">Pop</option>
-    <option value="Rock">Rock</option>
-    <option value="R&B">R&B</option>
-    <option value="Latin">Latin</option>
-    <option value="Electronische muziek">Electronische muziek</option>
-    <option value="Drum-'n-bass">Drum-'n-bass</option>
-    <option value="Klasiek">Klasiek</option>
-  </select>
-</div>  
-
-
-<div>
-<h2>Bent u een feestbeest?</h2>
-
-
-  <label for="feesten"></label>
-  <select id="feesten" name="feesten">
-    <option value="Ja">Ja</option>
-    <option value="Nee">Nee</option>
-  </select><br><br>
-</div>
-
-<div>
-
-<!-- userId hided and set temporary to empty, as this needs to come from main user file 
-the variable need to be transferred once this profile additional info is requested
-                      userId = id from users -->
-
-  <label for="userId"></label><br>
-  <input type="hidden" id="userId" name="userId"  >
-</div>
-
-<div>
-  <input type="submit">
-</div>
-</form>
-
-
-    
-
-</fieldset>
-
+    <div>
+      <input class = "button" type="submit">
+    </div>
+  </form>
 
 </body>
 </html>
-
-
-
-
-
-
