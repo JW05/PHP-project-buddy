@@ -22,9 +22,9 @@
 </head>
 <body>
     
-    <a href="ProfilePage.php"> Profile </a>
-
-    <a href="logout.php" class="btn-logout">logout</a>
+    <?php
+        include_once(__DIR__."/nav.inc.php");
+    ?>
 
     <div class="side-bar">
     <div class="same-intrest">

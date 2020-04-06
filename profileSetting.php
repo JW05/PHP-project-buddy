@@ -101,6 +101,9 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <?php
+        include_once(__DIR__."/nav.inc.php");
+    ?>
     <div>
         <div class="form--settings">
             <form action="" method="post" enctype="multipart/form-data">
