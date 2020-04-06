@@ -85,19 +85,20 @@
         $matchInfo = User::getUserInfo($id);
   ?>
   <div class="card col-md-4" style="width: 18rem;">
-  <img src="img/avatar/<?php echo $matchInfo->avatar;?>" class="card-img-top" alt="...">
+  <img src="img/avatar/<?php echo htmlspecialchars($matchInfo->avatar);?>" class="card-img-top" alt="...">
   <div class="card-body">
-    <h5 class="card-title"><?php echo $matchInfo->firstName." ".$matchInfo->lastName;?></h5>
+    <h5 class="card-title"><?php echo htmlspecialchars($matchInfo->firstName)." ".htmlspecialchars($matchInfo->lastName);?></h5>
     <?php
       if(!empty($matchInfo->description)):
     ?>
       <blockquote class="blockquote mb-0">
-        <p><?php echo $matchInfo->description;?></p>
-        <footer class="blockquote-footer">Someone famous in <cite title="Source Title"><?php echo $matchInfo->location;?></cite></footer>
+        <p><?php echo htmlspecialchars($matchInfo->description);?></p>
+        <footer class="blockquote-footer">Someone famous in <cite title="Source Title"><?php echo htmlspecialchars($matchInfo->location);?></cite></footer>
       </blockquote>
     <?php endif; ?>
     <p class="card-text"><?php echo printReasonMatch($currentPreference, $matchInfo);?></p>
     <a href="#" class="btn btn-primary">Send buddy request</a>
+    <a href="chat.php" class="btn btn-primary">Open chat</a>
   </div>
 </div>
   <?php 
