@@ -373,9 +373,7 @@
 
                 public function getUserInfo($userId){
                         $conn = Db::getConnection();
-                        $statement = $conn->prepare(
-                                "select users.firstName, users.lastName, users.avatar, users.description, profile.* from users left join profile p on p.userId = users.id where p.userId = '$userId'"
-                        );
+                        $statement = $conn->prepare("select firstName, lastName, avatar, description, location, year, userId, genre, preference, lookingForBuddy, likesToParty from users left join profile p on p.userId = users.id where users.id = '$userId'");
 
                         $statement->execute();
 
