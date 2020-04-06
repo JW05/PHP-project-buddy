@@ -58,11 +58,11 @@
 </style>
 </head>
 <body>
+<div ><a href="index.php">Go Back</a></div>
 
-
-  <h1>Vervoledig hier je profiel</h1>
+  <h1>Complete your profile</h1>
   <br><br>
-  <legend><h1>Kenmerken</h1></legend>
+  
   <form action="" method="post">
     <?php if(isset($error)):?>
       <div class="error"><?php echo $error; ?></div>
@@ -72,12 +72,12 @@
     <?php endif; ?>
 
     <div>
-      <label for="location"><h2>Van waar bent u?</h2></label><br>
+      <label for="location"><h2>From where are you?</h2></label><br>
       <input type="text" id="location" name="location" value="<?php echo htmlspecialchars($currentPreference->location);?>"><br><br>
     </div>
  
     <div>
-      <label for="year"><h2>In welk jaar zit u</h2></label>
+      <label for="year"><h2>Your study year</h2></label>
       <select id="year" name="year">
         <option value="1" <?php echo ($currentPreference->year == 1)? "selected": ""; ?>>1</option>
         <option value="2" <?php echo ($currentPreference->year == 2)? "selected": ""; ?>>2</option>
@@ -86,7 +86,7 @@
     </div> 
 
     <div>
-      <label for="preference"><h2>Verkiest u development of design?</h2></label>
+      <label for="preference"><h2>Do you prefer Design or Development?</h2></label>
       <select id="preference" name="preference">
         <option value="Development" <?php echo ($currentPreference->preference == "Development")? "selected": ""; ?>>Development</option>
         <option value="Design" <?php echo ($currentPreference->preference == "Design")? "selected": ""; ?>>Design</option>
