@@ -62,7 +62,7 @@
 
   <h1>Complete your profile</h1>
   <br><br>
-  <legend><h1>Characteristiques</h1></legend>
+  
   <form action="" method="post">
     <?php if(isset($error)):?>
       <div class="error"><?php echo $error; ?></div>
