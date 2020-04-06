@@ -51,7 +51,7 @@
     <h2>Preference: <?php echo $currentPreference->preference; ?></h2>
     <h2>Music genre: <?php echo $currentPreference->genre; ?></h2>
     <h2>Party animal: <?php echo ($currentPreference->likesToParty)? "Yes": "No"; ?></h2>
-    <h2>Buddy type: <?php echo ($currentPreference->lookingForBuddy)? "I'm looking for a buddy": "I'm looking for a guardian"; ?></h2>    
+    <h2>Buddy type: <?php echo ($currentPreference->lookingForBuddy)? "I'm looking for a buddy": "I would like to take care of someone"; ?></h2>    
         
 
 </div>
