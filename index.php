@@ -6,7 +6,7 @@
         $user = User::getCurrentUser($_SESSION['user']);
         $currentPreference = User::getCurrentPreference($user['id']);
     }catch(\Throwable $th){
-        header("Location: insertProfile.php");
+       // header("Location: insertProfile.php");
     }
 
 ?>
@@ -25,15 +25,21 @@
     <a href="ProfilePage.php"> Profile </a>
 
     <a href="logout.php" class="btn-logout">logout</a>
+    <div class="search-container">
+        <form action="index.php" method="POST"></form>
+        <h1>Search for a buddy by interest or name here</h1>
+        <input type="text" name="search" placeholder="name or interest">
+        <button type="submit" name="search-action">Search</button>
+    </div>
 
     <div class="side-bar">
-    <div class="same-intrest">
-        <h2>These people have the same interests</h2>
-        <h3>Maybe get in touch</h3>
+        <div class="same-intrest">
+            <h2>These people have the same interests</h2>
+            <h3>Maybe get in touch</h3>
 
-        <?php include_once(__DIR__."/buddySuggestion.php"); ?>
-    
-    </div>
+            <?php include_once(__DIR__."/buddySuggestion.php"); ?>
+        
+        </div>
     </div>
 
 </body>
