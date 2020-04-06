@@ -64,18 +64,18 @@ if(!empty($_POST)){
   <?php endif; ?>
 
 
-<h1>Vervoledig hier je profiel</h1>
+<h1>Complete your profile</h1>
 <br><br>
-<legend><h1>Kenmerken</h1></legend>
+<legend><h1>Fill in your info</h1></legend>
 <form action="" method="post">
 
   <div>
-  <label for="location"><h2>Van waar bent u?</h2></label><br>
+  <label for="location"><h2>Where do you live?</h2></label><br>
   <input type="text" id="location" name="location" value=""><br><br>
   </div>
  
 <div>
-<h2>In welk jaar zit u</h2>
+<h2>What grade are you in?</h2>
 
   <label for="year"></label>
   <select id="year" name="year">
@@ -86,7 +86,7 @@ if(!empty($_POST)){
  </div> 
 
 <div>
-<h2>Verkiest u development of design?</h2>
+<h2>Do you prefer design or development?</h2>
 
   <label for="preference"></label>
   <select id="preference" name="preference">
@@ -96,27 +96,28 @@ if(!empty($_POST)){
  </div>
 
 <div>
-<h2>Wat is je muziek genre?</h2>
+<h2>What is your favorite music genre?</h2>
 
   <label for="genre"></label>
   <select id="genre" name="genre">
     <option value="Pop">Pop</option>
     <option value="Rock">Rock</option>
+    <option value="Metal">Metal</option>
     <option value="R&B">R&B</option>
     <option value="Latin">Latin</option>
-    <option value="Electronische muziek">Electronische muziek</option>
+    <option value="Electronische muziek">Electro</option>
     <option value="Drum-'n-bass">Drum-'n-bass</option>
-    <option value="Klasiek">Klasiek</option>
+    <option value="Klasiek">Classical Music</option>
   </select>
 </div>  
 
 <div>
-<h2>Bent u een feestbeest?</h2>
+<h2>Do you enjoy going out?</h2>
 
   <label for="likesToParty"></label>
   <select id="likesToParty" name="likesToParty">
-    <option value="1">Ja</option>
-    <option value="0">Nee</option>
+    <option value="1">Yes</option>
+    <option value="0">No</option>
   </select><br><br>
 </div>
 
@@ -136,7 +137,7 @@ if(!empty($_POST)){
 
 
 <div>
-  <input class = "button" type="submit">
+  <input class = "button" type="submit" placeholder="send">
 </div>
 </form>
 
