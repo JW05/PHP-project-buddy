@@ -1,3 +1,16 @@
+<?php 
+    include_once(__DIR__."/classes/User.php");
+    session_start();
+
+    try{
+        $user = User::getCurrentUser($_SESSION['user']);
+        $currentPreference = User::getCurrentPreference($user['id']);
+    }catch(\Throwable $th){
+        include_once(__DIR__."/insertProfile.php");
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
