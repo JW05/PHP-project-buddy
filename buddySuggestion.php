@@ -103,7 +103,11 @@
   <?php 
       endforeach;
     else:
-      echo "Geen match gevonden.";
+      if(!empty($error)){
+        echo $error;
+      }else{
+        echo "No match found.";
+      }
     endif;
   ?>
 </div>

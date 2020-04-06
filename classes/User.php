@@ -365,8 +365,10 @@
                         $statement->bindValue(":likesToParty", $currentUserProfile->likesToParty);
 
                         $statement->execute();
-                        
                         $match = $statement->fetchAll(PDO::FETCH_ASSOC);
+                        if(empty($match)){
+                                throw new Exception("No suggestions found.");
+                        }
                         
                         return $match;
                 }
