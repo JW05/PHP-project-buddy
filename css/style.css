@@ -226,3 +226,33 @@ a.btn-logout
 	text-align: left;
 
 }
+
+.chatContainer{
+	width: 700px;
+}
+
+.chatMessages{
+	width: auto;
+	height: 500px;
+	overflow: auto;
+}
+
+.media{
+	background-color: white;
+	border: 1px solid lightgray;
+	border-radius: 5px;
+	padding: 1em;
+}
+
+.chatMessages .media{
+	width: 80%;
+}
+
+.media.buddy{
+	background-color: lightblue;
+}
+
+.media img{
+	width: 64px;
+	height: 64px;
+}

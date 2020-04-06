@@ -23,38 +23,6 @@
       return $score;
     }
 
-    function printReasonMatch($user, $match){
-      $reason = "This person ";
-      $i = 1;
-
-      if($user->genre == $match->genre){
-        $reason .= "also likes to listen to ".$match->genre;
-        $i++;
-      }
-
-      if($i > 1 && $user->preference == $match->preference){
-        $reason .= ", also does ".$match->preference;
-      }else if($user->preference == $match->preference){
-        $reason .= "also does ".$match->preference;
-        $i++;
-      }
-
-      if($i > 1 && $user->location == $match->location){
-        $reason .= ", also lives in ".$match->location;
-      }else if($user->location == $match->location){
-        $reason .= "also lives in ".$match->location;
-        $i++;
-      }
-
-      if($user->likesToParty == $match->likesToParty && $match->likesToParty == 1){
-        $reason .= " and also to party";
-      }else if($user->likesToParty == $match->likesToParty && $match->likesToParty == 0){
-        $reason .= " and also doesn't like to party";
-      }
-
-      return $reason;
-    }
-
     $user = User::getCurrentUser($_SESSION['user']);
     $currentPreference = User::getCurrentPreference($user['id']);
 
@@ -96,9 +64,9 @@
         <footer class="blockquote-footer">Someone famous in <cite title="Source Title"><?php echo htmlspecialchars($matchInfo->location);?></cite></footer>
       </blockquote>
     <?php endif; ?>
-    <p class="card-text"><?php echo printReasonMatch($currentPreference, $matchInfo);?></p>
+    <p class="card-text"><?php echo User::printReasonMatch($currentPreference, $matchInfo);?></p>
     <a href="#" class="btn btn-primary">Send buddy request</a>
-    <a href="chat.php" class="btn btn-primary">Open chat</a>
+    <a href="chat.php?buddyId=<?php echo htmlspecialchars($matchInfo->userId); ?>" class="btn btn-primary">Open chat</a>
   </div>
 </div>
   <?php 
