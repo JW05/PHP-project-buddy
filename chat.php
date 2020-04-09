@@ -49,6 +49,13 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+<?php
+        include_once(__DIR__."/nav.inc.php");
+    ?>
+
+
+
   <div class="chatContainer">
     <?php if(isset($error)): ?>
 				<div class="form__error">
