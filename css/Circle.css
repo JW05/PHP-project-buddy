@@ -21,7 +21,9 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0 25px;
+    margin: 0 -300px;
+    
+    padding-left: 800px;
   }
   .circle__progress {
     fill: none;
