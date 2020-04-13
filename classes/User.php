@@ -18,6 +18,12 @@
                 private $userId;
                 private $buddy;
                 private $lookingForBuddy;
+                private $sentRequest;
+                private $requestAccepted;
+
+
+
+
 
                 /**
                  * Get the value of firstname
@@ -651,6 +657,167 @@
 
                                 return $this;
                 }
+        
+
+
+
+
+
+
+
+
+
+
+
+                /**
+                 * Get the value of requestAccepted
+                 */ 
+                public function getRequestAccepted()
+                {
+                                return $this->requestAccepted;
+                }
+
+                /**
+                 * Set the value of requestAccepted
+                 *
+                 * @return  self
+                 */ 
+                public function setRequestAccepted($requestAccepted)
+                {
+                                $this->requestAccepted = $requestAccepted;
+
+                                return $this;
+                }
+
+
+
+
+
+                        //function 11 - MAURY MASSA     
+
+        public function sentRequests()
+        {
+                // connectie maken
+                $conn = Db::getConnection();
+              //gegevens van de tabel halen
+                $userId = $this->getUserId(); 
+                $buddy = $this->getBuddy();         
+               
+                $statement = $conn->prepare("insert into buddys (userId, buddyId) values (:userId, :buddyId)");
+             
+                $statement->bindValue(":buddyId", $buddy);
+                $statement->bindValue(":userId", $userId);
+
+
+                $result = $statement->execute();
+
+                return $result; 
         }
 
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public function requestAccepted($userId)
+        {
+        //connectie maken met Tabel buddys
+                        
+                $conn = Db::getConnection();
+        //update tbl met incoming requests
+
+                $statement = $conn->prepare("update buddys (requestAccepted) values (:requestAccepted where '$userId')"); 
+                $requestAccepted = $this->getRequestAccepted();               
+
+                $statement->bindValue(":requestAccepted", $requestAccepted);
+
+
+                $result = $statement->execute();
+
+                return $result;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                /**
+                 * Get the value of sentRequest
+                 */ 
+                public function getSentRequest()
+                {
+                                return $this->sentRequest;
+                }
+
+                /**
+                 * Set the value of sentRequest
+                 *
+                 * @return  self
+                 */ 
+                public function setSentRequest($sentRequest)
+                {
+                                $this->sentRequest = $sentRequest;
+
+                                return $this;
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
 ?>
