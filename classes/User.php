@@ -651,6 +651,39 @@
 
                                 return $this;
                 }
+
+                //getAllStudents
+               /* public static function getAllStudents(){
+
+                        $conn = Db::getConnection();
+                        $statement = $conn->prepare("select count(*) from users");
+                        $result = $statement->execute() ;
+                        
+        
+                        return $result;
+            
+                }*/
+                public static function getAllStudents(){
+
+                        $conn = Db::getConnection();
+                        $statement = $conn->prepare("select count(*) from users");
+                        $statement->execute() ;
+                        $AllStudents = $statement->fetch(PDO::FETCH_ASSOC);
+        
+                        return $AllStudents;
+            
+                }
+                public static function getAllBuddys(){
+
+                        $conn = Db::getConnection();
+                        $statement = $conn->prepare("select count(*) from buddys where buddyId=buddyId");
+                        $statement->execute() ;
+                        $AllBuddys = $statement->fetch(PDO::FETCH_ASSOC);
+        
+                        return $AllBuddys;
+            
+                }
+
         }
 
 ?>

@@ -74,6 +74,27 @@
         
         </div>
     </div>
+    <!-- visual geregistreerde studenten -->
+    <?php    
+           $AllStudents = User::getAllStudents();
+    ?>
+           
+          
+           <?php foreach($AllStudents as $student): ?>
+		   <h2><?php echo $student; ?></h2>
+           <?php endforeach; ?>
+
+    <!-- visual buddy overeenkomsten -->
+    <?php
+           $AllBuddys = User::getAllBuddys();
+    ?>
+           
+          
+
+           <?php foreach($AllBuddys as $Buddy): ?>
+		   <h2><?php echo $Buddy; ?></h2>
+           <?php endforeach; ?>
+
 
 </body>
 </html>
