@@ -375,7 +375,7 @@
 
                 public function getUserInfo($userId){
                         $conn = Db::getConnection();
-                        $statement = $conn->prepare("select firstName, lastName, avatar, description, location, year, userId, genre, preference, lookingForBuddy, likesToParty from users left join profile p on p.userId = users.id where users.id = '$userId'");
+                        $statement = $conn->prepare("select firstname, lastname, avatar, description, location, year, userId, genre, preference, lookingForBuddy, likesToParty from users left join profile p on p.userId = users.id where users.id = '$userId'");
 
                         $statement->execute();
 
@@ -407,7 +407,7 @@
                         }
                   
                         if($user->likesToParty == $match->likesToParty && $match->likesToParty == 1){
-                          $reason .= " and also to party";
+                          $reason .= " and also goes to party";
                         }else if($user->likesToParty == $match->likesToParty && $match->likesToParty == 0){
                           $reason .= " and also doesn't like to party";
                         }
