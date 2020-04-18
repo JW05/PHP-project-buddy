@@ -22,21 +22,6 @@
       //throw $th;
     $error = $th->getMessage();
   }
-
-  if(!empty($_POST)){
-    try{
-      if(!empty($_POST['message'])){
-        $newMessage = new Message();
-        $newMessage->setSenderId($user['id']);
-        $newMessage->setReceiverId($buddyId);
-        $newMessage->setMessage($_POST["message"]);
-        $newMessage->saveMessage();
-      }
-
-    }catch(\Throwable $th){
-      $error = $th->getMessage();
-    }
-  }
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +41,7 @@
 						
 				</div>
     <?php endif; ?>
-    <h2><?php echo htmlspecialchars($matchInfo->firstName)." ".htmlspecialchars($matchInfo->lastName);?></h2>
+    <h2><?php echo htmlspecialchars($matchInfo->firstname)." ".htmlspecialchars($matchInfo->lastname);?></h2>
     <div class="media mb-3">
         <div class="media-body">
           <?php echo User::printReasonMatch($currentPreference, $matchInfo);?>
@@ -84,15 +69,14 @@
         endif;?>
     </div>
     <div class="sendMessage">
-      <form action="" method="post">
-        <div class="input-group mb-3">
-          <input type="text" name="message" class="form-control" placeholder="Write here your message..." aria-label="sendMessage">
-          <div class="input-group-append">
-            <input type="submit" class="btn btn-primary" data-senderId="<?php echo $user['id'];?>" value="Send">
-          </div>
+      <div class="input-group mb-3">
+        <input type="text" id="chatMessage" name="message" class="form-control" placeholder="Write here your message..." aria-label="sendMessage">
+        <div class="input-group-append">
+          <input type="button" id="btnSendMessage" class="btn btn-primary" data-receiverid="<?php echo $matchInfo->userId;?>" value="Send">
         </div>
-      </form>
+      </div>
     </div>
   </div>
+  <script src="js/chat.js"></script>
 </body>
 </html>
