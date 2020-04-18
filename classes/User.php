@@ -20,6 +20,7 @@
                 private $lookingForBuddy;
                 private $sentRequest;
                 private $requestAccepted;
+                private $reasonDenial;
 
 
 
@@ -695,78 +696,44 @@
 
                         //function 11 - MAURY MASSA     
 
-        public function sentRequests()
-        {
-                // connectie maken
-                $conn = Db::getConnection();
-              //gegevens van de tabel halen
-                $userId = $this->getUserId(); 
-                $buddy = $this->getBuddy();         
-               
-                $statement = $conn->prepare("insert into buddys (userId, buddyId) values (:userId, :buddyId)");
-             
-                $statement->bindValue(":buddyId", $buddy);
-                $statement->bindValue(":userId", $userId);
 
-
-                $result = $statement->execute();
-
-                return $result; 
-        }
-
-
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        public function requestAccepted($userId)
+        public function requestAccepted($userId, $buddy)
         {
         //connectie maken met Tabel buddys
                         
                 $conn = Db::getConnection();
         //update tbl met incoming requests
 
-                $statement = $conn->prepare("update buddys (requestAccepted) values (:requestAccepted where '$userId')"); 
+                $statement = $conn->prepare("UPDATE `buddys` SET `requestAccepted`= :requestAccepted ,`activeMatch`= 1 WHERE  (requestAccepted = 0 AND buddyId = '$userId' AND activeMatch = 0 )"); 
                 $requestAccepted = $this->getRequestAccepted();               
 
                 $statement->bindValue(":requestAccepted", $requestAccepted);
+              //  $statement->bindValue(":reasonDenial", $reasonDenial);
+                
 
 
                 $result = $statement->execute();
 
                 return $result;
         }
+
+
+
+
+
+
+
+
+
+        public function showcaseMatches($userId){
+                $conn = Db::getConnection();
+                $statement = $conn->prepare("select * from buddys where (requestAccepted = 0 AND buddyId = '$userId' AND activeMatch = 0 )");
+                $statement->execute();
+    
+                $allMatches = $statement->fetchAll(PDO::FETCH_ASSOC);
+    
+                return $allMatches;
+            }
 
 
 
@@ -806,18 +773,44 @@
 
 
 
+                /**
+                 * Get the value of denyRequest
+                 */ 
+                public function getDenyRequest()
+                {
+                                return $this->denyRequest;
+                }
 
+                /**
+                 * Set the value of denyRequest
+                 *
+                 * @return  self
+                 */ 
+                public function setDenyRequest($denyRequest)
+                {
+                                $this->denyRequest = $denyRequest;
 
+                                return $this;
+                }
 
+                /**
+                 * Get the value of reasonDenial
+                 */ 
+                public function getReasonDenial()
+                {
+                                return $this->reasonDenial;
+                }
 
+                /**
+                 * Set the value of reasonDenial
+                 *
+                 * @return  self
+                 */ 
+                public function setReasonDenial($reasonDenial)
+                {
+                                $this->reasonDenial = $reasonDenial;
 
-
-
-
-
-
-
-
-
+                                return $this;
+                }
 }
 ?>

@@ -80,6 +80,16 @@
         
         </div>
     </div>
+    <div class="side-bar">
+        <div class="same-intrest">
+
+            <h2>These people have liked you</h2>
+            <?php include_once(__DIR__."/receivedRequests.php"); ?>
+
+            
+        
+        </div>
+    </div>
 
 </body>
 </html>
