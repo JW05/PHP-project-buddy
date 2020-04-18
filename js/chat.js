@@ -1,5 +1,7 @@
 let messageInput = document.querySelector("#chatMessage");
 let btnSend = document.querySelector("#btnSendMessage");
+let btnReacts = document.querySelectorAll(".btnReact");
+let reactionModal = document.querySelector("#reactions");
 
 if(messageInput.value.trim() === ""){
   btnSend.classList.add("invisible");
@@ -93,4 +95,40 @@ btnSend.addEventListener("click", () => {
   .catch(error => {
     console.error('Error:', error);
   });
+});
+
+btnReacts.forEach(btnReact => {
+  btnReact.addEventListener("click", (e)=>{
+    reactionModal.setAttribute("data-messageid", e.target.dataset.messageid);
+  });
+});
+
+reactionModal.addEventListener("click", (e)=>{
+  if(e.target.classList.contains("reaction")){
+    let reaction = e.target.innerHTML;
+    let messageId = reactionModal.dataset.messageid;
+
+    //send to database
+    let formData = new FormData();
+    formData.append('reaction', reaction);
+    formData.append('messageId', messageId);
+
+    fetch('ajax/addReaction.php', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(result => {
+      if(result.status === "success"){
+        document.querySelector(`.btnReact[data-messageid="${messageId}"]`).innerHTML = result.body;
+      }
+
+      reactionModal.removeAttribute("data-messageid");
+      $('#reactions').modal('hide');
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  }
+
 });
