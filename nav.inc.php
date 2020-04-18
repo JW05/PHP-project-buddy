@@ -36,7 +36,7 @@
               $senderInfo = User::getUserInfo($notif['senderId']);
           ?>
             <a class="dropdown-item" href="chat.php?buddyId=<?php echo htmlspecialchars($senderInfo->userId); ?>">
-              <?php echo htmlspecialchars($senderInfo->firstName)." ".htmlspecialchars($senderInfo->lastName)." has sent you a message";?>
+              <?php echo htmlspecialchars($senderInfo->firstname)." ".htmlspecialchars($senderInfo->lastname)." has sent you a message";?>
             </a>
           <?php endforeach; ?>
         </div>

@@ -356,7 +356,7 @@
                 //Madina feature7
                 public function getMatchingProfiles($currentUserProfile){
                         $conn = Db::getConnection();
-                        $statement = $conn->prepare("select * from profile where not exists (select 1 from buddys where buddys.userId = profile.userId or buddys.buddyId = profile.userId) and userId != :userId and lookingForBuddy = :lookingForBuddy and (location = :location or preference = :preference or genre = :genre or likesToParty = :likesToParty)");
+                        $statement = $conn->prepare("select * from profile where not exists (select 1 from buddys where (buddys.userId = profile.userId or buddys.buddyId = profile.userId) and requestAccepted = 1) and userId != :userId and lookingForBuddy = :lookingForBuddy and (location = :location or preference = :preference or genre = :genre or likesToParty = :likesToParty)");
                         $statement->bindValue(":userId", $currentUserProfile->userId);
                         $statement->bindValue(":lookingForBuddy", !$currentUserProfile->lookingForBuddy);
                         $statement->bindValue(":location", $currentUserProfile->location);
