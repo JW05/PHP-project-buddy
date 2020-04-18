@@ -55,7 +55,7 @@
   <div class="card col-md-4" style="width: 18rem;">
   <img src="img/avatar/<?php echo htmlspecialchars($matchInfo->avatar);?>" class="card-img-top" alt="...">
   <div class="card-body">
-    <h5 class="card-title"><?php echo htmlspecialchars($matchInfo->firstName)." ".htmlspecialchars($matchInfo->lastName);?></h5>
+    <h5 class="card-title"><?php echo htmlspecialchars($matchInfo->firstname)." ".htmlspecialchars($matchInfo->lastname);?></h5>
     <?php
       if(!empty($matchInfo->description)):
     ?>

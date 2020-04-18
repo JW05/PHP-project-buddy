@@ -1,5 +1,11 @@
 <?php 
+  include_once(__DIR__."/classes/Message.php");
   $activePage = basename($_SERVER['PHP_SELF'],'.php');
+  $user = User::getCurrentUser($_SESSION['user']);
+  //Select unreadNotifications
+  $notifsBySender = Message::getUnreadNotifBySender($user['id']);
+
+  $ammountNotif = count($notifsBySender);
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -19,8 +25,25 @@
       <li class="nav-item  <?php echo ($activePage == "profileSetting")? "active":""; ?>">
         <a class="nav-link" href="profileSetting.php">My Account</a>
       </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link <?php echo ($ammountNotif > 0)? "dropdown-toggle": "disabled"; ?>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Notification<?php echo ($ammountNotif > 0)? ": ".$ammountNotif: ""; ?>
+        </a>
+        <?php if($ammountNotif > 0): ?>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <?php 
+            foreach($notifsBySender as $notif): 
+              $senderInfo = User::getUserInfo($notif['senderId']);
+          ?>
+            <a class="dropdown-item" href="chat.php?buddyId=<?php echo htmlspecialchars($senderInfo->userId); ?>">
+              <?php echo htmlspecialchars($senderInfo->firstName)." ".htmlspecialchars($senderInfo->lastName)." has sent you a message";?>
+            </a>
+          <?php endforeach; ?>
+        </div>
+            <?php endif; ?>
+      </li>
     </ul>
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav float-right">
       <li class="nav-item">
         <a class="nav-link" href="logout.php">Logout</a>
       </li>

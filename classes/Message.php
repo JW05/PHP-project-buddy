@@ -120,6 +120,16 @@
             return $allMessages;
         }
 
+        public function getUnreadNotifBySender($userId){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("select senderId from `chat-messages` where receiverId='$userId' and readed = 0");
+            $statement->execute();
+
+            $notifMessage = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            return $notifMessage;
+        }
+
         public function saveMessage(){
             $conn = Db::getConnection();
             $statement = $conn->prepare("insert into `chat-messages` (senderId, receiverId, message) values (:senderId, :receiverId, :message)");
@@ -149,3 +159,4 @@
             return $result;
         }
     }
+?>
