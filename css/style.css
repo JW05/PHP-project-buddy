@@ -231,7 +231,11 @@ margin-bottom: -15em;
 }
 
 .chatContainer{
-	width: 700px;
+	padding: 1em;
+}
+
+a.list-group-item {
+	margin: 0;
 }
 
 .chatMessages{
