@@ -658,6 +658,7 @@
 
                                 return $this;
                 }
+<<<<<<< HEAD
         
 
 
@@ -715,6 +716,41 @@
                 $result = $statement->execute();
 
                 return $result;
+=======
+
+                //getAllStudents
+               /* public static function getAllStudents(){
+
+                        $conn = Db::getConnection();
+                        $statement = $conn->prepare("select count(*) from users");
+                        $result = $statement->execute() ;
+                        
+        
+                        return $result;
+            
+                }*/
+                public static function getAllStudents(){
+
+                        $conn = Db::getConnection();
+                        $statement = $conn->prepare("select count(*) from users");
+                        $statement->execute() ;
+                        $AllStudents = $statement->fetch(PDO::FETCH_ASSOC);
+        
+                        return $AllStudents;
+            
+                }
+                public static function getAllBuddys(){
+
+                        $conn = Db::getConnection();
+                        $statement = $conn->prepare("select count(*) from buddys where buddyId=buddyId");
+                        $statement->execute() ;
+                        $AllBuddys = $statement->fetch(PDO::FETCH_ASSOC);
+        
+                        return $AllBuddys;
+            
+                }
+
+>>>>>>> 6d8f185c888fc2bb419992830cf072678f45ea34
         }
 
 
