@@ -1,5 +1,6 @@
 <?php
 	include_once(__DIR__."/classes/User.php");
+	$allUsers = User::getAll(3);
 	 /* een account aanmaken kan met
     Email
     Dit adres moet eindigen op @student.thomasmore.be*/
@@ -95,8 +96,15 @@
 
 				<input type="password" name="password" placeholder="Password" id="password">
 
-				<input type="submit" value="Register">
+				<input type="submit" value="Register" id="btnAddUser">
 			</form>
+			<ul class="emailAlert">
+        <?php foreach($allUsers as $u): ?>
+        <p><?php echo $u('email'); ?></p>  
+	
+        <?php endforeach; ?>
+      </ul>
 		</div>
+		<script src="js/saveUser.js"></script>
 </body>
 </html>
