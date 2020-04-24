@@ -26,6 +26,9 @@
 
 
 
+                //from registerpage
+                private $emailId;
+
                 /**
                  * Get the value of firstname
                  */ 
@@ -363,7 +366,7 @@
                 //Madina feature7
                 public function getMatchingProfiles($currentUserProfile){
                         $conn = Db::getConnection();
-                        $statement = $conn->prepare("select * from profile where not exists (select 1 from buddys where buddys.userId = profile.userId or buddys.buddyId = profile.userId) and userId != :userId and lookingForBuddy = :lookingForBuddy and (location = :location or preference = :preference or genre = :genre or likesToParty = :likesToParty)");
+                        $statement = $conn->prepare("select * from profile where not exists (select 1 from buddys where (buddys.userId = profile.userId or buddys.buddyId = profile.userId) and requestAccepted = 1) and userId != :userId and lookingForBuddy = :lookingForBuddy and (location = :location or preference = :preference or genre = :genre or likesToParty = :likesToParty)");
                         $statement->bindValue(":userId", $currentUserProfile->userId);
                         $statement->bindValue(":lookingForBuddy", !$currentUserProfile->lookingForBuddy);
                         $statement->bindValue(":location", $currentUserProfile->location);
@@ -382,7 +385,7 @@
 
                 public function getUserInfo($userId){
                         $conn = Db::getConnection();
-                        $statement = $conn->prepare("select firstName, lastName, avatar, description, location, year, userId, genre, preference, lookingForBuddy, likesToParty from users left join profile p on p.userId = users.id where users.id = '$userId'");
+                        $statement = $conn->prepare("select firstname, lastname, avatar, description, location, year, userId, genre, preference, lookingForBuddy, likesToParty from users left join profile p on p.userId = users.id where users.id = '$userId'");
 
                         $statement->execute();
 
@@ -414,7 +417,7 @@
                         }
                   
                         if($user->likesToParty == $match->likesToParty && $match->likesToParty == 1){
-                          $reason .= " and also to party";
+                          $reason .= " and also goes to party";
                         }else if($user->likesToParty == $match->likesToParty && $match->likesToParty == 0){
                           $reason .= " and also doesn't like to party";
                         }

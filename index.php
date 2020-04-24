@@ -6,7 +6,7 @@
         $user = User::getCurrentUser($_SESSION['user']);
         $currentPreference = User::getCurrentPreference($user['id']);
     }catch(\Throwable $th){
-       // header("Location: insertProfile.php");
+       header("Location: insertProfile.php");
     }
 
 
@@ -92,5 +92,15 @@
         </div>
     </div>
 
+<<<<<<< HEAD
+=======
+    <span class="label">Buddys</span>
+  </li>
+</ul>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+>>>>>>> e3db3064b72cbb9c45e1088b463cb513a4094411
 </body>
 </html>

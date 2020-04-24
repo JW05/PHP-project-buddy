@@ -7,6 +7,7 @@
         private $receiverId;
         private $timeStamp;
         private $readed;
+        private $reaction;
 
         
 
@@ -112,12 +113,22 @@
 
         public function getAllMessages($userId, $buddyId){
             $conn = Db::getConnection();
-            $statement = $conn->prepare("select firstname, avatar, senderId, message, timestamp from `chat-messages` msg left join users u on u.id = msg.senderId where (senderId = '$userId' and receiverId = '$buddyId') or (senderId = '$buddyId' and receiverId = '$userId') order by timestamp asc");
+            $statement = $conn->prepare("select msg.id, firstname, avatar, senderId, message, reaction, timestamp from `chat-messages` msg left join users u on u.id = msg.senderId where (senderId = '$userId' and receiverId = '$buddyId') or (senderId = '$buddyId' and receiverId = '$userId') order by timestamp asc");
             $statement->execute();
 
             $allMessages = $statement->fetchAll(PDO::FETCH_ASSOC);
 
             return $allMessages;
+        }
+
+        public function getUnreadNotifBySender($userId){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("select senderId from `chat-messages` where receiverId='$userId' and readed = 0 group by senderId order by timestamp desc");
+            $statement->execute();
+
+            $notifMessage = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            return $notifMessage;
         }
 
         public function saveMessage(){
@@ -137,6 +148,22 @@
             return $result;
         }
 
+        public function addReaction($messageId){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("update `chat-messages` set reaction = :reaction where id = '$messageId'");
+            $reaction = $this->getReaction();
+
+            $statement->bindValue(":reaction", $reaction);
+
+            $result = $statement->execute();
+    
+            if(empty($result)){
+                throw new Exception("There has been some setting the reaction.");
+            }
+    
+            return $result;
+        }
+
         public function setOnRead($userId, $buddyId){
             $conn = Db::getConnection();
             $statement = $conn->prepare("update `chat-messages` set readed = 1 where (senderId = '$buddyId' and receiverId = '$userId') and readed = 0");
@@ -148,4 +175,25 @@
 
             return $result;
         }
+
+        /**
+         * Get the value of reaction
+         */ 
+        public function getReaction()
+        {
+                return $this->reaction;
+        }
+
+        /**
+         * Set the value of reaction
+         *
+         * @return  self
+         */ 
+        public function setReaction($reaction)
+        {
+                $this->reaction = $reaction;
+
+                return $this;
+        }
     }
+?>
