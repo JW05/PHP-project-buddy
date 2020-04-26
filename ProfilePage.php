@@ -1,8 +1,9 @@
 <?php   
         include_once(__DIR__."/classes/User.php");
         session_start();
-        
-       
+        $user = User::getCurrentUser($_SESSION['user']);
+        $userId = $user['id'];
+        $matches = User::activeMatches($user['id']);
       
       /*  $kenmerken = User::getCurrentAllKenmerk();*/
         /*var_dump($kenmerken);*/
@@ -16,6 +17,8 @@
         }
 
 
+
+        
 
 ?>
 
@@ -60,5 +63,40 @@
 
 </div>
 </fieldset>
+
+
+
+
+
+<div class="row">
+
+
+
+<?php foreach($matches as $match):
+  $senderUser = User::getUserInfo($match['userId']); ?>
+  <div class="card col-md-4" style="width: 3rem;">
+
+  <img src="img/avatar/<?php echo htmlspecialchars($senderUser->avatar);?>" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title"><?php echo htmlspecialchars($senderUser->firstName)." ".htmlspecialchars($senderUser->lastName);?></h5>
+ 
+  <form  action="" method="post">
+
+
+
+
+
+  <a href="chat.php?buddyId=<?php echo htmlspecialchars($senderUser->userId); ?>" class="btn btn-primary">Open chat</a>
+
+
+
+  
+
+
+ 
+  </div>
+</div>
+<?php endforeach;?>
+</div>
 </body>
 </html>

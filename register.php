@@ -1,6 +1,6 @@
 <?php
 	include_once(__DIR__."/classes/User.php");
-	$allUsers = User::getAll(3);
+	$allUsers = User::getAll(4);
 	 /* een account aanmaken kan met
     Email
     Dit adres moet eindigen op @student.thomasmore.be*/
@@ -37,6 +37,12 @@
 				throw new Exception("Student email required i.e. John@student.thomasmore.be");
 				$emailOk = false;
 			}
+
+
+			
+
+
+
 
 			// indien een email adres in gebruik is 
 			$email = ($_POST['email']);

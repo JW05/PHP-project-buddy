@@ -21,6 +21,7 @@
                 private $sentRequest;
                 private $requestAccepted;
                 private $reasonDenial;
+                private $vKey;
 
 
 
@@ -128,7 +129,10 @@
                         //$conn = new PDO('mysql:host=localhost;dbname=phpals', "root", "");
                         $conn = Db::getConnection();
                         //insert query
-                        $statement = $conn->prepare("insert into users (firstname, lastname, email, password) values (:firstName, :lastName, :email, :password)"); 
+                        $salt = "dsjkirdçfàçfioijf6558ffieeéddfsze";
+                        $vKey = md5($email.$salt);
+
+                        $statement = $conn->prepare("insert into users (firstname, lastname, email, password,vKey) values (:firstName, :lastName, :email, :password, $vKey)"); 
                         // sql injectie tegengaan
                         $firstName = $this->getFirstName();
                         $lastName = $this->getLastName();
@@ -140,12 +144,53 @@
                         $statement->bindValue(":lastName", $lastName);
                         $statement->bindValue(":email", $email);
                         $statement->bindValue(":password", $password);
-            
+                        
+
+                    
+
                         $result = $statement->execute();
 
+
+
+
+                        //written by maury
+                 function verifyAccount()
+                {
+                        
+                        
+                        if($statement)
+                        {
+                                $to = $email;
+                                $subject = "";
+                                $message = "<a href='http://localhost/PHPals/php-project-buddy/verify.php?vKey=$vKey'> Confirm your account</a>";
+                                $headers = "From: maury_massa@outlook.com";
+                                $headers .= "MIME-Version:1.0"."\r\n";
+                                $headers .= "Content-type:text/html;charset=UTF-8"."\r\n";
+                                
+                               
+                                
+                                mail($to,$subject,$message,$headers);
+
+
+                        }
+
+
+
+                }
                         return $result;
 
                 }
+
+
+
+
+
+
+                
+
+
+
+
 
                 public static function getEmails(){
                         //$conn = new PDO('mysql:host=localhost;dbname=phpals', "root", "");
@@ -696,10 +741,10 @@
         {
         //connectie maken met Tabel buddys
                    var_dump($buddy,$userId);     
-                $conn = Db::getConnection();
+                  $conn = Db::getConnection();
         //update tbl met incoming requests
 
-                $statement = $conn->prepare("UPDATE `buddys` SET `requestAccepted`= :requestAccepted ,`activeMatch`= 1 WHERE (requestAccepted = 0 AND buddyId = '$userId' AND activeMatch = 0 )"); 
+                $statement = $conn->prepare("UPDATE `buddys` SET `requestAccepted`= :requestAccepted ,`activeMatch`= 1 WHERE (requestAccepted = 0 AND buddyId = '$userId' AND activeMatch = 1 )"); 
                 $requestAccepted = $this->getRequestAccepted();               
 
                 $statement->bindValue(":requestAccepted", $requestAccepted);
@@ -712,17 +757,9 @@
                 return $result;
         }
 
-
-
-
-
-
-
-
-
         public function showcaseMatches($userId){
                 $conn = Db::getConnection();
-                $statement = $conn->prepare("select * from buddys where (requestAccepted = 0 AND buddyId = '$userId' AND activeMatch = 0 )");
+                $statement = $conn->prepare("select * from buddys where (requestAccepted = 0 AND buddyId = '$userId' AND activeMatch = 1 )");
                 $statement->execute();
     
                 $allMatches = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -731,8 +768,16 @@
             }
 
 
+        //function 12 - Maury Massa
+        public function activeMatches($userId){
+                $conn = Db::getConnection();
+                $statement = $conn->prepare("select * from buddys where (requestAccepted = 1 AND buddyId = '$userId' AND activeMatch = 1 )");
+                $statement->execute();
 
+                $allMatches = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+                return $allMatches;
+    }   
 
 
 
@@ -807,5 +852,12 @@
 
                                 return $this;
                 }
+
+
+
+
+
+
+
 }
 ?>
