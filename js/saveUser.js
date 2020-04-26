@@ -24,7 +24,7 @@ console.log("test");
         .then((response) => response.json())
         .then((result) => {
             let newUser = document.createElement('p');
-            newComment.innerHtml = result.body;
+            newUser.innerHtml = result.body;
             document.querySelector(".emailAlert").appendChild(newUser);
     
             console.log('Success:', result);

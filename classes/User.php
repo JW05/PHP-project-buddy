@@ -687,7 +687,7 @@
             
                 }
 
-                //user saven
+                //user regestratie saven ajax
                 public function saveUser(){
                         $conn = Db::getConnection();
                         $statement = $conn->prepare("insert into email (email, emailId, userId) values (:email, :emailId, :userId)");
