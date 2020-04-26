@@ -1,24 +1,55 @@
 <?php
 
 include_once(__DIR__."/classes/User.php");
+include_once(__DIR__."/classes/LoginAttempt.php");
+session_start();
+
+if(isset($_SESSION['startAttemptTime']) && $_SESSION['startAttemptTime'] + 1800  < time()){
+	unset($_SESSION['startAttemptTime']);
+}
+
 
 if( !empty($_POST) ){
 	$user = new User();
 	$email = $_POST['email'];
 	$password = $_POST['password'];
+	$ip = $_SERVER['REMOTE_ADDR'];
    
 	if( !empty($email) && !empty($password) ){
+		$loginAttempt = new LoginAttempt();
+		$loginAttempt->setIpAddress($ip);
+		$loginAttempt->setEmail($email);
 
-		
-		// indien ok: login checken
-		if($user->canLogin($email, $password)){
-			session_start();
-			$_SESSION['user'] = $email ;
-			//header("Location: buddyPage.php"); //JENS //For testing the buddypage 
-			header("Location: userIdExist.php"); //JENS //Instead of going to index, first we will perform a check if our profile is filled in
-		} else {
-			$error = "Sorry, we couldn't log you in.";
+		//Count amount of attempts
+		if(isset($_SESSION['startAttemptTime'])){
+			$time = $_SESSION['startAttemptTime'];
+		}else{
+			$_SESSION['startAttemptTime'] = time();
+			$time = $_SESSION['startAttemptTime'];
 		}
+
+		$nrAttemptEmail = LoginAttempt::getNumberAttemptsWithEmail($email, $ip, $time);
+		$nrAttemptIp = LoginAttempt::getNumberAttemptsWithIp($ip, $time);
+
+		// indien ok: login checken
+		//Feature 16: prevent multiple login attempt in a frame of time (limit: 5 attempts in 30 minutes in this case)
+		if($nrAttemptIp['count(ipAddress)'] >= 5 || $nrAttemptEmail['count(email)'] >= 5){
+			$error = "You tried to many times, please try again after some time";
+		}else{
+			if($user->canLogin($email, $password)){
+				$loginAttempt->setIsSucceed(1);
+				$loginAttempt->save();
+	
+				$_SESSION['user'] = $email ;
+				header("Location: index.php");
+				
+			} else {
+				$error = "Sorry, we couldn't log you in.";
+				$loginAttempt->setIsSucceed(0);
+				$loginAttempt->save();
+			}
+		}
+
 	} else {
 		// indien leeg: error generen
 		$error = "Email and password are required.";
