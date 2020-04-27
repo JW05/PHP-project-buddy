@@ -22,6 +22,7 @@
                 private $requestAccepted;
                 private $reasonDenial;
                 private $vKey;
+                private $isVerified = false;
 
 
 
@@ -129,10 +130,9 @@
                         //$conn = new PDO('mysql:host=localhost;dbname=phpals', "root", "");
                         $conn = Db::getConnection();
                         //insert query
-                        $salt = "dsjkirdçfàçfioijf6558ffieeéddfsze";
-                        $vKey = md5($email.$salt);
+                      
 
-                        $statement = $conn->prepare("insert into users (firstname, lastname, email, password,vKey) values (:firstName, :lastName, :email, :password, $vKey)"); 
+                        $statement = $conn->prepare("insert into users (firstname, lastname, email, password) values (:firstName, :lastName, :email, :password)"); 
                         // sql injectie tegengaan
                         $firstName = $this->getFirstName();
                         $lastName = $this->getLastName();
@@ -154,35 +154,41 @@
 
 
                         //written by maury
-                 function verifyAccount()
+                
+                        return $result;
+
+                }
+
+               public function verifyAccount($email,$vKey)
                 {
-                        
-                        
-                        if($statement)
-                        {
+                                
                                 $to = $email;
                                 $subject = "";
-                                $message = "<a href='http://localhost/PHPals/php-project-buddy/verify.php?vKey=$vKey'> Confirm your account</a>";
+                                $message = "We need you to confirm your existence:<a href='http://localhost/PHPals/php-project-buddy/verify.php?vKey=$vKey'> Confirm your account</a>";
                                 $headers = "From: maury_massa@outlook.com";
                                 $headers .= "MIME-Version:1.0"."\r\n";
                                 $headers .= "Content-type:text/html;charset=UTF-8"."\r\n";
                                 
                                
                                 
-                                mail($to,$subject,$message,$headers);
-
-
-                        }
-
-
-
-                }
-                        return $result;
-
+                                mail($to,$subject,$message,$headers);                
                 }
 
+             
+                public function updateVerification($email){
+                                $conn = Db::getConnection();
+                                $statement = $conn->prepare("UPDATE users SET isVerified = 1 WHERE email = $email"); 
+                                
+                        
 
+                    
 
+                                $result = $statement->execute();
+        
+                                //written by maury
+                        
+                                return $result;
+}
 
 
 
