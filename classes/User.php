@@ -668,7 +668,85 @@
                                 return false;
                         }
                 } 
- 
+
+                //getAllStudents
+
+                public static function getAllStudents(){
+
+                        $conn = Db::getConnection();
+                        $statement = $conn->prepare("select count(*) from users");
+                        $statement->execute() ;
+                        $AllStudents = $statement->fetch(PDO::FETCH_ASSOC);
+
+                        return $AllStudents;
+
+                }
+                public static function getAllBuddys(){
+
+                        $conn = Db::getConnection();
+                        $statement = $conn->prepare("select count(*) from buddys where buddyId=buddyId");
+                        $statement->execute() ;
+                        $AllBuddys = $statement->fetch(PDO::FETCH_ASSOC);
+
+                        return $AllBuddys;
+
+                }
+
+
+
+                 //user saven
+                 public function saveUser(){
+                        $conn = Db::getConnection();
+                        $statement = $conn->prepare("insert into email (email, emailId, userId) values (:email, :emailId, :userId)");
+
+                        $email =$this->getEmail();
+                        $emailId =$this->getEmailId();
+                        $userId =$this->getUserId();
+
+
+                        $statement->bindValue(":email", $email);
+                        $statement->bindValue(":emailId", $emailId);
+                        $statement->bindValue(":userId", $userId);
+
+                        $result = $statement->execute();
+                        return $result;
+                    }
+
+                public static function getAll($emailId){
+                        $conn = Db::getConnection();
+                        $statement = $conn->prepare('select * from email where emailId = :emailId');
+
+                        $statement->bindValue(":emailId", $emailId);
+
+                        $result = $statement->execute();
+                        return $statement->fetchAll(PDO::FETCH_ASSOC);
+                    }
+
+
+                /**
+                 * Get the value of emailId
+                 */ 
+                public function getEmailId()
+                {
+                                return $this->emailId;
+                }
+
+                /**
+                 * Set the value of emailId
+                 *
+                 * @return  self
+                 */ 
+                public function setEmailId($emailId)
+                {
+                                $this->emailId = $emailId;
+
+                                return $this;
+                }
+
+
+
+
+
                 // END JENS
 
 
