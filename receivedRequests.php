@@ -12,7 +12,7 @@
            $match = new User();
            $match->setRequestAccepted($_POST['requestAccepted']);
            
-           $result = $match->requestAccepted();
+           $result = $match->requestAccepted($userId,$buddy);
         
            Echo $_post['requestAccepted'];
   

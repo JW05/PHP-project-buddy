@@ -1,6 +1,6 @@
 <?php
 	include_once(__DIR__."/classes/User.php");
-	$allUsers = User::getAll(4);
+	
 	 /* een account aanmaken kan met
     Email
     Dit adres moet eindigen op @student.thomasmore.be*/
@@ -60,10 +60,13 @@
 			
 			if($accountExists == false && $emailOk == true){
 				$user->save();
-				$success = "user saved";
-				session_start();
-				 $_SESSION["user"] = $_POST["email"];
-				 header("Location: index.php");
+				$success = "Email has been send for verification";
+			//	session_start();
+			//	 $_SESSION["user"] = $_POST["email"];
+			//	 header("Location: index.php");
+			$salt = "dsjkirdçfàçfioijf6558ffieeéddfsze";
+			$vKey = md5($email.$salt);
+			$user->verifyAccount($vKey,$email);
 			}
 
 		} catch (\Throwable $th) {
@@ -104,12 +107,6 @@
 
 				<input type="submit" value="Register" id="btnAddUser">
 			</form>
-			<ul class="emailAlert">
-        <?php foreach($allUsers as $u): ?>
-        <p><?php echo $u('email'); ?></p>  
-	
-        <?php endforeach; ?>
-      </ul>
 		</div>
 		<script src="js/saveUser.js"></script>
 </body>

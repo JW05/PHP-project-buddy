@@ -2,14 +2,20 @@
 include_once(__DIR__."/classes/User.php");
 
 
+$allEmails = User::getEmails();
 
 if(isset($_GET['vKey']))
 {
-    $conn = Db::getConnection();
-    $vKey = $_GET('vKey');
-    $result = $conn->query("SELECT verified, vKey FROM users WHERE verified 0 AND ");
-
-
+ 
+    foreach($allEmails as $userEmail )
+    {
+        $salt = "dsjkirdçfàçfioijf6558ffieeéddfsze";
+        $checkKey = md5($userEmail['email'].$salt);
+        if($checkKey == $_GET['vkey'] )
+        {
+            User::updateVerification($userEmail['email']);
+        }
+    }
 }
 else
 {
