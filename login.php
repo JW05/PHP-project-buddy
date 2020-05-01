@@ -2,7 +2,7 @@
 
 include_once(__DIR__."/classes/User.php");
 include_once(__DIR__."/classes/LoginAttempt.php");
-include_once(__DIR__."/classes/verify.php");
+include_once("verify.php");
 session_start();
 
 if(isset($_SESSION['startAttemptTime']) && $_SESSION['startAttemptTime'] + 1800  < time()){

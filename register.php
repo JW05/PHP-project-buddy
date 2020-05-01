@@ -33,6 +33,9 @@
 
 			/* een account aanmaken kan met email
 			Dit adres moet eindigen op @student.thomasmore.be*/
+
+
+			
 			if(strpos($_POST["email"], $emailRequirement) == false){
 				throw new Exception("Student email required i.e. John@student.thomasmore.be");
 				$emailOk = false;
@@ -66,7 +69,11 @@
 			//	 header("Location: index.php");
 			$salt = "dsjkirdçfàçfioijf6558ffieeéddfsze";
 			$vKey = md5($email.$salt);
+
+			var_dump($email);
 			$user->verifyAccount($vKey,$email);
+
+			
 			}
 
 		} catch (\Throwable $th) {
