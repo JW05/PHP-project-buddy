@@ -216,14 +216,16 @@
                 //Written by Maury
 		public function canLogin($email, $password)
 		{
-			$conn = new mysqli("localhost", "root", "","phpals");
-			$email = $conn->real_escape_string($email);
-			$query="select * from users where email = '$email' AND isVerified = true";
-                        $result = $conn->query($query);
+			$conn = Db::getConnection();
+			
+			$statement = $conn->prepare("select * from users where email = ':email' AND isVerified = true");
+                        $statement->bindValue(":email", $email);
+
+                        $result = $statement->execute();
                         
 			if(mysqli_num_rows($result)!=0)
 			{
-				$user = $result->fetch_assoc();
+				$user = $statement->fetch(PDO::FETCH_ASSOC);
 				if(password_verify($password,$user['password'])){
 					return true;
 			
