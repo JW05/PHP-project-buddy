@@ -223,7 +223,7 @@
 
                         $result = $statement->execute();
                         
-			if(mysqli_num_rows($result)!=0)
+			if($result->fetchColumn() > 0)
 			{
 				$user = $statement->fetch(PDO::FETCH_ASSOC);
 				if(password_verify($password,$user['password'])){
