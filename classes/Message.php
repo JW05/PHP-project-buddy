@@ -113,7 +113,7 @@
 
         public function getAllMessages($userId, $buddyId){
             $conn = Db::getConnection();
-            $statement = $conn->prepare("select msg.id, firstname, avatar, senderId, message, reaction, timestamp from `chat-messages` msg left join users u on u.id = msg.senderId where (senderId = '$userId' and receiverId = '$buddyId') or (senderId = '$buddyId' and receiverId = '$userId') order by timestamp asc");
+            $statement = $conn->prepare("select msg.id, firstname, avatar, senderId, message, reaction, timestamp from `chat_messages` msg left join users u on u.id = msg.senderId where (senderId = '$userId' and receiverId = '$buddyId') or (senderId = '$buddyId' and receiverId = '$userId') order by timestamp asc");
             $statement->execute();
 
             $allMessages = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -123,7 +123,7 @@
 
         public function getUnreadNotifBySender($userId){
             $conn = Db::getConnection();
-            $statement = $conn->prepare("select senderId from `chat-messages` where receiverId='$userId' and readed = 0 group by senderId order by timestamp desc");
+            $statement = $conn->prepare("select senderId from `chat_messages` where receiverId='$userId' and readed = 0 group by senderId order by timestamp desc");
             $statement->execute();
 
             $notifMessage = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -133,7 +133,7 @@
 
         public function saveMessage(){
             $conn = Db::getConnection();
-            $statement = $conn->prepare("insert into `chat-messages` (senderId, receiverId, message) values (:senderId, :receiverId, :message)");
+            $statement = $conn->prepare("insert into `chat_messages` (senderId, receiverId, message) values (:senderId, :receiverId, :message)");
 
             $senderId = $this->getSenderId();
             $receiverId = $this->getReceiverId();
@@ -150,7 +150,7 @@
 
         public function addReaction($messageId){
             $conn = Db::getConnection();
-            $statement = $conn->prepare("update `chat-messages` set reaction = :reaction where id = '$messageId'");
+            $statement = $conn->prepare("update `chat_messages` set reaction = :reaction where id = '$messageId'");
             $reaction = $this->getReaction();
 
             $statement->bindValue(":reaction", $reaction);
@@ -166,7 +166,7 @@
 
         public function setOnRead($userId, $buddyId){
             $conn = Db::getConnection();
-            $statement = $conn->prepare("update `chat-messages` set readed = 1 where (senderId = '$buddyId' and receiverId = '$userId') and readed = 0");
+            $statement = $conn->prepare("update `chat_messages` set readed = 1 where (senderId = '$buddyId' and receiverId = '$userId') and readed = 0");
             $result = $statement->execute();
 
             if(empty($result)){
