@@ -162,10 +162,31 @@
                public function verifyAccount($email,$vKey)
                 {
                                 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        
                                 $to = $email;
                                 $subject = "Email Verification";
                                 $message = "We need you to confirm your existence:<a href='http://localhost/PHPals/php-project-buddy/verify.php?vKey=$vKey'> Confirm your account</a>";
-                                $headers = "From: maury_massa@outlook.com"."\r\n";
+                                
+                                
+                        $headers = "MIME-Version: 1.0" . "\r\n";
+                        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+                        $headers .= 'From: <mauryd1q@maurydigital.be>' . "\r\n";
+                        
                             
                    
                                

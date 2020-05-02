@@ -70,7 +70,7 @@
 			$salt = "dsjkirdçfàçfioijf6558ffieeéddfsze";
 			$vKey = md5($email.$salt);
 
-			var_dump($email);
+
 			$user->verifyAccount($vKey,$email);
 
 			
