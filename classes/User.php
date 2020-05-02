@@ -162,37 +162,18 @@
                public function verifyAccount($email,$vKey)
                 {
                                 
-                               // $to = $email;
-                                //$subject = "Email Verification";
-                                //$message = "We need you to confirm your existence:<a href='http://localhost/PHPals/php-project-buddy/verify.php?vKey=$vKey'> Confirm your account</a>";
-                                //$headers = "From: maury_massa@outlook.com"."\r\n";
-                              //  $headers .= "MIME-Version: 1.0"."\r\n";
-                                //$headers .= "Content-type:text/html;charset=UTF-8"."\r\n";
-                                
+                                $to = $email;
+                                $subject = "Email Verification";
+                                $message = "We need you to confirm your existence:<a href='http://localhost/PHPals/php-project-buddy/verify.php?vKey=$vKey'> Confirm your account</a>";
+                                $headers = "From: maury_massa@outlook.com"."\r\n";
+                            
+                   
                                
-                                //mail($to,$subject,$message,$headers);   
-                                // Settings
+                                mail($to,$subject,$message,$headers);   
+                        
+
+
                                 
-                                $email = new PHPMailer();
-                                $email->IsSMTP();
-                                $email->CharSet = 'UTF-8';
-
-                                $email->Host       = "smtp.sendgrid.net"; // SMTP server example
-                                $email->SMTPDebug  = 0;                     // enables SMTP debug information (for testing)
-                                $email->SMTPAuth   = true;                  // enable SMTP authentication
-                                $email->Port       = 25;                    // set the SMTP port for the GMAIL server
-                                $email->Username   = "apikey"; // SMTP account username example
-                                $email->Password   = "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";        // SMTP account password example
-
-                                // Content
-                                $email->isHTML(true);                                  // Set email format to HTML
-                                $email->Subject = 'Email Verification';
-                                $email->Body    = "We need you to confirm your existence:<a href='http://localhost/PHPals/php-project-buddy/verify.php?vKey=$vKey'> Confirm your account</a>";
-                                
-                                
-
-
-                                $email->send();
                                 
                                 header("login.php");         
                 }
@@ -237,8 +218,9 @@
 		{
 			$conn = new mysqli("localhost", "root", "","phpals");
 			$email = $conn->real_escape_string($email);
-			$query="select * from users where email = '$email'";
-			$result = $conn->query($query);
+			$query="select * from users where email = '$email' AND isVerified = true";
+                        $result = $conn->query($query);
+                        
 			if(mysqli_num_rows($result)!=0)
 			{
 				$user = $result->fetch_assoc();
