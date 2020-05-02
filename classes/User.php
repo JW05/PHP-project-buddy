@@ -218,10 +218,10 @@
 		{
 			$conn = Db::getConnection();
 			
-			$statement = $conn->prepare("select * from users where email = ':email' AND isVerified = true");
+			$statement = $conn->prepare("select * from users where email = :email AND isVerified = true");
                         $statement->bindValue(":email", $email);
 
-                        $result = $statement->execute();
+                        $statement->execute();
                         
 			if($statement->rowCount() > 0)
 			{
