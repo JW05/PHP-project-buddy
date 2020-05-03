@@ -13,12 +13,101 @@ body {
 	align-items: center;
 	flex-direction: column;
 	font-family: 'Montserrat', sans-serif;
-  	margin: 0;
+	margin: 0;
+	overflow-x: hidden;
 }
+.navbar
+{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	background-color: white;
+	z-index: 9999;
+	width: 100vw;
+	box-shadow: 0 5px 5px -6px black;
+}
+.navbar div ul li:active
+{
+	color: red;
+}
+
+
+
+.navbar .mr-auto
+{
+	position: absolute;
+	left: 60%;
+	
+}
+
+
+ul li #white
+{
+	color: white;
+	font-weight: bold;
+}
+
+.search-container
+{
+	position: fixed;
+	top: 37px;
+	left: 150px;
+	z-index: 100001;
+	color: white;
+	margin-left: 0px;
+	
+}
+
+
+
+.search-container input
+{
+	z-index: 1000001;
+	border-radius: 25px;
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	-ms-border-radius: 25px;
+	-o-border-radius: 25px;
+	margin-right: 350px;
+	background-color: rgb(230, 230, 230);
+	color: white;
+}
+.search-container button
+{
+	display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.float-right
+{
+	float: right;
+}
+.float-left
+{
+	float: left;
+}
+nav img
+{
+	float: left;
+} 
+
+
 
 h1 {
 	font-weight: bold;
 	margin: 0;
+	margin-top: 200px;
 }
 
 h2 {
@@ -33,6 +122,23 @@ p {
 	margin: 20px 0 30px;
 }
 
+
+
+.logout a
+{
+	margin-right: 30px;
+	background-color: #FF4744;
+	text-align: center;
+	width: 200px;
+	border-radius: 25px;
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	-ms-border-radius: 25px;
+	-o-border-radius: 25px;
+	position: absolute;
+	right: 20px;
+	top: 36px;
+}
 span {
 	font-size: 12px;
 }
@@ -174,26 +280,40 @@ input {
 }
 /* END OF LOGIN PAGE MARKUP BRYAN */
 
-
-a.btn-logout
+.display-container
 {
-    background-color: black;
-    color: white;
-    font-weight: bold;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 100px;
-    padding-right: 100px;
-    border: none;
-    border-radius: 20px 10px;
-    -webkit-border-radius: 20px 10px;
-    -moz-border-radius: 20px 10px;
-    -ms-border-radius: 20px 10px;
-    -o-border-radius: 20px 10px;
+	z-index: 100001;
 }
+
+.circle
+{
+	margin-top: 250px;
+	margin-bottom: 250px;
+}
+.display-container .display-container .circle
+{
+	padding-left: 25%;
+}
+section
+{
+	width: 100vw;
+}
+.hero-img
+{
+	background-size: 100%;
+	background-image: url(../img/background-header.jpg);
+
+	height: auto;
+	background-repeat: no-repeat;
+	display: block;
+	margin: 0 auto;
+
+}
+
 .settingsNav
 {
 margin-bottom: -15em;
+
 }
 
 .form--settings{

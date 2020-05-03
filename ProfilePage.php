@@ -26,12 +26,11 @@
 <html>
 <head>
     <title>ProfilePage</title>
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <style>
  
-        body{padding: 0;margin: 0; font-family: 'Roboto Condensed';color:#FF6161;}
-        h1{font-size: 45px;}
-        h2{font-size: 25px;}
+   
         #Kenmerken{ background-color: #a4fcaf;padding: 60px 25%;}
         
     </style>
