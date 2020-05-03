@@ -1,5 +1,6 @@
 <?php
         include_once(__DIR__."/Db.php");
+     
 
         class User {
 		private $email;
@@ -162,30 +163,14 @@
                public function verifyAccount($email,$vKey)
                 {
                                 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        
+                
                                 $to = $email;
+                                $from = "<mauryd1q@maurydigital.be>";
                                 $subject = "Email Verification";
                                 $message = "We need you to confirm your existence:<a href='http://localhost/PHPals/php-project-buddy/verify.php?vKey=$vKey'> Confirm your account</a>";
-                                
-                                
-                        $headers = "MIME-Version: 1.0" . "\r\n";
-                        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-
-                        $headers .= 'From: <mauryd1q@maurydigital.be>' . "\r\n";
+                                $headers = 'From: <mauryd1q@maurydigital.be>' . "\r\n";
+                                $headers .= "MIME-Version: 1.0" . "\r\n";
+                                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";                       
                         
                             
                    
@@ -239,7 +224,7 @@
 		{
 			$conn = Db::getConnection();
 			
-			$statement = $conn->prepare("select * from users where email = :email AND isVerified = true");
+			$statement = $conn->prepare("select * from users where email = :email AND isVerified = false");
                         $statement->bindValue(":email", $email);
 
                         $statement->execute();
