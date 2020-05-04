@@ -26,10 +26,6 @@ body {
 	width: 100vw;
 	box-shadow: 0 5px 5px -6px black;
 }
-.navbar div ul li:active
-{
-	color: red;
-}
 
 
 
@@ -38,6 +34,10 @@ body {
 	position: absolute;
 	left: 60%;
 	
+}
+.navbar .mr-auto:active
+{
+	color: red;	
 }
 
 
@@ -283,17 +283,9 @@ input {
 .display-container
 {
 	z-index: 100001;
+	
 }
 
-.circle
-{
-	margin-top: 250px;
-	margin-bottom: 250px;
-}
-.display-container .display-container .circle
-{
-	padding-left: 25%;
-}
 section
 {
 	width: 100vw;

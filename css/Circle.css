@@ -16,9 +16,11 @@
     flex-direction: column;
     align-items: center;
     margin: 0 -300px;
-    
+
     padding-left: 800px;
   }
+
+
   .circle__progress {
     fill: none;
     stroke-width: 3;
@@ -51,6 +53,7 @@
     font-size: 14px;
     text-transform: uppercase;
     margin-top: 15px;
+    color: white;
   }
   .circle__progress--fill {
     --initialStroke: 0;
@@ -63,6 +66,22 @@
   .circle__svg {
     transform: rotate(-90deg);
   }
-  
+  .circle
+  {
+    margin-top: 400px;
+    margin-bottom: 250px;
     
+  }
+  .circle span
+  {
+    color: white;
+  }
+  .display-container span
+  {
+    margin-top: -370px;
+    padding-bottom: 450px;
+    font-size: 1.8em;
+    font-weight: bold;
+  }
+
         

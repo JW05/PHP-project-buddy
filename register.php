@@ -67,11 +67,11 @@
 			//	session_start();
 			//	 $_SESSION["user"] = $_POST["email"];
 			//	 header("Location: index.php");
-			$salt = "dsjkirdçfàçfioijf6558ffieeéddfsze";
-			$vKey = md5($email.$salt);
+			//$salt = "dsjkirdçfàçfioijf6558ffieeéddfsze";
+			//$vKey = md5($email.$salt);
 
 
-			$user->verifyAccount($vKey,$email);
+			//$user->verifyAccount($vKey,$email);
 
 			
 			}
@@ -115,6 +115,9 @@
 				<input type="submit" value="Register" id="btnAddUser">
 			</form>
 		</div>
+
+
+		<a href="login.php">back to log in</a>
 		<script src="js/saveUser.js"></script>
 </body>
 </html>

@@ -76,7 +76,7 @@
     ?>
 
 
-
+<div class="middle">
 <ul class="display-container">
  <li class="note-display" data-note="7.50">
     <div class="circle">
@@ -115,9 +115,10 @@
       </div>
     </div>
 
-    <span class="label">Buddys</span>
+    <span class="label">Buddies</span>
   </li>
 </ul>
+</div>
 </div>
     </section>
 
