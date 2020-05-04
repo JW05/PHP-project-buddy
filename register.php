@@ -1,6 +1,6 @@
 <?php
 	include_once(__DIR__."/classes/User.php");
-	
+	$allUsers = User::getAll(3);
 	 /* een account aanmaken kan met
     Email
     Dit adres moet eindigen op @student.thomasmore.be*/

@@ -7,17 +7,14 @@
      
 
   if(!empty($_POST)){
-    var_dump($_POST);
+    
      
     try {
       $buddy = $_POST['buddyId'];
            $match = new User();
            $match->setRequestAccepted($_POST['requestAccepted']);
-           
+           $match->setReasonDenial($_POST['reasonDenial']);
            $match->requestAccepted($userId,$buddy);
-        
-           Echo $_post['requestAccepted'];
-  
     } catch (\Throwable $th) {
       $error =$th->getMessage();
     }
@@ -29,7 +26,7 @@
 
 
 <div class="row">
-<input type="hidden" id="buddyId" name="buddyId" value="<?php echo $request['userId']; ?>">
+
 <?php foreach($receivedRequest as $request):
   $senderUser = User::getUserInfo($request['userId']); ?>
   <div class="card col-md-4" style="width: 3rem;">
@@ -38,13 +35,10 @@
   <div class="card-body">
     <h5 class="card-title"><?php echo htmlspecialchars($senderUser->firstName)." ".htmlspecialchars($senderUser->lastName);?></h5>
  
-  <form  action="" method="POST">
-
+  <form  action="" method="post">
+  <input type="hidden" id="buddyId" name="buddyId" value="<?php echo $request['userId']; ?>">
 
  <h6>Accept request</h6>
-
-
-
  <label for="acceptRequest"></label>
   <select id="acceptRequest" name="requestAccepted">
     <option value="1">Accept match</option>
@@ -54,7 +48,7 @@
 
 
   <textarea name="reasonDenial" id="" cols="30" rows="2" placeholder="Reason for dislike"></textarea>
- <input class = "button" type="submit" placeholder="send">
+  <input class = "button" type="submit" placeholder="send">
  </form>
   
 
