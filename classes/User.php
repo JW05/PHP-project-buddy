@@ -852,21 +852,23 @@
                         //function 11 - MAURY MASSA     
 
 //
-        public function requestAccepted($userId)
+        public function requestAccepted()
         {
         //connectie maken met Tabel buddys
          
                   $conn = Db::getConnection();
         //update tbl met incoming requests
                 //query upate uitvoeren in de tabel buddy
-                $statement = $conn->prepare("UPDATE `buddys` SET `requestAccepted`= :requestAccepted ,`reasonDenied`= :reasonDenial  ,`activeMatch`= :requestAccepted WHERE (requestAccepted = 0 AND buddyId = '$userId' AND activeMatch = 1 )"); 
+                $statement = $conn->prepare("update buddys SET requestAccepted = :requestAccepted, reasonDenied = :reasonDenial, activeMatch = :requestAccepted where (userId = :buddyId AND buddyId = :userId) AND activeMatch = 1"); 
                 $requestAccepted = $this->getRequestAccepted();               
-                $reasonDenial = $this->getReasonDenial();  
+                $reasonDenial = $this->getReasonDenial();
+                $buddyId = $this->getBuddy();
+                $userId = $this->getUserId();  
                 //waardes toekennen
                 $statement->bindValue(":requestAccepted", $requestAccepted);
                 $statement->bindValue(":reasonDenial", $reasonDenial);
-                
-
+                $statement->bindValue(":buddyId", $buddyId);
+                $statement->bindValue(":userId", $userId);
 
                 $result = $statement->execute();
 

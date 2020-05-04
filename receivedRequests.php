@@ -10,11 +10,13 @@
     
      
     try {
-      $buddy = $_POST['buddyId'];
+          $buddy = $_POST['buddyId'];
            $match = new User();
            $match->setRequestAccepted($_POST['requestAccepted']);
            $match->setReasonDenial($_POST['reasonDenial']);
-           $match->requestAccepted($userId,$buddy);
+           $match->setBuddy($buddy);
+           $match->setUserId($userId);
+           $match->requestAccepted();
     } catch (\Throwable $th) {
       $error =$th->getMessage();
     }
@@ -38,16 +40,15 @@
   <form  action="" method="post">
   <input type="hidden" id="buddyId" name="buddyId" value="<?php echo $request['userId']; ?>">
 
- <h6>Accept request</h6>
- <label for="acceptRequest"></label>
+ <label for="acceptRequest">Accept request</label>
   <select id="acceptRequest" name="requestAccepted">
     <option value="1">Accept match</option>
     <option value="0">Decline match</option>
   </select><br>
 
 
-
-  <textarea name="reasonDenial" id="" cols="30" rows="2" placeholder="Reason for dislike"></textarea>
+  <label for="reasonDenial">Reason</label>
+  <input type="text" id="reasonDenial" name="reasonDenial">
   <input class = "button" type="submit" placeholder="send">
  </form>
   
