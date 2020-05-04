@@ -48,7 +48,7 @@
 
 
   <label for="reasonDenial">Reason</label>
-  <input type="text" id="reasonDenial" name="reasonDenial">
+  <textarea name="reasonDenial" id="reasonDenial" cols="30" rows="2" placeholder="Reason for dislike"></textarea>
   <input class = "button" type="submit" placeholder="send">
  </form>
   
