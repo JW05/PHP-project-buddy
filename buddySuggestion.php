@@ -1,5 +1,6 @@
 <?php
   include_once(__DIR__."/classes/User.php");
+  include_once(__DIR__."/classes/Buddy.php");
 
   try{
     function calcMatch($user, $match){
@@ -65,7 +66,7 @@
       </blockquote>
     <?php endif; ?>
     <p class="card-text"><?php echo User::printReasonMatch($currentPreference, $matchInfo);?></p>
-    <a href="#" class="btn btn-primary">Send buddy request</a>
+    <a href="#" class="sendRequest btn <?php echo (Buddy::buddyExist($user['id'], htmlspecialchars($matchInfo->userId)))?"btn-danger":"btn-primary";?>" data-buddyid="<?php echo htmlspecialchars($matchInfo->userId); ?>"> <?php echo (Buddy::buddyExist($user['id'], htmlspecialchars($matchInfo->userId)))?"Cancel request":"Send request";?>  </a>
     <a href="chat.php?buddyId=<?php echo htmlspecialchars($matchInfo->userId); ?>" class="btn btn-primary">Open chat</a>
   </div>
 </div>

@@ -156,6 +156,6 @@
     </div>
       <!-- including geregistreerde studenten + buddy overeenkomsten-->
     
-
+    <script src="js/saveBuddy.js"></script>
 </body>
 </html>

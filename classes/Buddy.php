@@ -110,7 +110,7 @@
 
     public function getAllBuddies($userId){
       $conn = Db::getConnection();
-      $statement = $conn->prepare("select * from buddys where userId = '$userId' or buddyId = '$userId'");
+      $statement = $conn->prepare("select * from buddys where userId = '$userId' or buddyId = '$userId' and activeMatch=1");
       $statement->execute();
       
       $buddys = $statement->fetchAll(PDO::FETCH_OBJ);
@@ -119,7 +119,7 @@
 
     public function buddyExist($userId, $buddyId){
       $conn = Db::getConnection();
-      $result = $conn->query("select userId, buddyId from buddys where (userId = '$userId' and buddyId='$buddyId') or (userId = '$buddyId' and buddyId='$userId')");
+      $result = $conn->query("select userId, buddyId from buddys where activeMatch=1 and ((userId = '$userId' and buddyId='$buddyId') or (userId = '$buddyId' and buddyId='$userId'))");
       if($result->fetchColumn() > 0){
         return true;
       }else{
@@ -127,9 +127,20 @@
       }
     }
 
+    public function cancelRequest($userId, $buddyId){
+      $conn = Db::getConnection();
+      $statement = $conn->prepare("update buddys set activeMatch = 0 where userId = :userId and buddyId = :buddyId");
+      
+      $statement->bindValue(":userId", $userId);
+      $statement->bindValue(":buddyId", $buddyId);
+      
+      $result = $statement->execute();
+      return $result;
+    }
+
     public function save(){
       $conn = Db::getConnection();
-      $statement = $conn->prepare("insert into buddys (userId, buddyId) values (:userId, :buddyId)");
+      $statement = $conn->prepare("insert into buddys (userId, buddyId, activeMatch) values (:userId, :buddyId, 1)");
       $userId = $this->getUserId();
       $buddyId = $this->getBuddyId();
 
