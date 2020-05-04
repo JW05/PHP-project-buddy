@@ -859,7 +859,7 @@
                   $conn = Db::getConnection();
         //update tbl met incoming requests
                 //query upate uitvoeren in de tabel buddy
-                $statement = $conn->prepare("UPDATE `buddys` SET `requestAccepted`= :requestAccepted,`reasonDenied`= :reasonDenial  ,`activeMatch`= 1 WHERE (requestAccepted = 0 AND buddyId = '$userId' AND activeMatch = 1 )"); 
+                $statement = $conn->prepare("UPDATE `buddys` SET `requestAccepted`= :requestAccepted ,`reasonDenied`= :reasonDenial  ,`activeMatch`= :requestAccepted WHERE (requestAccepted = 0 AND buddyId = '$userId' AND activeMatch = 1 )"); 
                 $requestAccepted = $this->getRequestAccepted();               
                 $reasonDenial = $this->getReasonDenial();  
                 //waardes toekennen

@@ -33,7 +33,7 @@
 
   <img src="img/avatar/<?php echo htmlspecialchars($senderUser->avatar);?>" class="card-img-top" alt="...">
   <div class="card-body">
-    <h5 class="card-title"><?php echo htmlspecialchars($senderUser->firstName)." ".htmlspecialchars($senderUser->lastName);?></h5>
+    <h5 class="card-title"><?php echo htmlspecialchars($senderUser->firstname)." ".htmlspecialchars($senderUser->lastname);?></h5>
  
   <form  action="" method="post">
   <input type="hidden" id="buddyId" name="buddyId" value="<?php echo $request['userId']; ?>">
