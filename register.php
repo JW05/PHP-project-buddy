@@ -97,7 +97,7 @@
 
 
 
-	<img src="img/Untitled-1.png" width="250px" height="auto" alt="" class="logo">
+	<a href="login.php"><img src="img/Untitled-1.png" width="250px" height="auto" alt="" class="logo"></a>
 			<?php if(isset($error)):?>
 				<div class="error" style="color: red;"><?php echo $error;?></div>
 			<?php endif;?>
