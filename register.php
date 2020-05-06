@@ -63,16 +63,17 @@
 			
 			if($accountExists == false && $emailOk == true){
 				$user->save();
+
 				$success = "Email has been send for verification";
-			//	session_start();
-			//	 $_SESSION["user"] = $_POST["email"];
-			//	 header("Location: index.php");
-			//$salt = "dsjkirdçfàçfioijf6558ffieeéddfsze";
-			//$vKey = md5($email.$salt);
+			session_start();
+			$_SESSION["user"] = $_POST["email"];
+			
+			$salt = "dsjkirdçfàçfioijf6558ffieeéddfsze";
+			$vKey = md5($email.$salt);
 
 
-			//$user->verifyAccount($vKey,$email);
-
+		//	$user->verifyAccount($vKey,$email);
+			header("Location: login.php");	
 			
 			}
 
@@ -87,12 +88,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/register.css">
+    <title>Register PHPals</title>
 </head>
 <body>
-    <div class="register">
+    <div class="register-wrap">
 
+
+
+	<img src="img/Untitled-1.png" width="250px" height="auto" alt="" class="logo">
 			<?php if(isset($error)):?>
 				<div class="error" style="color: red;"><?php echo $error;?></div>
 			<?php endif;?>
@@ -100,7 +105,7 @@
 				<div class="error" style="color: green;"><?php echo $success;?></div>
 			<?php endif;?>
 
-			<h1>Register</h1>
+
 			<form action="" method="post">
                 <div class="error"></div>
 
@@ -112,12 +117,14 @@
 
 				<input type="password" name="password" placeholder="Password" id="password">
 
+				
+
 				<input type="submit" value="Register" id="btnAddUser">
 			</form>
 		</div>
 
 
-		<a href="login.php">back to log in</a>
+		
 		<script src="js/saveUser.js"></script>
 </body>
 </html>

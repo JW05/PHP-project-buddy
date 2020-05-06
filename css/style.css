@@ -27,7 +27,10 @@ body {
 	box-shadow: 0 5px 5px -6px black;
 }
 
-
+.chatContainer
+{
+	margin-top: 20g0px;
+}
 
 .navbar .mr-auto
 {
@@ -376,3 +379,4 @@ a.list-group-item {
 	width: 64px;
 	height: 64px;
 }
+
