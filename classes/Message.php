@@ -145,6 +145,22 @@
             return $allMessages;
         }
 
+        public function getMessageId(){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("select id from `chat_messages` where senderId = :senderId and receiverId = :receiverId order by timestamp desc limit 1");
+            
+            $senderId = $this->getSenderId();
+            $receiverId = $this->getReceiverId();
+            $statement->bindValue(":senderId", $senderId);
+            $statement->bindValue(":receiverId", $receiverId);
+
+            $statement->execute();
+
+            $selectedMessage = $statement->fetch(PDO::FETCH_ASSOC);
+
+            return $selectedMessage['id'];
+        }
+
         public static function getUnreadNotifBySender($userId){
             $conn = Db::getConnection();
             $statement = $conn->prepare("select senderId from `chat_messages` where receiverId = :userId and readed = 0 group by senderId order by timestamp desc");
@@ -178,7 +194,7 @@
             $statement = $conn->prepare("update `chat_messages` set reaction = :reaction where id = :messageId");
             $reaction = $this->getReaction();
 
-            $statement->bindValue(":senderId", $messageId);
+            $statement->bindValue(":messageId", $messageId);
             $statement->bindValue(":reaction", $reaction);
 
             $result = $statement->execute();

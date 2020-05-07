@@ -13,11 +13,14 @@
         $newMessage->setMessage($_POST["message"]);
         $newMessage->saveMessage();
 
+        $newMessageId = Message::getMessageId($user['id'], $_POST['receiverId']); 
+
         $response = [
           'status' => 'success',
           'body' => [
             'message' => htmlspecialchars($newMessage->getMessage()),
-            'timestamp' => date("Y-m-d H:i:s", time())
+            'timestamp' => date("Y-m-d H:i:s", time()),
+            'id' => $newMessageId
           ],
           'message' => 'Message send'
         ];
@@ -32,9 +35,6 @@
         header('Content-Type: application/json');
         echo json_encode($response);
       }
-
-      
-
     
   }
 

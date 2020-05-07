@@ -117,13 +117,15 @@
       return $buddys;
     }
 
-    public function buddyExist($userId, $buddyId){
+    public static function buddyExist($userId, $buddyId){
       $conn = Db::getConnection();
-      $result = $conn->query("select userId, buddyId from buddys where activeMatch=1 and ((userId = :userId and buddyId = :buddyId) or (userId = :buddyId and buddyId = :userId))");
-      $result->bindValue(":userId", $userId);
-      $result->bindValue(":buddyId", $buddyId);
+      $statement = $conn->prepare("select userId, buddyId from buddys where activeMatch=1 and ((userId = :userId and buddyId = :buddyId) or (userId = :buddyId and buddyId = :userId))");
+      $statement->bindValue(":userId", $userId);
+      $statement->bindValue(":buddyId", $buddyId);
 
-      if($result->fetchColumn() > 0){
+      $statement->execute();
+
+      if($statement->rowCount() > 0){
         return true;
       }else{
         return false;

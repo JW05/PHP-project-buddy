@@ -4,12 +4,16 @@
   include_once(__DIR__."/classes/Buddy.php");
   session_start();
 
+  if(!isset($_SESSION['user'])){
+    header("Location: login.php");
+  }
+
   try{
     $user = User::getCurrentUser($_SESSION['user']);
     $currentPreference = User::getCurrentPreference($user['id']);
 
     if(isset($_GET['buddyId']) && !empty($_GET['buddyId'])){
-      $buddyId = htmlspecialchars($_GET['buddyId']);
+      $buddyId = $_GET['buddyId'];
     }else{
       header("Location: index.php");
     }

@@ -605,13 +605,14 @@
                         return $match;
                 }
 
-                public function getUserInfo($userId){
+                public static function getUserInfo($userId){
                         $conn = Db::getConnection();
                         $statement = $conn->prepare("select firstname, lastname, avatar, description, location, year, userId, genre, preference, lookingForBuddy, likesToParty from users left join profile p on p.userId = users.id where users.id = :userId");
                         $statement->bindValue(":userId", $userId);
                         $statement->execute();
 
                         $user = $statement->fetch(PDO::FETCH_OBJ);
+                        
                         return $user;
                 }
 
