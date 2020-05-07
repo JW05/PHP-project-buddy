@@ -109,7 +109,8 @@
 
     public function getAllBuddies($userId){
       $conn = Db::getConnection();
-      $statement = $conn->prepare("select * from buddys where userId = '$userId' or buddyId = '$userId' and activeMatch=1");
+      $statement = $conn->prepare("select * from buddys where userId = :userId or buddyId = :userId and activeMatch=1");
+      $statement->bindValue(":userId", $userId);
       $statement->execute();
       
       $buddys = $statement->fetchAll(PDO::FETCH_OBJ);
@@ -118,7 +119,10 @@
 
     public function buddyExist($userId, $buddyId){
       $conn = Db::getConnection();
-      $result = $conn->query("select userId, buddyId from buddys where activeMatch=1 and ((userId = '$userId' and buddyId='$buddyId') or (userId = '$buddyId' and buddyId='$userId'))");
+      $result = $conn->query("select userId, buddyId from buddys where activeMatch=1 and ((userId = :userId and buddyId = :buddyId) or (userId = :buddyId and buddyId = :userId))");
+      $result->bindValue(":userId", $userId);
+      $result->bindValue(":buddyId", $buddyId);
+
       if($result->fetchColumn() > 0){
         return true;
       }else{
