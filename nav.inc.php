@@ -25,6 +25,10 @@
       <li class="nav-item  <?php echo ($activePage == "profileSetting")? "active":""; ?>">
         <a class="nav-link" href="profileSetting.php">My Account</a>
       </li>
+
+      <li class="nav-item  <?php echo ($activePage == "FAQ")? "active":""; ?>">
+        <a class="nav-link" href="FAQ.php">FAQ</a>
+      </li>
       <li class="nav-item dropdown">
         <a class="nav-link <?php echo ($ammountNotif > 0)? "dropdown-toggle": "disabled"; ?>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Notification<?php echo ($ammountNotif > 0)? ": ".$ammountNotif: ""; ?>
