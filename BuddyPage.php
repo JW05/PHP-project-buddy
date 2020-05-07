@@ -41,12 +41,7 @@ include_once(__DIR__."/classes/User.php");
 	
 	
   }
-  .buddy-left-container{
-	
-  }
-  .buddy-right-container{
-	
-  }
+
   
   }
   </style>

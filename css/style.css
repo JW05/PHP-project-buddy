@@ -16,6 +16,21 @@ body {
 	margin: 0;
 	overflow-x: hidden;
 }
+body::-webkit-scrollbar {
+	width: 12px;               /* width of the entire scrollbar */
+  }
+
+  body::-webkit-scrollbar-thumb {
+	background-color: #F7893E;
+}
+.chatMessages::-webkit-scrollbar {
+	width: 12px;               /* width of the entire scrollbar */
+  }
+
+  .chatMessages::-webkit-scrollbar-thumb {
+	background-color: #F7893E;
+}
+
 .navbar
 {
 	position: fixed;
@@ -29,7 +44,7 @@ body {
 
 .chatContainer
 {
-	margin-top: 20g0px;
+	padding-top: 200px;
 }
 
 .navbar .mr-auto
@@ -295,9 +310,9 @@ section
 }
 .hero-img
 {
+	
+	background:-webkit-linear-gradient(rgba(255,255,255,0.5),rgba(255,255,255,0.5) ),url(../img/background-header.jpg);
 	background-size: 100%;
-	background-image: url(../img/background-header.jpg);
-
 	height: auto;
 	background-repeat: no-repeat;
 	display: block;
@@ -346,9 +361,6 @@ margin-bottom: -15em;
 
 }
 
-.chatContainer{
-	padding: 1em;
-}
 
 a.list-group-item {
 	margin: 0;
@@ -379,4 +391,8 @@ a.list-group-item {
 	width: 64px;
 	height: 64px;
 }
-
+.faq-container
+{
+	margin-top: 150px;
+	text-align: justify;
+}
