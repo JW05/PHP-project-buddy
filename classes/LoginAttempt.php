@@ -8,8 +8,6 @@
       private $timestamp;
       private $isSucceed;
 
-    
-
       /**
        * Get the value of ipAddress
        */
@@ -113,8 +111,10 @@
           $endTime = date("Y-m-d H:i:s", $startTime + 1800);
           $startTime = date("Y-m-d H:i:s", $startTime);
           $conn = Db::getConnection();
-          $statement = $conn->prepare("select count(ipAddress) from login_attempts where ipAddress = '$ip' and isSucceed = 0 and timestamp between '$startTime' and '$endTime'");
-
+          $statement = $conn->prepare("select count(ipAddress) from login_attempts where ipAddress = :ip and isSucceed = 0 and timestamp between :startTime and :endTime");
+          $statement->bindValue(":ip", $ip);
+          $statement->bindValue(":startTime", $startTime);
+          $statement->bindValue(":endTime", $endTime);
 
           $statement->execute();
 
@@ -127,7 +127,12 @@
           $endTime = date("Y-m-d H:i:s", $startTime + 1800);
           $startTime = date("Y-m-d H:i:s", $startTime);
           $conn = Db::getConnection();
-          $statement = $conn->prepare("select count(email) from login_attempts where email = '$email' and isSucceed = 0 and ipAddress = '$ip' and timestamp between '$startTime' and '$endTime'");
+          $statement = $conn->prepare("select count(email) from login_attempts where email = :email and isSucceed = 0 and ipAddress = :ip and timestamp between :startTime and :endTime");
+          $statement->bindValue(":ip", $ip);
+          $statement->bindValue(":email", $email);
+          $statement->bindValue(":startTime", $startTime);
+          $statement->bindValue(":endTime", $endTime);
+
           $statement->execute();
 
           $attempts = $statement->fetch(PDO::FETCH_ASSOC);
