@@ -9,8 +9,6 @@
         private $readed;
         private $reaction;
 
-        
-
         /**
          * Get the value of message
          */ 
@@ -26,6 +24,10 @@
          */ 
         public function setMessage($message)
         {
+                if(empty($message)){
+                     throw new Exception("You cannot send empty messages");
+                }
+                
                 $this->message = $message;
 
                 return $this;
@@ -111,9 +113,31 @@
                 return $this;
         }
 
-        public function getAllMessages($userId, $buddyId){
+         /**
+         * Get the value of reaction
+         */ 
+        public function getReaction()
+        {
+                return $this->reaction;
+        }
+
+        /**
+         * Set the value of reaction
+         *
+         * @return  self
+         */ 
+        public function setReaction($reaction)
+        {
+                $this->reaction = $reaction;
+
+                return $this;
+        }
+
+        public static function getAllMessages($userId, $buddyId){
             $conn = Db::getConnection();
-            $statement = $conn->prepare("select msg.id, firstname, avatar, senderId, message, reaction, timestamp from `chat_messages` msg left join users u on u.id = msg.senderId where (senderId = '$userId' and receiverId = '$buddyId') or (senderId = '$buddyId' and receiverId = '$userId') order by timestamp asc");
+            $statement = $conn->prepare("select msg.id, firstname, avatar, senderId, message, reaction, timestamp from `chat_messages` msg left join users u on u.id = msg.senderId where (senderId = :userId and receiverId = :buddyId) or (senderId = :buddyId and receiverId = :userId) order by timestamp asc");
+            $statement->bindValue(":userId", $userId);
+            $statement->bindValue(":buddyId", $buddyId);
             $statement->execute();
 
             $allMessages = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -121,9 +145,10 @@
             return $allMessages;
         }
 
-        public function getUnreadNotifBySender($userId){
+        public static function getUnreadNotifBySender($userId){
             $conn = Db::getConnection();
-            $statement = $conn->prepare("select senderId from `chat_messages` where receiverId='$userId' and readed = 0 group by senderId order by timestamp desc");
+            $statement = $conn->prepare("select senderId from `chat_messages` where receiverId = :userId and readed = 0 group by senderId order by timestamp desc");
+            $statement->bindValue(":userId", $userId);
             $statement->execute();
 
             $notifMessage = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -150,9 +175,10 @@
 
         public function addReaction($messageId){
             $conn = Db::getConnection();
-            $statement = $conn->prepare("update `chat_messages` set reaction = :reaction where id = '$messageId'");
+            $statement = $conn->prepare("update `chat_messages` set reaction = :reaction where id = :messageId");
             $reaction = $this->getReaction();
 
+            $statement->bindValue(":senderId", $messageId);
             $statement->bindValue(":reaction", $reaction);
 
             $result = $statement->execute();
@@ -166,7 +192,10 @@
 
         public function setOnRead($userId, $buddyId){
             $conn = Db::getConnection();
-            $statement = $conn->prepare("update `chat_messages` set readed = 1 where (senderId = '$buddyId' and receiverId = '$userId') and readed = 0");
+            $statement = $conn->prepare("update `chat_messages` set readed = 1 where (senderId = :buddyId and receiverId = :userId) and readed = 0");
+            $statement->bindValue(":userId", $userId);
+            $statement->bindValue(":buddyId", $buddyId);
+            
             $result = $statement->execute();
 
             if(empty($result)){
@@ -176,24 +205,5 @@
             return $result;
         }
 
-        /**
-         * Get the value of reaction
-         */ 
-        public function getReaction()
-        {
-                return $this->reaction;
-        }
-
-        /**
-         * Set the value of reaction
-         *
-         * @return  self
-         */ 
-        public function setReaction($reaction)
-        {
-                $this->reaction = $reaction;
-
-                return $this;
-        }
     }
 ?>
