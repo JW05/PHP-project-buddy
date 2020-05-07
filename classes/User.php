@@ -19,15 +19,8 @@
                 private $userId;
                 private $buddy;
                 private $lookingForBuddy;
-                private $sentRequest;
-                private $requestAccepted;
-                private $reasonDenial;
                 private $vKey;
                 private $isVerified = false;
-
-
-
-
 
                 //from registerpage
                 private $emailId;
@@ -37,7 +30,7 @@
                  */ 
                 public function getFirstName()
                 {
-                                return $this->firstName;
+                        return $this->firstName;
                 }
 
                 /**
@@ -83,7 +76,7 @@
 		 */ 
 		public function getEmail()
 		{
-				return $this->email;
+			return $this->email;
 		}
 
 		/**
@@ -123,6 +116,241 @@
 
                         return $this;
                 }
+
+                /* Replaced by MADINA */
+
+                /**
+                 * Get the value of avatar
+                 */ 
+                public function getAvatar()
+                {
+                        return $this->avatar;
+                }
+
+                /**
+                 * Set the value of avatar
+                 *
+                 * @return  self
+                 */ 
+                public function setAvatar($avatar)
+                {
+                        $this->avatar = $avatar;
+
+                        return $this;
+                }
+
+                /**
+                 * Get the value of description
+                 */ 
+                public function getDescription()
+                {
+                        return $this->description;
+                }
+
+                /**
+                 * Set the value of description
+                 *
+                 * @return  self
+                 */ 
+                public function setDescription($description)
+                {
+                        $this->description = $description;
+
+                        return $this;
+                }
+
+                // JENS Getters & setters     
+               
+                  /**
+                 * Get the value of userId
+                 */ 
+
+                public function getUserId()
+                {
+                        return $this->userId;
+                }
+
+
+                /**
+                 * Set the value of userId
+                 *
+                 * @return  self
+                 */ 
+                public function setUserId($userId)
+                {
+
+                        $this->userId = $userId;
+
+                        return $this;
+                }
+
+
+                /**
+                 * Get the value of locatie
+                 */ 
+                public function getLocation()
+                {
+                       
+                        return $this->location;
+                }
+
+                /**
+                 * Set the value of locatie
+                 *
+                 * @return  self
+                 */ 
+                public function setLocation($location)
+                {
+                         
+                        $this->location = $location;
+
+                        return $this;
+                }
+
+                /**
+                 * Get the value of jaar
+                 */ 
+                public function getYear()
+                {
+                        return $this->year;
+                }
+
+                
+                /**
+                 * Set the value of jaar
+                 *
+                 * @return  self
+                 */ 
+                public function setYear($year)
+                {
+                        $this->year = $year;
+
+                        return $this;
+                }
+
+                /**
+                 * Get the value of preference
+                 */ 
+                public function getPreference()
+                {
+                        return $this->preference;
+                }
+
+                /**
+                 * Set the value of preference
+                 *
+                 * @return  self
+                 */ 
+                public function setPreference($preference)
+                {
+                        $this->preference = $preference;
+
+                        return $this;
+                }
+
+                /**
+                 * Get the value of genre
+                 */ 
+                public function getGenre()
+                {
+                        return $this->genre;
+                }
+
+                /**
+                 * Set the value of genre
+                 *
+                 * @return  self
+                 */ 
+                public function setGenre($genre)
+                {
+                        $this->genre = $genre;
+
+                        return $this;
+                }
+
+                /**
+                 * Get the value of LikesToParty
+                 */ 
+                public function getLikesToParty()
+                {
+                        return $this->likesToParty;
+                }
+
+                /**
+                 * Set the value of LikesToParty
+                 *
+                 * @return  self
+                 */ 
+                public function setLikesToParty($likesToParty)
+                {
+                        $this->likesToParty = $likesToParty;
+
+                        return $this;
+                }
+                
+                // JENS end getters and setters
+
+                /**
+                 * Get the value of buddy
+                 */ 
+                public function getBuddy()
+                {
+                        return $this->buddy;
+                }
+
+                /**
+                 * Set the value of buddy
+                 *
+                 * @return  self
+                 */ 
+                public function setBuddy($buddy)
+                {
+                        $this->buddy = $buddy;
+
+                        return $this;
+                }
+
+                /**
+                 * Get the value of lookingForBuddy
+                 */ 
+                public function getLookingForBuddy()
+                {
+                        return $this->lookingForBuddy;
+                }
+
+                /**
+                 * Set the value of lookingForBuddy
+                 *
+                 * @return  self
+                 */ 
+                public function setLookingForBuddy($lookingForBuddy)
+                {
+                        $this->lookingForBuddy = $lookingForBuddy;
+
+                        return $this;
+                }
+
+                /**
+                 * Get the value of emailId
+                 */ 
+                public function getEmailId()
+                {
+                        return $this->emailId;
+                }
+
+                /**
+                 * Set the value of emailId
+                 *
+                 * @return  self
+                 */ 
+                public function setEmailId($emailId)
+                {
+                        $this->emailId = $emailId;
+
+                        return $this;
+                }
+
+                /* End replaced by MADINA */
                 
                 //Written by Bryan
                 public function save()
@@ -144,57 +372,37 @@
                         $statement->bindValue(":firstName", $firstName);
                         $statement->bindValue(":lastName", $lastName);
                         $statement->bindValue(":email", $email);
-                        $statement->bindValue(":password", $password);
-                        
-
-                    
+                        $statement->bindValue(":password", $password); 
 
                         $result = $statement->execute();
-
-
-
-
-                        //written by maury
                 
                         return $result;
 
                 }
+
                 //feature 17 -- Maury Massag
                public function verifyAccount($email,$vKey)
                 {
-                                $to = $email;
-                                $subject = "Email Verification";
-                                $message = "We need you to confirm your existence:<a href='http://localhost/PHPals/php-project-buddy/verify.php?vKey=$vKey'> Confirm your account</a>";
-                                $headers = "from: Maury Massa <mauryd1q@maurydigital.be>";
-                               
-                                mail($to,$subject,$message,$headers);   
+                        $to = $email;
+                        $subject = "Email Verification";
+                        $message = "We need you to confirm your existence:<a href='http://localhost/PHPals/php-project-buddy/verify.php?vKey=$vKey'> Confirm your account</a>";
+                        $headers = "from: Maury Massa <mauryd1q@maurydigital.be>";
                         
-                                header("login.php");         
+                        mail($to,$subject,$message,$headers);   
+                
+                        header("login.php");         
                 }
-
              
                 public function updateVerification($email){
-                                $conn = Db::getConnection();
-                                $statement = $conn->prepare("UPDATE users SET isVerified = 1 WHERE email = $email"); 
-                                
-                        
+                        $conn = Db::getConnection();
+                        $statement = $conn->prepare("UPDATE users SET isVerified = 1 WHERE email = $email"); 
 
-                    
+                        $result = $statement->execute();
 
-                                $result = $statement->execute();
-        
-                                //written by maury
-                        
-                                return $result;
-}
-
-
-
+                        //written by maury
                 
-
-
-
-
+                        return $result;
+                }
 
                 public static function getEmails(){
                         //$conn = new PDO('mysql:host=localhost;dbname=phpals', "root", "");
@@ -241,7 +449,8 @@
                 //Get current active user
                 public static function getCurrentUser($email){
                         $conn = Db::getConnection();
-                        $statement = $conn->prepare("select * from users where email = '$email'");
+                        $statement = $conn->prepare("select * from users where email = :email");
+                        $statement->bindValue(":email", $email);
                         $statement->execute();
                         $user = $statement->fetch(PDO::FETCH_ASSOC);
                         if(empty($user)){
@@ -262,11 +471,11 @@
                         
                         //if user as for new password execute first statement where password will be updated, else execute the second one
                         if(!empty($password)){
-                                $statement = $conn->prepare("update users set firstname = :firstName, lastname = :lastName, email = :email, password = :password, description = :description, avatar = :avatar where id = '$id'");
+                                $statement = $conn->prepare("update users set firstname = :firstName, lastname = :lastName, email = :email, password = :password, description = :description, avatar = :avatar where id = :id");
                                 $password = password_hash($password, PASSWORD_DEFAULT, ["cost" => 14]);
                                 $statement->bindValue(":password", $password);
                         }else{
-                                $statement = $conn->prepare("update users set firstname = :firstName, lastname = :lastName, email = :email, description = :description, avatar = :avatar where id = '$id'");
+                                $statement = $conn->prepare("update users set firstname = :firstName, lastname = :lastName, email = :email, description = :description, avatar = :avatar where id = :id");
                         }
 
                         $statement->bindValue(":firstName", $firstName);
@@ -274,6 +483,7 @@
                         $statement->bindValue(":email", $email);
                         $statement->bindValue(":avatar", $avatar);
                         $statement->bindValue(":description", $description);
+                        $statement->bindValue(":id", $id);
 
                         $result = $statement->execute();
 
@@ -282,58 +492,16 @@
 
                 public function checkEmail($email){
                         $conn = Db::getConnection();
-                        $result = $conn->query("select * from users where email = '$email'");
-                        if($result->fetchColumn() > 0 && $this->email != $email){
+                        $userEmail = $this->getEmail();
+                        $statement = $conn->prepare("select * from users where email = :email");
+                        $statement->bindValue(":email", $email);
+                        $statement->execute();
+                        if($statement->rowCount() > 0 && $userEmail != htmlspecialchars($email)){
                                 return false;
                         }else{
                                 return true;
                         }
                 }
-		
-
-                /**
-                 * Get the value of avatar
-                 */ 
-                public function getAvatar()
-                {
-                        return $this->avatar;
-                }
-
-                /**
-                 * Set the value of avatar
-                 *
-                 * @return  self
-                 */ 
-                public function setAvatar($avatar)
-                {
-                        $this->avatar = $avatar;
-
-                        return $this;
-                }
-
-                /**
-                 * Get the value of description
-                 */ 
-                public function getDescription()
-                {
-                        return $this->description;
-                }
-
-                /**
-                 * Set the value of description
-                 *
-                 * @return  self
-                 */ 
-                public function setDescription($description)
-                {
-                        $this->description = $description;
-
-                        return $this;
-                }
-
-
-
-
 
                 // JENS - (feature 5 toegevoegd MAURY)
 
@@ -371,7 +539,7 @@
                 public function updateInfo($userId){
 
                         $conn = Db::getConnection();
-                        $statement = $conn->prepare("update profile set location = :location, year = :year, preference = :preference, genre = :genre, likesToParty = :likesToParty, lookingForBuddy = :lookingForBuddy where userId = '$userId'");
+                        $statement = $conn->prepare("update profile set location = :location, year = :year, preference = :preference, genre = :genre, likesToParty = :likesToParty, lookingForBuddy = :lookingForBuddy where userId = :userId");
         
        
                         $location = $this->getLocation();
@@ -381,6 +549,7 @@
                         $party = $this->getLikesToParty(); 
                         $lookingForBuddy = $this->getLookingForBuddy();
                     
+                        $statement->bindValue(":userId", $userId);
                         $statement->bindValue(":location", $location);
                         $statement->bindValue(":year", $year);
                         $statement->bindValue(":preference", $preference);
@@ -401,7 +570,8 @@
        
                         $conn = Db::getConnection();
             
-                        $statement = $conn->prepare("select * from profile where userId = '$userId'");
+                        $statement = $conn->prepare("select * from profile where userId = :userId");
+                        $statement->bindValue(":userId", $userId); //added by Madina
                         $statement->execute();
                         $preference = $statement->fetch(PDO::FETCH_OBJ);
                         if(empty($preference)){
@@ -437,8 +607,8 @@
 
                 public function getUserInfo($userId){
                         $conn = Db::getConnection();
-                        $statement = $conn->prepare("select firstname, lastname, avatar, description, location, year, userId, genre, preference, lookingForBuddy, likesToParty from users left join profile p on p.userId = users.id where users.id = '$userId'");
-
+                        $statement = $conn->prepare("select firstname, lastname, avatar, description, location, year, userId, genre, preference, lookingForBuddy, likesToParty from users left join profile p on p.userId = users.id where users.id = :userId");
+                        $statement->bindValue(":userId", $userId);
                         $statement->execute();
 
                         $user = $statement->fetch(PDO::FETCH_OBJ);
@@ -518,139 +688,7 @@
                         }
                 } 
 
-                // END JENS
-        
-                // JENS Getters & setters     
-               
-                  /**
-                 * Get the value of userId
-                 */ 
-
-                public function getUserId()
-                {
-                                return $this->userId;
-                }
-
-
-                /**
-                 * Set the value of userId
-                 *
-                 * @return  self
-                 */ 
-                public function setUserId($userId)
-                {
-
-                                $this->userId = $userId;
-
-                                return $this;
-                }
-
-
-                /**
-                 * Get the value of locatie
-                 */ 
-                public function getLocation()
-                {
-                       
-                                return $this->location;
-                }
-
-                /**
-                 * Set the value of locatie
-                 *
-                 * @return  self
-                 */ 
-                public function setLocation($location)
-                {
-                         
-                                $this->location = $location;
-
-                                return $this;
-                }
-
-                /**
-                 * Get the value of jaar
-                 */ 
-                public function getYear()
-                {
-                                return $this->year;
-                }
-
-                
-                /**
-                 * Set the value of jaar
-                 *
-                 * @return  self
-                 */ 
-                public function setYear($year)
-                {
-                                $this->year = $year;
-
-                                return $this;
-                }
-
-                /**
-                 * Get the value of preference
-                 */ 
-                public function getPreference()
-                {
-                                return $this->preference;
-                }
-
-                /**
-                 * Set the value of preference
-                 *
-                 * @return  self
-                 */ 
-                public function setPreference($preference)
-                {
-                                $this->preference = $preference;
-
-                                return $this;
-                }
-
-                /**
-                 * Get the value of genre
-                 */ 
-                public function getGenre()
-                {
-                                return $this->genre;
-                }
-
-                /**
-                 * Set the value of genre
-                 *
-                 * @return  self
-                 */ 
-                public function setGenre($genre)
-                {
-                                $this->genre = $genre;
-
-                                return $this;
-                }
-
-                /**
-                 * Get the value of LikesToParty
-                 */ 
-                public function getLikesToParty()
-                {
-                                return $this->likesToParty;
-                }
-
-                /**
-                 * Set the value of LikesToParty
-                 *
-                 * @return  self
-                 */ 
-                public function setLikesToParty($likesToParty)
-                {
-                                $this->likesToParty = $likesToParty;
-
-                                return $this;
-                }
-                
-                // JENS end getters and setters  
-        
+                // END JENS  
 	
                 // JENS
 
@@ -723,229 +761,7 @@
                         return $statement->fetchAll(PDO::FETCH_ASSOC);
                     }
 
+                // END JENS  
 
-                /**
-                 * Get the value of emailId
-                 */ 
-                public function getEmailId()
-                {
-                                return $this->emailId;
-                }
-
-                /**
-                 * Set the value of emailId
-                 *
-                 * @return  self
-                 */ 
-                public function setEmailId($emailId)
-                {
-                                $this->emailId = $emailId;
-
-                                return $this;
-                }
-
-
-
-
-
-                // END JENS
-
-
-
-                /**
-                 * Get the value of buddy
-                 */ 
-                public function getBuddy()
-                {
-                                return $this->buddy;
-                }
-
-                /**
-                 * Set the value of buddy
-                 *
-                 * @return  self
-                 */ 
-                public function setBuddy($buddy)
-                {
-                                $this->buddy = $buddy;
-
-                                return $this;
-                }
-
-                /**
-                 * Get the value of lookingForBuddy
-                 */ 
-                public function getLookingForBuddy()
-                {
-                                return $this->lookingForBuddy;
-                }
-
-                /**
-                 * Set the value of lookingForBuddy
-                 *
-                 * @return  self
-                 */ 
-                public function setLookingForBuddy($lookingForBuddy)
-                {
-                                $this->lookingForBuddy = $lookingForBuddy;
-
-                                return $this;
-                }
-        
-
-
-
-                /**
-                 * Get the value of requestAccepted
-                 */ 
-                public function getRequestAccepted()
-                {
-                                return $this->requestAccepted;
-                }
-
-                /**
-                 * Set the value of requestAccepted
-                 *
-                 * @return  self
-                 */ 
-                public function setRequestAccepted($requestAccepted)
-                {
-                                $this->requestAccepted = $requestAccepted;
-
-                                return $this;
-                }
-
-     /**
-                 * Get the value of reasonDenial
-                 */ 
-                public function getReasonDenial()
-                {
-                                return $this->reasonDenial;
-                }
-
-                /**
-                 * Set the value of reasonDenial
-                 *
-                 * @return  self
-                 */ 
-                public function setReasonDenial($reasonDenial)
-                {
-                                $this->reasonDenial = $reasonDenial;
-
-                                return $this;
-                }
-
-
-
-                        //function 11 - MAURY MASSA     
-
-//
-        public function requestAccepted()
-        {
-        //connectie maken met Tabel buddys
-         
-                  $conn = Db::getConnection();
-        //update tbl met incoming requests
-                //query upate uitvoeren in de tabel buddy
-                $statement = $conn->prepare("update buddys SET requestAccepted = :requestAccepted, reasonDenied = :reasonDenial, activeMatch = :requestAccepted where (userId = :buddyId AND buddyId = :userId) AND activeMatch = 1"); 
-                $requestAccepted = $this->getRequestAccepted();               
-                $reasonDenial = $this->getReasonDenial();
-                $buddyId = $this->getBuddy();
-                $userId = $this->getUserId();  
-                //waardes toekennen
-                $statement->bindValue(":requestAccepted", $requestAccepted);
-                $statement->bindValue(":reasonDenial", $reasonDenial);
-                $statement->bindValue(":buddyId", $buddyId);
-                $statement->bindValue(":userId", $userId);
-
-                $result = $statement->execute();
-
-                return $result;
         }
-
-        public function showcaseMatches($userId){
-                $conn = Db::getConnection();
-                $statement = $conn->prepare("select * from buddys where (requestAccepted = 0 AND buddyId = '$userId' AND activeMatch = 1 )");
-                $statement->execute();
-    
-                $allMatches = $statement->fetchAll(PDO::FETCH_ASSOC);
-    
-                return $allMatches;
-            }
-
-
-        //function 12 - Maury Massa
-        public function activeMatches($userId){
-                $conn = Db::getConnection();
-                $statement = $conn->prepare("select * from buddys where (requestAccepted = 1 AND buddyId = '$userId' AND activeMatch = 1 )");
-                $statement->execute();
-
-                $allMatches = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-                return $allMatches;
-    }   
-
-
-
-
-
-
-
-
-
-
-
-                /**
-                 * Get the value of sentRequest
-                 */ 
-                public function getSentRequest()
-                {
-                                return $this->sentRequest;
-                }
-
-                /**
-                 * Set the value of sentRequest
-                 *
-                 * @return  self
-                 */ 
-                public function setSentRequest($sentRequest)
-                {
-                                $this->sentRequest = $sentRequest;
-
-                                return $this;
-                }
-
-
-
-
-
-                /**
-                 * Get the value of denyRequest
-                 */ 
-                public function getDenyRequest()
-                {
-                                return $this->denyRequest;
-                }
-
-                /**
-                 * Set the value of denyRequest
-                 *
-                 * @return  self
-                 */ 
-                public function setDenyRequest($denyRequest)
-                {
-                                $this->denyRequest = $denyRequest;
-
-                                return $this;
-                }
-
-           
-
-
-
-
-
-
-
-}
 ?>
