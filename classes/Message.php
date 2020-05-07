@@ -145,12 +145,10 @@
             return $allMessages;
         }
 
-        public function getMessageId(){
+        public static function getMessageId($senderId, $receiverId){
             $conn = Db::getConnection();
             $statement = $conn->prepare("select id from `chat_messages` where senderId = :senderId and receiverId = :receiverId order by timestamp desc limit 1");
             
-            $senderId = $this->getSenderId();
-            $receiverId = $this->getReceiverId();
             $statement->bindValue(":senderId", $senderId);
             $statement->bindValue(":receiverId", $receiverId);
 
