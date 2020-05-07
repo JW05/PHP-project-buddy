@@ -5,8 +5,7 @@
     private $userId;
     private $buddyId;
     private $requestAccepted;
-    private $requestDenied;
-    private $reasonDenied;
+    private $reasonDenial;
 
     /**
      * Get the value of userId
@@ -91,9 +90,9 @@
     /**
      * Get the value of reasonDenied
      */ 
-    public function getReasonDenied()
+    public function getReasonDenial()
     {
-        return $this->reasonDenied;
+        return $this->reasonDenial;
     }
 
     /**
@@ -101,9 +100,9 @@
      *
      * @return  self
      */ 
-    public function setReasonDenied($reasonDenied)
+    public function setReasonDenial($reasonDenial)
     {
-        $this->reasonDenied = $reasonDenied;
+        $this->reasonDenied = $reasonDenial;
 
         return $this;
     }
@@ -152,4 +151,54 @@
       return $result;
     }
 
+    /* Replaced by Madina */
+
+    //function 11 - MAURY MASSA     
+
+    public function requestAccepted()
+    {
+      //connectie maken met Tabel buddys
+      $conn = Db::getConnection();
+      //update tbl met incoming requests
+      //query upate uitvoeren in de tabel buddy
+      $statement = $conn->prepare("update buddys SET requestAccepted = :requestAccepted, reasonDenied = :reasonDenial, activeMatch = :requestAccepted where (userId = :buddyId AND buddyId = :userId) AND activeMatch = 1"); 
+      $requestAccepted = $this->getRequestAccepted();               
+      $reasonDenial = $this->getReasonDenial();
+      $buddyId = $this->getBuddyId();
+      $userId = $this->getUserId();  
+      //waardes toekennen
+      $statement->bindValue(":requestAccepted", $requestAccepted);
+      $statement->bindValue(":reasonDenial", $reasonDenial);
+      $statement->bindValue(":buddyId", $buddyId);
+      $statement->bindValue(":userId", $userId);
+
+      $result = $statement->execute();
+
+      return $result;
+    }
+
+    public static function showcaseMatches($userId){
+      $conn = Db::getConnection();
+      $statement = $conn->prepare("select * from buddys where (requestAccepted = 0 AND buddyId = :userId AND activeMatch = 1 )");
+      $statement->bindValue(":userId", $userId);
+      $statement->execute();
+
+      $allMatches = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+      return $allMatches;
+    }
+
+
+    //function 12 - Maury Massa
+    public function activeMatches($userId){
+      $conn = Db::getConnection();
+      $statement = $conn->prepare("select * from buddys where (requestAccepted = 1 AND buddyId = '$userId' AND activeMatch = 1 )");
+      $statement->execute();
+
+      $allMatches = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+      return $allMatches;
+    } 
+
+    /* End replaced by Madina */
   }
