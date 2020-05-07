@@ -40,8 +40,12 @@ messageInput.addEventListener("keyup", (e) => {
         newMessage.innerHTML = `<div class="media-body">
         <h5 class="mt-0">Me</h5>
         ${result.body.message}
-        <small class="float-right">${result.body.timestamp}</small>
-        </div>`;
+        <div class="float-right">
+        <small>${result.body.timestamp}</small>
+        <button type="button" class="btn btn-primary btnReact" data-toggle="modal" data-target="#reactions" data-messageid="${result.body.id}">
+          Reaction
+        </button>
+      </div></div>`;
 
         document.querySelector(".chatMessages").appendChild(newMessage);
       }
@@ -49,6 +53,12 @@ messageInput.addEventListener("keyup", (e) => {
       messageInput.value = "";
       messageInput.focus();
       btnSend.classList.add("invisible");
+      btnReacts = document.querySelectorAll(".btnReact");
+      btnReacts.forEach(btnReact => {
+        btnReact.addEventListener("click", (e)=>{
+          reactionModal.setAttribute("data-messageid", e.target.dataset.messageid);
+        });
+      });
     })
     .catch(error => {
       console.error('Error:', error);
@@ -96,6 +106,12 @@ btnSend.addEventListener("click", () => {
     messageInput.value = "";
     messageInput.focus();
     btnSend.classList.add("invisible");
+    btnReacts = document.querySelectorAll(".btnReact");
+    btnReacts.forEach(btnReact => {
+      btnReact.addEventListener("click", (e)=>{
+        reactionModal.setAttribute("data-messageid", e.target.dataset.messageid);
+      });
+    });
   })
   .catch(error => {
     console.error('Error:', error);
