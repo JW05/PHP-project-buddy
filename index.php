@@ -14,31 +14,7 @@
     }
 
 
-    //SEARCH BRYAN
-    include_once(__DIR__ . "/classes/Search.php");
-
-    $searchReturned = null;
-
-    if(!empty($_POST['name']) || !empty($_POST['preferences']) || !empty($_POST['genres'])){
-        try {
-            //code...
-            $search = new Search();
-            $search->setName($_POST['name']);
-            $search->setPreference($_POST['preferences']);
-            $search->setGenre($_POST['genres']);
-            $searchReturned = $search->getData();
-        } catch (\Throwable $th) {
-            //throw $th;
-            $error = $th->getMessage();
-        }
-    }
-
-    //END SEARCH
-
-
 // sent requests
-
-
 
 ?>
 
@@ -61,98 +37,70 @@
     <?php
         include_once(__DIR__."/nav.inc.php");
     ?>
-  <div class="bg-img"></div>
+    <div class="bg-img"></div>
 
 
-    <!-- SEARCH BRYAN -->
-    <div class="search-container">
-        <p id="searchTitle">Search for people by interests or name</p>
-        <form action="index.php" method="POST" id="searchform">
-          
-          <label for="preferences" id="prefLabel">Preference</label>
-          <select name="preferences" id="preferences" form="searchform">
-            <option value=""></option>
-            <option value="design">Design</option>
-            <option value="development">Development</option>
-          </select>
-
-          <label for="genres" id="genresLabel">Genre</label>
-          <select name="genres" id="genres" form="searchform">
-            <option value=""></option>
-            <option value="Pop">Pop</option>
-            <option value="Rock">Rock</option>
-            <option value="R&B">R&B</option>
-            <option value="Latin">Latin</option>
-            <option value="Drum-'n-bass">Drum-'n-bass</option>
-            <option value="classic">Classic</option>
-          </select>
-
-          <label for="name" id="nameLabel">Name</label>
-          <input type="text" name="name" placeholder="name" id="name">
-          <input type="submit" name="search-action" value="Search" id="searchBtn"></input>
-
-        </form>
-    </div>
-    <!-- END SEARCH BRYAN -->
+    
     <section>
-    <div class="hero-img">
-      <?php    
-           $AllStudents = User::getAllStudents();
-    ?>
+      <div class="hero-img">
+        <?php    
+            $AllStudents = User::getAllStudents();
+        ?>
 
-    <?php
-           $AllBuddys = User::getAllBuddys();
-    ?>
+        <?php
+            $AllBuddys = User::getAllBuddys();
+        ?>
 
 
-<div class="middle">
-<ul class="display-container d-flex justify-content-center">
- <li class="note-display" data-note="7.50">
-    <div class="circle">
-      <svg width="84" height="84" class="circle__svg">
-        <circle cx="41" cy="41" r="38" class="circle__progress circle__progress--path"></circle>
-        <circle cx="41" cy="41" r="38" class="circle__progress circle__progress--fill"></circle>
-      </svg>
+        <div class="middle">
+          <ul class="display-container d-flex justify-content-center">
+          <li class="note-display" data-note="7.50">
+              <div class="circle">
+                <svg width="84" height="84" class="circle__svg">
+                  <circle cx="41" cy="41" r="38" class="circle__progress circle__progress--path"></circle>
+                  <circle cx="41" cy="41" r="38" class="circle__progress circle__progress--fill"></circle>
+                </svg>
 
-      <div class="percent">
-        <span class="percent__int">
-        <?php foreach($AllStudents as $student): ?>
-        <h2><?php echo $student; ?></h2>
-        <?php endforeach; ?>
-        </span>
-       <!-- <span class="percent__dec">00</span> -->
+                <div class="percent">
+                  <span class="percent__int">
+                  <?php foreach($AllStudents as $student): ?>
+                  <h2><?php echo $student; ?></h2>
+                  <?php endforeach; ?>
+                  </span>
+                <!-- <span class="percent__dec">00</span> -->
+                </div>
+              </div>
+
+              <span class="label">Students</span>
+            </li>
+
+          <li class="note-display" data-note="9.27">
+              <div class="circle">
+                <svg width="84" height="84" class="circle__svg">
+                  <circle cx="41" cy="41" r="38" class="circle__progress circle__progress--path"></circle>
+                  <circle cx="41" cy="41" r="38" class="circle__progress circle__progress--fill"></circle>
+                </svg>
+
+                <div class="percent">
+                  <span class="percent__int">
+                  <?php foreach($AllBuddys as $Buddy): ?>
+                  <h2><?php echo $Buddy; ?></h2>
+                  <?php endforeach; ?>
+                  </span>
+                <!--  <span class="percent__dec">00</span> -->
+                </div>
+              </div>
+
+              <span class="label">Buddies</span>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-
-    <span class="label">Students</span>
-  </li>
-
- <li class="note-display" data-note="9.27">
-    <div class="circle">
-      <svg width="84" height="84" class="circle__svg">
-        <circle cx="41" cy="41" r="38" class="circle__progress circle__progress--path"></circle>
-        <circle cx="41" cy="41" r="38" class="circle__progress circle__progress--fill"></circle>
-      </svg>
-
-      <div class="percent">
-        <span class="percent__int">
-        <?php foreach($AllBuddys as $Buddy): ?>
-        <h2><?php echo $Buddy; ?></h2>
-        <?php endforeach; ?>
-        </span>
-      <!--  <span class="percent__dec">00</span> -->
-      </div>
-    </div>
-
-    <span class="label">Buddies</span>
-  </li>
-</ul>
-</div>
-</div>
     </section>
 
+    <?php if($searchReturned != null): ?>
     <?php include('./includes/searchResults.inc.php');?>
-    
+    <?php else:?>
     <div class="side-bar">
         <div class="same-intrest">
             <h2>These people have the same interests</h2>
@@ -162,6 +110,7 @@
         
         </div>
     </div>
+    <?php endif;?>
     <div class="side-bar">
         <div class="same-intrest">
 
