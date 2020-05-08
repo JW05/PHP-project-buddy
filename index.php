@@ -19,11 +19,13 @@
 
     $searchReturned = null;
 
-    if(!empty($_POST['search'])){
+    if(!empty($_POST['name']) || !empty($_POST['preferences']) || !empty($_POST['genres'])){
         try {
             //code...
             $search = new Search();
-            $search->setSearch($_POST['search']);
+            $search->setName($_POST['name']);
+            $search->setPreference($_POST['preferences']);
+            $search->setGenre($_POST['genres']);
             $searchReturned = $search->getData();
         } catch (\Throwable $th) {
             //throw $th;
@@ -62,17 +64,36 @@
   <div class="bg-img"></div>
 
 
-
-
-
     <!-- SEARCH BRYAN -->
     <div class="search-container">
-        <form action="index.php" method="POST">
-        
-        <input type="text" name="search" placeholder="name or interest">
-        <button type="submit" name="search-action">Search</button>
+        <p id="searchTitle">Search for people by interests or name</p>
+        <form action="index.php" method="POST" id="searchform">
+          
+          <label for="preferences" id="prefLabel">Preference</label>
+          <select name="preferences" id="preferences" form="searchform">
+            <option value=""></option>
+            <option value="design">Design</option>
+            <option value="development">Development</option>
+          </select>
+
+          <label for="genres" id="genresLabel">Genre</label>
+          <select name="genres" id="genres" form="searchform">
+            <option value=""></option>
+            <option value="Pop">Pop</option>
+            <option value="Rock">Rock</option>
+            <option value="R&B">R&B</option>
+            <option value="Latin">Latin</option>
+            <option value="Drum-'n-bass">Drum-'n-bass</option>
+            <option value="classic">Classic</option>
+          </select>
+
+          <label for="name" id="nameLabel">Name</label>
+          <input type="text" name="name" placeholder="name" id="name">
+          <input type="submit" name="search-action" value="Search" id="searchBtn"></input>
+
         </form>
     </div>
+    <!-- END SEARCH BRYAN -->
     <section>
     <div class="hero-img">
       <?php    
@@ -129,18 +150,26 @@
 </div>
 </div>
     </section>
+    <!-- SEARCH BRYAN -->
+    <div class="search-results-container">
 
-    <?php
-    if($searchReturned != null){
-        foreach($searchReturned as $result){
-    ?>
-    <div>
-        <h1><?php echo $result["firstname"] . " " . $result["lastname"]?></h1>
+      <?php if($searchReturned != null):?>
+          <h1 id="search-results-title">Search results for "<?php echo $_POST['name']; ?>"</h1>
+      <?php endif;?>
+
+      <?php if($searchReturned != null){
+          foreach($searchReturned as $result){ ?>
+
+        <div class="search-results-profiles">
+            <h1><?php echo $result["firstname"] . " " . $result["lastname"]?></h1>
+            <P>This person also likes <?php echo $result['preference'] . " and listens to " . $result["genre"]?></P>
+        </div>
+        
+      <?php }} ?>
+    
     </div>
-    <?php }}else{ ?>
     <!-- END SEARCH BRYAN -->
-   
-
+    
 
     
     <div class="side-bar">
@@ -163,7 +192,6 @@
         </div>
     </div>
       <!-- including geregistreerde studenten + buddy overeenkomsten-->
-      <?php } ?>
     <script src="js/saveBuddy.js"></script>
 </body>
 </html>

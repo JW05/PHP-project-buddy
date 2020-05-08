@@ -149,31 +149,61 @@ ul li #white
 .search-container
 {
 	position: fixed;
-	top: 37px;
+	top: 30px;
 	left: 150px;
 	z-index: 100001;
-	color: white;
 	margin-left: 0px;
+}
+.search-container label{
+	color:black;
+}
+#searchTitle{
+	margin: 0;
+	padding-bottom: 10px;
+	font-size: 1.2em;
 	
 }
-
-
-
-.search-container input
-{
-	z-index: 1000001;
-	border-radius: 25px;
-	-webkit-border-radius: 25px;
-	-moz-border-radius: 25px;
-	-ms-border-radius: 25px;
-	-o-border-radius: 25px;
-	margin-right: 350px;
-	background-color: rgb(230, 230, 230);
+#searchform{
+	display: flex;
+	justify-content: space-between;
+	margin: 0;
+	padding: 0;
+	flex-direction: row;
+	align-items: center;
+	width: 750px;
+	height: 37px;
+}
+#searchform select{
+	height: 37px;
+	border: none;
+	background-color: #eee;
+}
+#prefLabel, #genresLabel, #nameLabel{
+	font-weight: bold;
+	font-size: 0.9em;
+	color: white;
+	margin: 0;
+	padding: 0 7px 0 7px;
+	line-height: 37px;
+	background-color: #FF4744;
+}
+#searchBtn{
+	width: 70px;
+	height: 37px;
+	margin:0;
+	padding:0;
+	text-align: center;
+	font-size: 0.9em;
+	font-weight: bold;
+	background-color: #007bff;
 	color: white;
 }
-.search-container button
-{
-	display: none;
+#name{
+	margin: 0;
+	height: 37px;
+	min-width: 100px;
+	max-width: 200px;
+
 }
 
 .float-right

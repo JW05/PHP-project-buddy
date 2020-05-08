@@ -100,7 +100,7 @@
         <option value="Rock" <?php echo ($currentPreference->genre == "Rock")? "selected": ""; ?>>Rock</option>
         <option value="R&B" <?php echo ($currentPreference->genre == "R&B")? "selected": ""; ?>>R&B</option>
         <option value="Latin" <?php echo ($currentPreference->genre == "Latin")? "selected": ""; ?>>Latin</option>
-        <option value="Electronische Music" <?php echo ($currentPreference->genre == "Electronische Music")? "selected": ""; ?>>Electronic Muzic</option>
+        <option value="Electronische Music" <?php echo ($currentPreference->genre == "Electronische Music")? "selected": ""; ?>>Electronic Music</option>
         <option value="Drum-'n-bass" <?php echo ($currentPreference->genre == "Drum-'n-bass")? "selected": ""; ?>>Drum-'n-bass</option>
         <option value="Classic" <?php echo ($currentPreference->genre == "Classic")? "selected": ""; ?>>Classic</option>
       </select>
