@@ -4,14 +4,15 @@
     session_start();
 
     
-   
+
 
     try
     {
         $user = User::getCurrentUser($_SESSION['user']);
-
+        $id = $user['id'];
         $faq = faq::showcaseFaq();
-
+        $roles = User::checkRole($id);
+        
 
     }
     catch(\Throwable $th)
@@ -31,17 +32,33 @@
     <title>FAQ PHPals</title>
 </head>
 <body>
-<?php include_once(__DIR__."/nav.inc.php");?> 
-<a href="addFaq.php" class="btn btn-success float-right">Add FAQ</a>
+<?php include_once(__DIR__."/nav.inc.php");?>
+
+
+<?php
+if($roles['role'] == 1)
+{
+    ?>
+    <a href="addFaq.php" class="btn btn-success float-right">Add FAQ</a>
+
+
+  <?php
+}
+else
+{
+    echo "You have no permission to access this tab!";
+}
+
+
+?>
+
+
+
 <div class="faq-container">
 <h1>Frequently Asked Questions</h1>
-
-
-
     <div>
         
     <?php foreach($faq as $faqItem):?>
-        
         <span class="questions">
             <ul>
 
