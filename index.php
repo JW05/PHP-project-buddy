@@ -150,27 +150,8 @@
 </div>
 </div>
     </section>
-    <!-- SEARCH BRYAN -->
-    <div class="search-results-container">
 
-      <?php if($searchReturned != null):?>
-          <h1 id="search-results-title">Search results for "<?php echo $_POST['name']; ?>"</h1>
-      <?php endif;?>
-
-      <?php if($searchReturned != null){
-          foreach($searchReturned as $result){ ?>
-
-        <div class="search-results-profiles">
-            <h1><?php echo $result["firstname"] . " " . $result["lastname"]?></h1>
-            <P>This person also likes <?php echo $result['preference'] . " and listens to " . $result["genre"]?></P>
-        </div>
-        
-      <?php }} ?>
-    
-    </div>
-    <!-- END SEARCH BRYAN -->
-    
-
+    <?php include('./includes/searchResults.inc.php');?>
     
     <div class="side-bar">
         <div class="same-intrest">
