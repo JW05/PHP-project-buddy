@@ -32,10 +32,11 @@
 </head>
 <body>
 <?php include_once(__DIR__."/nav.inc.php");?> 
-
+<a href="addFaq.php" class="btn-success float-right">Add New Employee</a>
 <div class="faq-container">
 <h1>Frequently Asked Questions</h1>
 <h3><a name="toc">Table of Contents</a></h3>
+
 
 
     <div>
