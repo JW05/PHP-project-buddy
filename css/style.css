@@ -47,43 +47,16 @@ img .card.col-md-4
 }
 .navbar
 {
-	position: fixed;
-	top: 0px;
-	right: 0px;
-	background-color: white;
-	z-index: 20000;
-	width: 100vw;
+	
 	box-shadow: 0 5px 5px -6px black;
 }
 
-.search-container
-	{
-		position: fixed;
-		top: 37px;
-		margin-left: 0px;
-		width: 400px;
-	}
 
-.search-container form{
-	background-color: transparent;
+.navbar-collapse{
+	display: block;
 }
 
-
-.search-container input
-{
-	position: relative;
-	left: 100px;
-	z-index: 1001;
-}
-
-
-.navbar .mr-auto
-{
-	position: absolute;
-	left: 60%;
-	background-color: white;
-}
-.navbar .mr-auto:active
+.navbar-nav:active
 {
 	color: red;	
 }
@@ -116,7 +89,6 @@ h3
 }
 .logout a
 {
-	margin-right: 30px;
 	background-color: #FF4744;
 	text-align: center;
 	width: 200px;
@@ -125,9 +97,6 @@ h3
 	-moz-border-radius: 25px;
 	-ms-border-radius: 25px;
 	-o-border-radius: 25px;
-	position: absolute;
-	right: 50px;
-	top: 406px;
 }
 div .form--settings
 {
@@ -141,44 +110,23 @@ ul li #white
 	font-weight: bold;
 }
 
-
-
-
-
-
-.search-container
-{
-	position: fixed;
-	top: 30px;
-	left: 150px;
-	z-index: 100001;
-	margin-left: 0px;
-}
-.search-container label{
-	color:black;
-}
-#searchTitle{
-	margin: 0;
-	padding-bottom: 10px;
-	font-size: 1.2em;
-	
-}
 #searchform{
-	display: flex;
-	justify-content: space-between;
+	display: block;
 	margin: 0;
 	padding: 0;
-	flex-direction: row;
-	align-items: center;
-	width: 750px;
-	height: 37px;
+	width: 100%;
+	height: auto;
+	background-color: transparent;
 }
+
 #searchform select{
+	width: 100%;
 	height: 37px;
 	border: none;
 	background-color: #eee;
 }
 #prefLabel, #genresLabel, #nameLabel{
+	width: 150px;
 	font-weight: bold;
 	font-size: 0.9em;
 	color: white;
@@ -188,10 +136,10 @@ ul li #white
 	background-color: #FF4744;
 }
 #searchBtn{
-	width: 70px;
+	width: 100%;
 	height: 37px;
-	margin:0;
-	padding:0;
+	margin: 1em auto;
+	padding:0 1em;
 	text-align: center;
 	font-size: 0.9em;
 	font-weight: bold;
@@ -199,10 +147,12 @@ ul li #white
 	color: white;
 }
 #name{
+	box-sizing: border-box;
 	margin: 0;
 	height: 37px;
 	min-width: 100px;
-	max-width: 200px;
+	max-width: 100%;
+	padding: 0 1em;
 
 }
 
@@ -439,64 +389,16 @@ a.list-group-item {
 	text-align: justify;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
 @media(min-width:750px)
 {
-	.navbar .mr-auto
-	{
-		position: absolute;
-		left: 60%;
-		
+	.navbar-collapse{
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
 	}
-	.search-container
-	{
-		position: fixed;
-		top: 37px;
-		left: 150px;
-		z-index: 100001;
-		color: white;
-		margin-left: 0px;
-		
-	}
+	
 	.hero-img
 	{
-		
 		background:-webkit-linear-gradient(rgba(255,255,255,0.5),rgba(255,255,255,0.5) ),url(../img/background-header.jpg);
 		background-size: 100%;
 		height: auto;
@@ -518,36 +420,38 @@ a.list-group-item {
 		margin-top: 30px;
 	}
 	.logout a
-{
-	margin-right: 30px;
-	background-color: #FF4744;
-	text-align: center;
-	width: 200px;
-	border-radius: 25px;
-	-webkit-border-radius: 25px;
-	-moz-border-radius: 25px;
-	-ms-border-radius: 25px;
-	-o-border-radius: 25px;
-	position: absolute;
-	right: 20px;
-	top: 36px;
-}
-.search-container
 	{
-		position: fixed;
-		top: 37px;
-		margin-left: 0px;
-		width: 400px;
+		background-color: #FF4744;
+		text-align: center;
+		width: 200px;
+		border-radius: 25px;
+		-webkit-border-radius: 25px;
+		-moz-border-radius: 25px;
+		-ms-border-radius: 25px;
+		-o-border-radius: 25px;
 	}
 
+	#searchform{
+		display: flex;
+		justify-content: space-between;
+		flex-direction: row;
+		align-items: center;
+		width: 750px;
+		height: 37px;
+	}
 
-.search-container input
-{
-	position: relative;
-	left: 200px;
-	z-index: 1001;
-	width: 800px;
-}
+	#prefLabel, #genresLabel, #nameLabel{
+		width: auto;
+	}
+
+	#searchform select{
+		width: auto;
+	}
+
+	#searchBtn{
+		margin: 0;
+		width: auto;
+	}
 
 }
 
