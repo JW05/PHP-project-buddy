@@ -8,17 +8,21 @@
 
     try
     {
-        $user = User::getCurrentUser($_SESSION['user']);
+        if(!empty($_POST))
+        {
+            $user = User::getCurrentUser($_SESSION['user']);
     
-        $faqs = new faq();
-        $faqs->setQuestions($_POST['questions']);
-        $faqs->setAnswers($_POST['answers']);
-  
-        $result = $faqs->createFaq($questions,$answers);
-        // FAQ REDIRECT
-        if($result) {
-            header('Location: FAQ.php');
-           }
+            $faqs = new faq();
+            $faqs->setQuestions($_POST['questions']);
+            $faqs->setAnswers($_POST['answers']);
+      
+            $result = $faqs->createFaq($questions,$answers);
+            // FAQ REDIRECT
+            if($result) {
+                header('Location: FAQ.php');
+               }
+        }
+       
     }
     catch(\Throwable $th)
     {

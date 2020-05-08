@@ -7,6 +7,7 @@ class faq
     private $questions;
     private $answers;
 
+
     
 
 
@@ -45,6 +46,8 @@ public function createFaq($questions,$answers)
     $statement->bindValue(":answers", $answers);
 
     $result = $statement->execute();
+
+
 
     return $result;
 
