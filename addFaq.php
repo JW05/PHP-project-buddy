@@ -44,38 +44,40 @@
 <?php include_once(__DIR__."/nav.inc.php");?> 
 
 
+<?php if($searchReturned != null): //If something is searched show results?>
+    <?php include('./includes/searchResults.inc.php');?>
+<?php else:?>
+  <div class="faq-container">
+  <h1>Frequently Asked Questions</h1>
 
-<div class="faq-container">
-<h1>Frequently Asked Questions</h1>
+  <form action="" method="post">
 
-<form action="" method="post">
+    <div class="questions">
+    <label for="questions"><h2>What is the Question?</h2></label><br>
+    <input type="text" id="questions" name="questions" value=""><br><br>
+    </div>
 
-  <div class="questions">
-  <label for="questions"><h2>What is the Question?</h2></label><br>
-  <input type="text" id="questions" name="questions" value=""><br><br>
+    <div class="answers">
+    <label for="answers"><h2>What is the answer to it?</h2></label><br>
+    <input type="text" id="answers" name="answers" value=""><br><br>
+    </div>
+
+  <div>
+    <input class = "button" type="submit" placeholder="send">
   </div>
+  </form>
 
-  <div class="answers">
-  <label for="answers"><h2>What is the answer to it?</h2></label><br>
-  <input type="text" id="answers" name="answers" value=""><br><br>
+
+
+
+
+
+
+
+
+
   </div>
-
-<div>
-  <input class = "button" type="submit" placeholder="send">
-</div>
-</form>
-
-
-
-
-
-
-
-
-
-
-</div>
-
+<?php endif; ?>
 
 </body>
 </html>

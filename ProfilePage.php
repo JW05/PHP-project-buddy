@@ -37,37 +37,42 @@
         include_once(__DIR__."/nav.inc.php");
     ?>
 
-    <a href="index.php" class="btn"> Go Back </a>
-    <a href="updateProfile.php" class="btn"> Update your profile </a>
+    <?php if($searchReturned != null): ?>
+        <?php include('./includes/searchResults.inc.php');?>
+    <?php else:?>
 
-    <div id="Kenmerken">
+        <a href="index.php" class="btn"> Go Back </a>
+        <a href="updateProfile.php" class="btn"> Update your profile </a>
 
-        <fieldset>
+        <div id="Kenmerken">
 
-            <legend><h1>Characteristiques</h1></legend>
-            <h2>Location: <?php echo $currentPreference->location;?></h2>
-            <h2>Year: <?php echo $currentPreference->year;?></h2>
-            <h2>Preference: <?php echo $currentPreference->preference; ?></h2>
-            <h2>Music genre: <?php echo $currentPreference->genre; ?></h2>
-            <h2>Party animal: <?php echo ($currentPreference->likesToParty)? "Yes": "No"; ?></h2>
-            <h2>Buddy type: <?php echo ($currentPreference->lookingForBuddy)? "I'm looking for a buddy": "I would like to take care of someone"; ?></h2>    
-        
-        </fieldset>
-    </div>
+            <fieldset>
 
-    <div class="row">
-    <?php foreach($matches as $match):
-        $senderUser = User::getUserInfo($match['userId']); ?>
-        <div class="card col-md-4" style="width: 3rem;">
-
-            <img src="img/avatar/<?php echo htmlspecialchars($senderUser->avatar);?>" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title"><?php echo htmlspecialchars($senderUser->firstname)." ".htmlspecialchars($senderUser->lastname);?></h5>
-                <a href="chat.php?buddyId=<?php echo htmlspecialchars($senderUser->userId); ?>" class="btn btn-primary">Open chat</a>
-
-            </div>
+                <legend><h1>Characteristiques</h1></legend>
+                <h2>Location: <?php echo $currentPreference->location;?></h2>
+                <h2>Year: <?php echo $currentPreference->year;?></h2>
+                <h2>Preference: <?php echo $currentPreference->preference; ?></h2>
+                <h2>Music genre: <?php echo $currentPreference->genre; ?></h2>
+                <h2>Party animal: <?php echo ($currentPreference->likesToParty)? "Yes": "No"; ?></h2>
+                <h2>Buddy type: <?php echo ($currentPreference->lookingForBuddy)? "I'm looking for a buddy": "I would like to take care of someone"; ?></h2>    
+            
+            </fieldset>
         </div>
-    <?php endforeach;?>
-    </div>
+
+        <div class="row">
+        <?php foreach($matches as $match):
+            $senderUser = User::getUserInfo($match['userId']); ?>
+            <div class="card col-md-4" style="width: 3rem;">
+
+                <img src="img/avatar/<?php echo htmlspecialchars($senderUser->avatar);?>" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title"><?php echo htmlspecialchars($senderUser->firstname)." ".htmlspecialchars($senderUser->lastname);?></h5>
+                    <a href="chat.php?buddyId=<?php echo htmlspecialchars($senderUser->userId); ?>" class="btn btn-primary">Open chat</a>
+
+                </div>
+            </div>
+        <?php endforeach;?>
+        </div>
+        <?php endif; ?>
 </body>
 </html>
