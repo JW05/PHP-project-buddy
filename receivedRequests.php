@@ -6,7 +6,7 @@
   $userId = $user['id'];
   $receivedRequest = Buddy::showcaseMatches($user['id']);
 
-  if(!empty($_POST)){
+  if(!empty($_POST) && $_POST['submit'] == "requestAction"){
      
     try {
           $buddy = $_POST['buddyId'];
@@ -47,7 +47,7 @@
 
         <label for="reasonDenial">Reason</label>
         <textarea name="reasonDenial" id="reasonDenial" cols="30" rows="2" placeholder="Reason for dislike"></textarea>
-        <input class = "button" type="submit" placeholder="send">
+        <input class = "button" type="submit" name="requestAction" placeholder="send">
       </form>
  
     </div>

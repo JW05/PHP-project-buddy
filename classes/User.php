@@ -649,38 +649,19 @@
                 }
 
                 //End feature 7
-
-                // JENS
-                /* check if id exists in profile table to execute insert Updateprofile data */
-
-                public function UserIdExists($id)
-                {
-                        $conn = new mysqli("localhost", "root", "","phpals");
-                        $query="select * from profile where userId ='$id'";
-                        $result = $conn->query($query);
-                        if(mysqli_num_rows($result)!=0)
                 
-                        {      
-                                echo "true user id exists";
-                                return true;}
-                        else	{
-                                echo "false user id doesnt exist";
-                                return false;
-                                }
-                }
-                // END JENS
-
                 // JENS
                 public function getUserId2($email)
                 {
-                        $conn = new mysqli("localhost", "root", "","phpals");
-                        $email = $conn->real_escape_string($email);
-                        $query="select id from users where email = '$email'";
-                        $result = $conn->query($query);
+                        //fixed by Madina
+                        $conn = Db::getConnection();
+                        $statement = $conn->prepare("select id from users where email = :email");
+                        $statement->bindValue(":email", $email);
+                        $statement->execute();
                         
-                        if(mysqli_num_rows($result)!=0)
+                        if($statement->rowCount()!=0)
                         {
-                                $user = $result->fetch_assoc();
+                                $user = $statement->fetch(PDO::FETCH_ASSOC);
                                 return $user;
                         
                         }else
@@ -693,17 +674,16 @@
 	
                 // JENS
 
-                public function getBuddys($userId) {					
-                        $conn = new mysqli("localhost", "root", "","phpals");
-                        $userId = $conn->real_escape_string($userId);
-                        $query="select u.firstname, u.lastname, u.avatar, u.email from users u left join buddys b on u.id = b.buddyid where b.userid = '$userId'";
-                        $result = $conn->query($query);
-                        if(mysqli_num_rows($result)!=0) {
-                                //place all data in the array row to be able to use 
-                                while($row = $result->fetch_assoc()) {
-                                        $rows[] = $row;
-                                }
-                                return $rows;   
+                public function getBuddys($userId) {	
+                        //fixed by Madina				
+                        $conn = Db::getConnection(); 
+                        $statement = $conn->prepare("select u.firstname, u.lastname, u.avatar, u.email from users u left join buddys b on u.id = b.buddyid where b.userid = :userId");
+                        $statement->bindValue(":userId", $userId);
+                        $statement->execute();
+
+                        if($statement->rowCount()!=0) {
+                                $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+                                return $result;   
                         }else {
                                 return false;
                         }
