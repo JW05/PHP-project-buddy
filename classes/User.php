@@ -447,8 +447,7 @@
                         
                         $statement->execute();
                         $roles = $statement->fetch(PDO::FETCH_ASSOC);
-                        var_dump($roles);
-                        var_dump($id);
+                        
 
                         return $roles;
                 }

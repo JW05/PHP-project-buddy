@@ -386,7 +386,7 @@ a.list-group-item {
 .faq-container
 {
 	margin-top: 150px;
-	text-align: justify;
+	text-align: center;
 }
 .faq-container ul li span
 {
@@ -396,7 +396,8 @@ a.list-group-item {
 {
 	font-size: 2em;
 	list-style-type: none ;
-	
+	text-align: left;
+	margin-left: 50px;
 }
 .faq-container ul 
 {
@@ -405,6 +406,12 @@ a.list-group-item {
 .faq-container ul:first-child
 {
 	border-top:none;
+}
+
+.btn-top
+{
+	margin-top: 200px;
+	margin-bottom: -125px;
 }
 
 @media(min-width:750px)

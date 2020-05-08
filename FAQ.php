@@ -39,7 +39,7 @@
 if($roles['role'] == 1)
 {
     ?>
-    <a href="addFaq.php" class="btn btn-success float-right">Add FAQ</a>
+    <a href="addFaq.php" class="btn-top btn btn-success">Add FAQ</a>
 
 
   <?php
