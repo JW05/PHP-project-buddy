@@ -106,7 +106,7 @@
 
 
 <div class="middle">
-<ul class="display-container">
+<ul class="display-container d-flex justify-content-center">
  <li class="note-display" data-note="7.50">
     <div class="circle">
       <svg width="84" height="84" class="circle__svg">
