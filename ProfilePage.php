@@ -1,4 +1,4 @@
-<?php   
+<?php
     include_once(__DIR__."/classes/User.php");
     include_once(__DIR__."/classes/Buddy.php"); //Added by Madina
     session_start();
@@ -9,9 +9,6 @@
     $user = User::getCurrentUser($_SESSION['user']);
     $userId = $user['id'];
     $matches = Buddy::activeMatches($user['id']);
-    
-    /*  $kenmerken = User::getCurrentAllKenmerk();*/
-    /*var_dump($kenmerken);*/
 
     try{
         $currentUser = User::getCurrentUser($_SESSION['user']);
