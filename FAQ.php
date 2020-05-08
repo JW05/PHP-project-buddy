@@ -10,7 +10,7 @@
     {
         $user = User::getCurrentUser($_SESSION['user']);
 
-
+        
         $questions = faq::showcaseFaq($questions);
         $answers = faq::showcaseFaq($answers);
 

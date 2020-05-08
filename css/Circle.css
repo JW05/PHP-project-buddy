@@ -1,5 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css?family=Nixie+One|Raleway:200');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 
 * {
   padding: 0;
@@ -49,13 +50,16 @@
   .percent__dec { font-size: 12px; }
   
   .label {
-    font-family: 'Raleway', serif;
+    font-family: 'Anton', sans-serif;
     font-size: 14px;
     text-transform: uppercase;
     margin-top: 15px;
     color: black;
     font-weight: bold;
+    
   }
+  span h2
+  {margin-top: 0px;}
   .circle__progress--fill {
     --initialStroke: 0;
     --transitionDuration: 0;
@@ -76,6 +80,7 @@
   .circle span
   {
     color: black;
+    
   }
   .display-container span
   {
