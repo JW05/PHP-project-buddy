@@ -437,7 +437,21 @@
 				}
 			}
 			
-		}
+                }
+                //written by maury
+                public function checkRole($id)
+                {
+                        $conn = Db::getConnection();
+                        $statement = $conn->prepare("select role from users where id = :id ");
+                        $statement->bindValue(":id", $id);
+                        
+                        $statement->execute();
+                        $roles = $statement->fetch(PDO::FETCH_ASSOC);
+                        var_dump($roles);
+                        var_dump($id);
+
+                        return $roles;
+                }
 
 
 		public function canLogout()

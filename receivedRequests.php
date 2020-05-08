@@ -23,9 +23,6 @@
   }
 ?>
 
-
-
-
 <div class="row">
 
 <?php foreach($receivedRequest as $request):
