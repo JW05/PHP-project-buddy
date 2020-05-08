@@ -62,15 +62,7 @@
     stroke-dashoffset: var(--initialStroke);
     transition: stroke-dashoffset var(--transitionDuration) ease;
   }
-  .circle__svg {
-    transform: rotate(-90deg);
-  }
-  .circle
-  {
-    margin-top: 400px;
-    margin-bottom: 250px;
-    
-  }
+  
   .circle span
   {
     color: black;
@@ -78,8 +70,6 @@
   }
   .display-container span
   {
-    margin-top: -370px;
-    padding-bottom: 450px;
     font-size: 1.8em;
     font-weight: bold;
   }

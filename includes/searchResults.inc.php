@@ -1,5 +1,5 @@
 <!-- SEARCH BRYAN -->
-<div class="search-results-container">
+<div class="search-results-container col-md-8">
 
 <?php if($searchReturned != null):?>
     <h1 id="search-results-title">Search results for "<?php echo $_POST['name']; ?>"</h1>

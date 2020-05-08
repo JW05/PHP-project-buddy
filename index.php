@@ -9,7 +9,9 @@
     try{
         $user = User::getCurrentUser($_SESSION['user']);
         $currentPreference = User::getCurrentPreference($user['id']);
-    }catch(\Throwable $th){
+        $AllStudents = User::getAllStudents();
+        $AllBuddys = User::getAllBuddys();
+      }catch(\Throwable $th){
        header("Location: insertProfile.php");
     }
 
@@ -39,22 +41,10 @@
     ?>
     <div class="bg-img"></div>
 
-
-    
     <section>
-      <div class="hero-img">
-        <?php    
-            $AllStudents = User::getAllStudents();
-        ?>
-
-        <?php
-            $AllBuddys = User::getAllBuddys();
-        ?>
-
-
-        <div class="middle">
+      <div class="hero-img d-flex justify-content-center align-items-center"> 
           <ul class="display-container d-flex justify-content-center">
-          <li class="note-display" data-note="7.50">
+            <li class="note-display" data-note="7.50">
               <div class="circle">
                 <svg width="84" height="84" class="circle__svg">
                   <circle cx="41" cy="41" r="38" class="circle__progress circle__progress--path"></circle>
@@ -74,7 +64,7 @@
               <span class="label">Students</span>
             </li>
 
-          <li class="note-display" data-note="9.27">
+            <li class="note-display" data-note="9.27">
               <div class="circle">
                 <svg width="84" height="84" class="circle__svg">
                   <circle cx="41" cy="41" r="38" class="circle__progress circle__progress--path"></circle>
@@ -94,32 +84,33 @@
               <span class="label">Buddies</span>
             </li>
           </ul>
-        </div>
       </div>
     </section>
+    <div class="container-fluid">
+      <div class="row">
+        <?php if($searchReturned != null): ?>
+          <?php include('./includes/searchResults.inc.php');?>
+        <?php else:?>
+          <div class="col-md-8">
+              <div class="same-intrest">
+                  <h2>These people have the same interests</h2>
+                  <h3>Maybe get in touch</h3>
 
-    <?php if($searchReturned != null): ?>
-    <?php include('./includes/searchResults.inc.php');?>
-    <?php else:?>
-    <div class="side-bar">
-        <div class="same-intrest">
-            <h2>These people have the same interests</h2>
-            <h3>Maybe get in touch</h3>
+                  <?php include_once(__DIR__."/buddySuggestion.php"); ?>
+              
+              </div>
+          </div>
+        <?php endif;?>
+        <div class="col-md-4 sidebar">
+            <div class="same-intrest">
 
-            <?php include_once(__DIR__."/buddySuggestion.php"); ?>
-        
-        </div>
-    </div>
-    <?php endif;?>
-    <div class="side-bar">
-        <div class="same-intrest">
-
-            <h2>These people have liked you</h2>
-            <?php include_once(__DIR__."/receivedRequests.php"); ?>
-
+                <h2>These people have liked you</h2>
+                <h3>Would you accept?</h3>
+                <?php include_once(__DIR__."/receivedRequests.php"); ?>
             
-        
+            </div>
         </div>
+      </div>
     </div>
       <!-- including geregistreerde studenten + buddy overeenkomsten-->
     <script src="js/saveBuddy.js"></script>
