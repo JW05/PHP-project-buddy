@@ -8,30 +8,24 @@ class faq
 public function showcaseFaq()
 {
     $conn = Db::getConnection();
-            
-    $statement = $conn->prepare("select * from faqs");
-    $res = PDO($statement) or die(mysqli_error());
-    if(mysqli_num_rows($res)> 0)
-    {
-        while($row = mysqli_fetch_assoc($res))
-        {
-            $questions = $row['questions'];
-            $answers = $row['questions'];
-        }
-    }
-    else
-    {
-        echo "there are no FAQ's to be shown";
-    }
+    $statement = $conn->prepare("select * from faqs");   // where question = $question and anwser = $anwser
+    
+    $statement->execute();
 
+    $faqs = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-
-
-
-
+    return $faqs;
 
 }    
     
+
+
+
+
+
+
+
+
 public function createFaq()
 {
     $conn = Db::getConnection();

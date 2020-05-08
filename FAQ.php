@@ -10,9 +10,7 @@
     {
         $user = User::getCurrentUser($_SESSION['user']);
 
-        
-        $questions = faq::showcaseFaq($questions);
-        $answers = faq::showcaseFaq($answers);
+        $faq = User::showcaseFaq();
 
 
     }
@@ -42,8 +40,8 @@
 
     <div>
         
-        <span class="questions"><?php echo $questions?></span>
-        <div class="answers"><?php echo $answers?></div>
+        <span class="questions"><?php echo $faq['questions']?></span>
+        <div class="answers"><?php echo $faq['answers']?></div>
 
     </div>
 
