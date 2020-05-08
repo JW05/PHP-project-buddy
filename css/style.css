@@ -404,7 +404,24 @@ a.list-group-item {
 	margin-top: 150px;
 	text-align: justify;
 }
-
+.faq-container ul li span
+{
+	font-size: 2.5em;
+}
+.faq-container ul li
+{
+	font-size: 2em;
+	list-style-type: none ;
+	
+}
+.faq-container ul 
+{
+	border-top: 1px solid orange;
+}
+.faq-container ul:first-child
+{
+	border-top:none;
+}
 
 
 

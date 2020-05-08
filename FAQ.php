@@ -1,6 +1,6 @@
 <?php 
     include_once(__DIR__."/classes/User.php");
-    include_once(__DIR__."/classes/faq.class.php");
+    include_once(__DIR__."/classes/faqs.php");
     session_start();
 
     
@@ -10,7 +10,7 @@
     {
         $user = User::getCurrentUser($_SESSION['user']);
 
-        $faq = User::showcaseFaq();
+        $faq = faq::showcaseFaq();
 
 
     }
@@ -40,10 +40,23 @@
 
     <div>
         
-        <span class="questions"><?php echo $faq['questions']?></span>
-        <div class="answers"><?php echo $faq['answers']?></div>
+    <?php foreach($faq as $faqItem):?>
+        
+        <span class="questions">
+            <ul>
 
-    </div>
+            <li> <span> Q:</span> <?php echo $faqItem['questions']?></li>
+
+            
+            <li> <span> A: </span><?php echo $faqItem['answers']?>
+            </ul>    
+        </span>
+    <?php endforeach ?>
+
+
+
+
+       
 
 
 </div>
