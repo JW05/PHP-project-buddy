@@ -8,17 +8,11 @@
   box-sizing: border-box;
 }
 
-  .display-container {
-    margin: auto;
-    display: flex;
-  }
   .note-display {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0 -300px;
-
-    padding-left: 800px;
+    padding: 5em;
   }
 
 

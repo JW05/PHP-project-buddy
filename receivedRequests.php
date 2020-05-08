@@ -6,7 +6,7 @@
   $userId = $user['id'];
   $receivedRequest = Buddy::showcaseMatches($user['id']);
 
-  if(!empty($_POST) && $_POST['submit'] == "requestAction"){
+  if(!empty($_POST) && isset($_POST['requestAction'])){
      
     try {
           $buddy = $_POST['buddyId'];

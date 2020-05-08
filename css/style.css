@@ -64,6 +64,10 @@ img .card.col-md-4
 		width: 400px;
 	}
 
+.search-container form{
+	background-color: transparent;
+}
+
 
 .search-container input
 {
