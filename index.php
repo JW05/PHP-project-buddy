@@ -137,7 +137,7 @@
     <div>
         <h1><?php echo $result["firstname"] . " " . $result["lastname"]?></h1>
     </div>
-    <?php }} ?>
+    <?php }}else{ ?>
     <!-- END SEARCH BRYAN -->
    
 
@@ -163,7 +163,7 @@
         </div>
     </div>
       <!-- including geregistreerde studenten + buddy overeenkomsten-->
-    
+      <?php } ?>
     <script src="js/saveBuddy.js"></script>
 </body>
 </html>
