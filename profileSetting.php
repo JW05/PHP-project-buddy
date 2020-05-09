@@ -1,6 +1,4 @@
 <?php
-    include_once(__DIR__."/classes/User.php");
-    session_start();
 
     try{
         //To get current active user
@@ -89,91 +87,71 @@
     }
     
     
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Settings</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-<nav class="settingsNav">
-<?php
-        include_once(__DIR__."/nav.inc.php");
-    ?>
-
-</nav>
-
-    <div>
-        <div class="form--settings">
-            <form action="" method="post" enctype="multipart/form-data">
-				<h2>Profile settings</h2>
-				<?php if(isset($error)): ?>
-				<div class="form__error">
-					<p><?php echo $error; ?></p>
-						
-				</div>
-                <?php endif; ?>
-                <?php if(isset($success)): ?>
-				<div class="form__success">
-					<p><?php echo $success; ?></p>
-						
-				</div>
-				<?php endif; ?>
-
-				<div class="form-group">
-                    <label for="Avatar">Your picture</label>
-                    <input type="file" class="form-control-file" name="avatarUpload" id="Avatar">
-                    <img class="avatar--img" src="img/avatar/<?php echo htmlspecialchars($currentUser->getAvatar());?>" alt="">
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="Firstname">Firstname</label>
-                        <input type="text" class="form-control" id="Firstname" name="firstname" value="<?php echo htmlspecialchars($currentUser->getFirstName());?>">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="Lastname">Lastname</label>
-                        <input type="text" class="form-control" id="Lastname" name="lastname" value="<?php echo htmlspecialchars($currentUser->getLastName());?>">
-                    </div>
-                </div>
-				<div class="form-group">
-					<label for="Description">Description</label>
-					<input type="text" class="form-control" id="Description" name="description" value="<?php echo htmlspecialchars($currentUser->getDescription());?>">
-                </div>
-                <hr>
-                <h3>Account information</h3>
-                <div class="form-group">
-					<label for="Email">Email</label>
-                    <input type="email" class="form-control" id="Email" name="email" value="<?php echo htmlspecialchars($currentUser->getEmail());?>">
-                    
-				</div>
-                <div class="form-group">
-                    <div class="form-group">
-                        <label for="Password">Your current password</label>
-                        <input type="password" class="form-control" id="Password" name="oldPassword">
-                        <small id="passwordHelp" class="form-text text-muted">
-                            Your current password is only needed if you want to change your email or password. 
-                            Leave this empty if you only want to change details information.
-                        </small>
-                    </div>
-                    <div class="form-group">
-                        <label for="PasswordNew">New password</label>
-                        <input type="password" class="form-control" id="PasswordNew" name="newPassword">
-                        <small id="newPasswordHelp" class="form-text text-muted">
-                            Leave this empty if you dont want to change your password.
-                        </small>
-                    </div>
-                </div>
-
-				<div class="form-group">
-					<input type="submit" value="Update" class="btn btn-success">	
-				</div>
-			</form>
+?>   
+<div class="form--settings">
+    <form action="" method="post" enctype="multipart/form-data">
+        <h2>Account settings</h2>
+        <?php if(isset($error)): ?>
+        <div class="form__error">
+            <p><?php echo $error; ?></p>
+                
         </div>
-    </div>
-</body>
-</html>
+        <?php endif; ?>
+        <?php if(isset($success)): ?>
+        <div class="form__success">
+            <p><?php echo $success; ?></p>
+                
+        </div>
+        <?php endif; ?>
+        <div class="form-row d-flex align-items-center">
+            <div class="form-group col-md-6">
+                <label for="Avatar">Your picture</label>
+                <input type="file" class="form-control-file" name="avatarUpload" id="Avatar">
+            </div>
+            <div class="form-group col-md-6">
+            <img class="card-img-top rounded-circle" src="img/avatar/<?php echo htmlspecialchars($currentUser->getAvatar());?>" alt="">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="Firstname">Firstname</label>
+                <input type="text" class="form-control" id="Firstname" name="firstname" value="<?php echo htmlspecialchars($currentUser->getFirstName());?>">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="Lastname">Lastname</label>
+                <input type="text" class="form-control" id="Lastname" name="lastname" value="<?php echo htmlspecialchars($currentUser->getLastName());?>">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Description">Description</label>
+            <input type="text" class="form-control" id="Description" name="description" value="<?php echo htmlspecialchars($currentUser->getDescription());?>">
+        </div>
+        <hr>
+        <div class="form-group">
+            <label for="Email">Email</label>
+            <input type="email" class="form-control" id="Email" name="email" value="<?php echo htmlspecialchars($currentUser->getEmail());?>">
+            
+        </div>
+        <div class="form-group">
+            <div class="form-group">
+                <label for="Password">Your current password</label>
+                <input type="password" class="form-control" id="Password" name="oldPassword">
+                <small id="passwordHelp" class="form-text text-muted">
+                    Your current password is only needed if you want to change your email or password. 
+                    Leave this empty if you only want to change details information.
+                </small>
+            </div>
+            <div class="form-group">
+                <label for="PasswordNew">New password</label>
+                <input type="password" class="form-control" id="PasswordNew" name="newPassword">
+                <small id="newPasswordHelp" class="form-text text-muted">
+                    Leave this empty if you dont want to change your password.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Update" class="btn btn-success">	
+        </div>
+    </form>
+</div>
