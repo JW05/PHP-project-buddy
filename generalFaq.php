@@ -11,15 +11,14 @@
 if(!empty($_POST)){
   try{
     $user = User::getCurrentUser($_SESSION['user']);
-    $currentPreference = User::getCurrentPreference($user['id']);
 
-    $allMessages = faq::getAllMessages($user['id']);
+    $allMessages = faq::getAllMessages();
 
     $sentMessage = new faq();
     $sentMessage->setSenderId($_POST($user['id']));
     $sentMessage->setMessage($_POST['message']);
 
-    $result = $sentMessage->saveMessage();
+    $sentMessage->saveMessage();
            
    
    
@@ -69,14 +68,14 @@ if(!empty($_POST)){
                 foreach($allMessages as $message):
             ?>
 
-            <div class="media mb-2 <?php echo ($message['senderId'] == $buddyId)? "buddy":"float-right"; ?>">
+            <div class="media mb-2 <?php echo ($message['senderId'])? "buddy":"float-right"; ?>">
               <?php if($message['senderId'] == $buddyId): ?>
                 <img src="img/avatar/<?php echo htmlspecialchars($message['avatar']);?>" class="mr-3 avatar">
               <?php endif;?>
 
 
               <div class="media-body">
-                <h5 class="mt-0"><?php echo ($message['senderId'] == $buddyId)? htmlspecialchars($message['firstname']): "Me" ;?></h5>
+                <h5 class="mt-0"><?php echo ($message['senderId'])? htmlspecialchars($message['firstname']): "Me" ;?></h5>
                 <?php echo htmlspecialchars($message['message']);?>
                 <div class="float-right"> 
                   <small><?php echo htmlspecialchars($message['timestamp']);?></small>

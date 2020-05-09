@@ -44,10 +44,10 @@ public function createFaq($questions,$answers)
     return $result;
 }
 
-public static function getAllMessages($userId){
+public static function getAllMessages(){
     $conn = Db::getConnection();
     $statement = $conn->prepare("select msg.id, firstname, avatar, senderId, message, reaction, timestamp from `faqs_messages` msg left join users u on u.id = msg.senderId where (senderId = :userId) order by timestamp asc");
-    $statement->bindValue(":userId", $userId);
+    
     $statement->execute();
 
     $allMessages = $statement->fetchAll(PDO::FETCH_ASSOC);
