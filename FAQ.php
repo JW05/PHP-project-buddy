@@ -71,7 +71,7 @@ else
     <?php endforeach ?>
 
 
-
+    <?php include_once("/generalFaq.php");?>
 
        
 
