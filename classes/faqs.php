@@ -58,7 +58,7 @@ public static function getAllMessages(){
 
 public static function getMessageId($senderId){
     $conn = Db::getConnection();
-    $statement = $conn->prepare("select id from `faqs_messages` where senderId = :senderId order by timestamp desc limit 1");
+    $statement = $conn->prepare("select id from `faqs_messages` where senderId = :senderId order by timestamp asc limit 1");
     
     $statement->bindValue(":senderId", $senderId);
 

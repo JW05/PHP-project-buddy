@@ -68,7 +68,7 @@ if(!empty($_POST)){
           <?php 
             
               foreach($allMessages as $message):
-                  $formUser = User::getUserInfo($user['id']);
+                  $formUser = User::getUserInfo($user['senderId']);
           ?>
 
           <div class="media mb-2">
