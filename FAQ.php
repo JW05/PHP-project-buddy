@@ -1,6 +1,8 @@
 <?php 
     include_once(__DIR__."/classes/User.php");
     include_once(__DIR__."/classes/faqs.php");
+    include_once(__DIR__."/classes/Message.php");
+    include_once(__DIR__."/classes/Buddy.php");
     session_start();
 
     
@@ -53,31 +55,33 @@ else
 ?>
 
 
+<?php if($searchReturned != null): //If something is searched show results?>
+    <?php include('./includes/searchResults.inc.php');?>
+<?php else:?>
 
-<div class="faq-container">
-<h1>Frequently Asked Questions</h1>
-    <div>
-        
-    <?php foreach($faq as $faqItem):?>
-        <span class="questions">
-            <ul>
-
-            <li> <span> Q:</span> <?php echo $faqItem['questions']?></li>
-
+    <div class="faq-container float-right">
+    <h1>Frequently Asked Questions</h1>
+        <div>
             
-            <li> <span> A: </span><?php echo $faqItem['answers']?>
-            </ul>    
-        </span>
-    <?php endforeach ?>
+        <?php foreach($faq as $faqItem):?>
+            <span class="questions">
+                <ul>
+
+                <li> <span> Q:</span> <?php echo $faqItem['questions']?></li>
+                <li> <span> A: </span><?php echo $faqItem['answers']?>
+                </ul>    
+            </span>
+        <?php endforeach ?>
+
+    <?php include_once("generalFaq.php");?>
 
 
-    <?php include_once("/generalFaq.php");?>
 
-       
+        
 
 
-</div>
-
+    </div>
+<?php endif;?>
 
 </body>
 </html>
