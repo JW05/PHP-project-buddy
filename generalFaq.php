@@ -58,10 +58,12 @@ if(!empty($_POST)){
                   
               </div>
           <?php endif; ?>
+            
           <h2> General FAQ chat</h2>
-          <div class="media mb-3">
-          <form action="" method="POST">  
+          
+         
           </div>
+          <form action="" method="POST"> 
           <div class="chatMessages">
             <?php 
               if(!empty($allMessages)):
@@ -97,9 +99,9 @@ if(!empty($_POST)){
               </div>
             </div>
           </div>
-
+          </form> 
           
         </div>
       </div>
-    </div>
-    </form>
+
+  
