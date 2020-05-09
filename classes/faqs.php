@@ -46,7 +46,7 @@ public function createFaq($questions,$answers)
 
 public static function getAllMessages(){
     $conn = Db::getConnection();
-    $statement = $conn->prepare("select msg.id, firstname, avatar, senderId, message, reaction, timestamp from `faqs_messages` msg left join users u on u.id = msg.senderId where (senderId = :userId) order by timestamp asc");
+    $statement = $conn->prepare("select * from `faqs_messages` order by timestamp asc");
     
     $statement->execute();
 
@@ -58,7 +58,7 @@ public static function getAllMessages(){
 
 public static function getMessageId($senderId){
     $conn = Db::getConnection();
-    $statement = $conn->prepare("select id from `faqs_messages` where senderId = :senderIdorder by timestamp desc limit 1");
+    $statement = $conn->prepare("select id from `faqs_messages` where senderId = :senderId order by timestamp desc limit 1");
     
     $statement->bindValue(":senderId", $senderId);
 
