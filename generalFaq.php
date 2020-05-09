@@ -66,7 +66,7 @@ if(!empty($_POST)){
             <?php 
               if(!empty($allMessages)):
                 foreach($allMessages as $message):
-                    $formUser = User::getUserInfo($message['id']);
+                    $formUser = User::getUserInfo($user['id']);
             ?>
 
             <div class="media mb-2">
@@ -76,13 +76,10 @@ if(!empty($_POST)){
 
 
               <div class="media-body">
-                <h5 class="mt-0"><?php echo ($formUser['senderId'])? htmlspecialchars($formUser['firstname']): "Me" ;?></h5>
+                <h5 class="mt-0"><?php echo htmlspecialchars($formUser['firstname']);?></h5>
                 <?php echo htmlspecialchars($message['message']);?>
                 <div class="float-right"> 
                   <small><?php echo htmlspecialchars($message['timestamp']);?></small>
-                  <button type="button" class="btn btn-primary btnReact" data-toggle="modal" data-target="#reactions" data-messageid="<?php echo htmlspecialchars($message['id']); ?>">
-                    <?php echo (empty($message['reaction']))? "Reaction": htmlspecialchars($message['reaction']);?>
-                  </button>
                 </div>
               </div>
             </div>
@@ -101,26 +98,7 @@ if(!empty($_POST)){
             </div>
           </div>
 
-          <!-- Modal -->
-          <div class="modal fade" id="reactions" tabindex="-1" role="dialog" aria-labelledby="reactions" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-body">
-                  <div class="row">
-                  <button class="btn btn-light col-md-2 reaction">👍</button>
-                  <button class="btn btn-light col-md-2 reaction">😆</button>
-                  <button class="btn btn-light col-md-2 reaction">😮</button>
-                  <button class="btn btn-light col-md-2 reaction">😢</button>
-                  <button class="btn btn-ligth col-md-2 reaction">😡</button>
-                  <button class="btn btn-light col-md-2 reaction">🤯</button>
-                  <button class="btn btn-light col-md-2 reaction">🥳</button>
-                  <button class="btn btn-light col-md-2 reaction">❌</button>
-                  <button class="btn btn-ligth col-md-2 reaction">✔️</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          
         </div>
       </div>
     </div>
